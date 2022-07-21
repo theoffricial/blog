@@ -1,9 +1,12 @@
 ---
 slug: welcome
 title: Welcome
-authors: [slorber, yangshun]
+authors: [unicop, neri]
 tags: [facebook, hello, docusaurus]
 ---
+
+This is our blog !
+We hope you find our content valuable
 
 [Docusaurus blogging features](https://docusaurus.io/docs/blog) are powered by the [blog plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog).
 
