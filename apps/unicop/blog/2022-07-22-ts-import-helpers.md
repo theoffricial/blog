@@ -1,12 +1,12 @@
 ---
-slug: xxx
-title: Optimize your TypeScript project using tslib 🧿
+slug: tslib
+title: tslib - Optimize your TypeScript project's output 🧿
 authors: [unicop, neri]
 tags: [TypeScript, Optimize, Unknown]
 ---
 
 <details>
-    <summary>TL;DR</summary>
+    <summary>TL;DR ⚡️</summary>
     
     1. Add to your <code>tsconifg.json</code> <code>compilerOptions.importHelpers</code> to <code>true</code>.
 
@@ -15,21 +15,23 @@ tags: [TypeScript, Optimize, Unknown]
 
 </details>
 
-## Why 🤔
+## Why 💡
 
 What `tsc` (TypeScript-compiler) does is to take each `.ts` file (= module) and transpile it to a generated form `.js` file (output module).
 
-## How
+## How 🤯
 
 TypeScript transpile each module separately, and it needs to generate a module that is compatible to the defined `target` for each source module.
 
-## What
+## What 🤔
 
 To do it, TypeScript uses a set of pre-defined helper functions, and these functions are large and duplicated.
 
 ---
 
-### Let's demonstrate the issue
+## The issue 🦚
+
+Let's demonstrate the issue
 
 Our example is how TypeScript transpile the `export * from 'my-module'` syntax,
 
@@ -70,7 +72,7 @@ Also I created a closure to demonstrate how large the implementation of TypeScri
 Currently TypeScript has **24 different helper functions**, which you can see their **implementation of 324 lines** _[here](https://github.com/microsoft/tslib/blob/main/tslib.js#L16-L41)_.
 :::
 
-## The Solution
+## The Solution 🛠
 
 The TypeScript team realized this overhead and released a library call `tslib` which exports all TypeScript helper functions, but also created a flag, which is a `boolean` and call `importHelpers`, for the `tsconfig.json` (The TypeScript configuration file for your project) to let TypeScript know if to use `tslib` or generate it for each module.
 
@@ -99,7 +101,7 @@ https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/in
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/index.js#L7-L30
 ```
 
-### To summarize
+## What you should do 💎
 
 1. Set on your tsconfig.json the `compileOptions.importHelpers` to `true`
 
@@ -152,7 +154,7 @@ npm install tslib
 }
 ```
 
-### Recommendations
+## Recommendations 🙌
 
 <!-- - The TypeScript team is recommending it on the `tslib` readme, and I will quote -->
 
@@ -161,6 +163,9 @@ npm install tslib
 > you should absolutely consider using `tslib` and `--importHelpers`.
 >
 > — [TypeScript Team](https://github.com/Microsoft/tslib#tslib)
+
+<br/>
+I Hope you've enjoyed the reading 🙏❤️
 
 ## Sources 🔗
 
