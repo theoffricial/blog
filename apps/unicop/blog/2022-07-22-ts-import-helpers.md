@@ -76,11 +76,11 @@ Currently TypeScript has **24 different helper functions**, which you can see th
 
 The TypeScript team realized this overhead and released a library call `tslib` which exports all TypeScript helper functions, but also created a flag, which is a `boolean` and call `importHelpers`, for the `tsconfig.json` (The TypeScript configuration file for your project) to let TypeScript know if to use `tslib` or generate it for each module.
 
-What `importHelpers` flag does is very simple, when it is set to `true` TypeScript transpile the source modules like before, BUT whenever TypeScript detect an helper function is required it is importing it from `tslib`!
+What `importHelpers` flag does is very simple, when it is set to `true` TypeScript transpile the source modules like before, BUT whenever TypeScript detects that an helper function is required, instead of generating it, TypeScript imports it from `tslib` and avoids the generated duplications!
 
-Now let's see what happens when to the same files from the example above, using both `tslib` and `importHelpers` (`true`)
+Now let's see how TypeScript transpile the same files, but now TypeScript will use `tslib`, and `importHelpers` set to `true`
 
-```json reference title="tsconfig.json when 'importHelpers' is 'true'"
+```json reference title="tsconfig.json when 'importHelpers' is set to 'true'"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/tsconfig.true-import-helpers.json#L1-L17
 
 ```
@@ -97,7 +97,9 @@ https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/t
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/index.ts#L4-L30
 ```
 
-```js reference title="dist/index.js - transpiled with tslib to 16 lines, (previously was more than 50 lines see above 👆)"
+And that's the transpiled module when using tslib, which turned to 16 lines Vs. [+50 lines](#the-issue-)
+
+```js reference title="dist/index.js"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/index.js#L7-L30
 ```
 
