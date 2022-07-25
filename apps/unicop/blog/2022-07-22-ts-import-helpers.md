@@ -124,13 +124,13 @@ https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/t
 For applications save `tslib` as `dependency`
 
 ```bash
-npm install -D tslib
+npm install tslib
 ```
 
 For libraries save `tslib` as both `peerDependency`, and `devDependency`
 
 ```bash
-npm install tslib
+npm install -D tslib
 ```
 
 ```json
