@@ -19,6 +19,8 @@ tags: [TypeScript, Optimize, Unknown]
 
 What `tsc` (TypeScript-compiler) does is to take each `.ts` file (= module) and transpile it to a generated form `.js` file (output module).
 
+<!--truncate-->
+
 ## How 🤯
 
 TypeScript transpile each module separately, and it needs to generate a module that is compatible to the defined `target` for each source module.

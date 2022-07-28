@@ -31,10 +31,12 @@ const config = {
           blogTitle: 'unicop',
           routeBasePath: '/',
           showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
           // Please change this to your repo.
           editUrl:
           
-            'https://github.com/facebook/docusaurus/edit/main/website/blog/',
+            'https://github.com/uniorg/personal-blogs/edit/main/apps/unicop/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

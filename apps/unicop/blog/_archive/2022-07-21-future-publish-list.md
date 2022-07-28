@@ -12,6 +12,7 @@ tags: [Future Publish List]
 | :-----------------------------------------------------------: | :--------------------------------------------------------------------------: | :-----: |
 |                                                               |                                                                              | @unicop |
 |                          TypeScript                           |                           Tip: Use `importHelpers`                           | @unicop |
+|   JS Modules Series - CommonJS vs. ESM vs AMD vs UMD vs raw   |                         The BIG elephant in the room                         | @unicop |
 |                          TypeScript                           |                            Tip: What is `noEmit`                             | @unicop |
 |                          TypeScript                           |                         Tip: What is `noEmitOnError`                         | @unicop |
 |                             Jest                              |                          Tip: What is `maxWorkers`                           | @unicop |
