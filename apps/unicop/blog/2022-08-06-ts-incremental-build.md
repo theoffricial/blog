@@ -58,7 +58,7 @@ Let's do it.
 
 **Requirements**:
 
-- `TypeScript 3.4` or above
+- **[TypeScript 3.4][ts-incremental-build]** or above, only then the `incremental` option is supported.
 
 ### 1. Make TypeScript to Incremental Build
 
@@ -128,10 +128,12 @@ It is more advanced, and requires some changes of how we work with `TypeScript`,
 
 More detailed
 
-- [TypeScript 3.4 Release Note][ts-incremental-build] - When the `incremental` option released
-- [TypeScript Performance Wiki](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit) - "Incremental Project Emit" section, this page explain many ways to improve build times.
+- **[TypeScript 3.4 Release Note][ts-incremental-build]** - When the `incremental` option released
+- **[TypeScript Performance Wiki](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit)** - "Incremental Project Emit" section, this page explain many ways to improve build times.
 
 Configurations
 
-- [TypeScript incremental option](https://www.typescriptlang.org/tsconfig#incremental)
-- [TypeScript tsBuildInfoFile option](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile)
+- **[TypeScript incremental option](https://www.typescriptlang.org/tsconfig#incremental)**
+- **[TypeScript tsBuildInfoFile option](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile)**
+
+[ts-incremental-build]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag
