@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/unicop-art-minimal.png',
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
@@ -31,10 +31,12 @@ const config = {
           blogTitle: 'unicop',
           routeBasePath: '/',
           showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
           // Please change this to your repo.
           editUrl:
           
-            'https://github.com/facebook/docusaurus/edit/main/website/blog/',
+            'https://github.com/uniorg/personal-blogs/edit/main/apps/unicop/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -51,10 +53,10 @@ const config = {
     ({
       navbar: {
         title: 'unicop',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: ''
-        // },
+        logo: {
+          alt: 'be unico be a part',
+          src: 'img/unicop-art.svg'
+        },
         items: [
           // {
           //   type: 'doc',
