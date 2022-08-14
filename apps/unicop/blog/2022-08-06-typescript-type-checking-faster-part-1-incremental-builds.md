@@ -26,7 +26,7 @@ If you would like your `TypeScript` project to build faster, this article is for
 
 By default, `TypeScript` build is naive.
 What it does is simply to take all `src` files it finds <sub><sup>[1]</sup></sub> and builds `dist` files.
-When setting incremental builds tells `TypeScript` to save information about the project graph from the last compilation.
+Setting incremental builds tells `TypeScript` to save information about the project graph from the last compilation.
 
 So, The next time `TypeScript` is invoked with `incremental`, it will use that information to detect the least costly way to `type-check` and `emit` <sub><sup>[2]</sup></sub> changes to your project.
 
@@ -46,7 +46,7 @@ Also, what in this article
 
 ## How 🤯
 
-Let `TypeScript` to save information of previous compilation to calculates the least-costly way to build the next one.
+Let `TypeScript` save information of previous compilation to calculates the least-costly way to build the next one.
 
 ## What 🤔
 
@@ -79,7 +79,7 @@ Add the `incremental` flag to your `tsconfig.json`
 }
 ```
 
-The `incremental` option set to `true` enables `TypeScript` to save information from last compilation and use this information for the next build, the information will be generated in file call `.tsbuildinfo`.
+The `incremental` option set to `true` enables `TypeScript` to save information from the last compilation and use this information for the next build, the information will be generated in a file called `.tsbuildinfo`.
 
 So with these settings, when we run tsc, TypeScript will look for a file called `.tsbuildinfo` in the output directory (`./build`). If `./build/.tsbuildinfo` doesn’t exist, it’ll be generated. But if it does, tsc will try to use that file to incrementally type-check and update our output files.
 
@@ -110,7 +110,7 @@ You can specified a custom location for the `.tsbuildinfo` with the `tsBuildInfo
 
 ## Recommendations 🙌
 
-> This `.tsbuildinfo` file is used to figure out the smallest set of files that might to be re-checked/re-emitted since it last ran.
+> This `.tsbuildinfo` file is used to figure out the smallest set of files that might be re-checked/re-emitted since it last ran.
 >
 > - **[TypeScript Team](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit)**
 
@@ -124,7 +124,7 @@ and uses that information to re-build only what's necessary.
 
 To take `incremental` builds one step forward,
 read my article about `TypeScript` projects `composite`.
-It is more advanced, and requires some changes of how we work with `TypeScript`, but might worth it!
+It is more advanced, and requires some changes of how we work with `TypeScript`, but might be worth it!
 
 ## Sources 🔗
 
