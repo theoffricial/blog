@@ -16,53 +16,56 @@ tags: [TypeScript, Incremental Builds, Optimize, Unknown, Advanced]
 <br/>
 </details>
 
-## Intro
+## Why 💡 - why does it important?
 
-If you would like your `TypeScript` project to build faster, this article is for you.
+Incremental builds as a concept lets your compiler to be smarter to avoid re-build unnecessary parts, and improve its build times, improves the development feedback loop, and to have a good development experience,
+which simply mean faster progression.
 
 <!--truncate-->
 
-## The issue 🦚
+## How 🤯 - how does it affect my work?
+
+Setup incremental builds will enables `TypeScript` to save information of the previous compilation to calculates the least-costly way to build the next one.
+
+It does it in a generated `.tsbuildinfo` file, which not affects the dist-code, and is described in details below.
+
+Rather than that nothing.
+
+## What 🤔 - what should I change?
+
+Set your TypeScript configurations with the `incremental` option, which tells TypeScript to build with incremental builds.
+
+- zero costs, and no extra effort required, except reading this article 😉
+- As I mentioned the changes won't affect or change how the runtime code works.
+
+Now let's begin!
+
+---
+
+## The issue 🦚 - The root-cause a solution is necessary
 
 By default, `TypeScript` build is naive.
-What it does is simply to take all `src` files it finds <sub><sup>[1]</sup></sub> and builds `dist` files.
-Setting incremental builds tells `TypeScript` to save information about the project graph from the last compilation.
+It means that TypeScript takes all source-files it finds <sub><sup>[1]</sup></sub> and builds dist-files out of them.
+Incremental builds tells `TypeScript` to change its default behavior by save information about the project graph from the last compilation.
 
-So, The next time `TypeScript` is invoked with `incremental`, it will use that information to detect the least costly way to `type-check` and `emit` <sub><sup>[2]</sup></sub> changes to your project.
+Then on the next time TypeScript compiler invokes, it will use that information to detect the least costly way to `type-check` and `emit` <sub><sup>[2]</sup></sub> changes to your project.
 
 <sub><sup>[1] - TypeScript finds files based on the `include`, `exclude` or `files` configurations.</sup></sub>
 
 <sub><sup>[2] - TypeScript in comparison to other transpilers (e.g. [Babel][babel-site]) which only `emit` project, also `type-check` the project.</sup></sub>
 
-## Why 💡
+## Concept 💭 - Incremental Build
 
-Improving build times of your project improves its feedback loop,
-which leads to faster progression.
+Incremental build - When a compiler/transpiler program save information on previous compilation, to have a sort of understanding and detecting the least costly way to do the compilation next time.
+The information usually maps the project dependencies graph and use it to re-builds only parts depends on the latest changes, which each tool implements it in its own method.
 
-Also, what in this article
+## The Solution 🛠 - Your implementation guide
 
-- Has zero cost, and no extra development required (except reading this article 😉)
-- The changes won't affect or change how the runtime code works
-
-## How 🤯
-
-Let `TypeScript` save information of previous compilation to calculates the least-costly way to build the next one.
-
-## What 🤔
-
-Set `TypeScript` to use `incremental` builds.
-
-Let's do it.
-
----
-
-## The Solution 🛠
-
-**Requirements**:
+**Prerequisite**:
 
 - `TypeScript 3.4` or above
 
-### 1. Make TypeScript to Incremental Build
+### 1. Setup TypeScript to work with Incremental Build
 
 Add the `incremental` flag to your `tsconfig.json`
 
@@ -102,25 +105,19 @@ You can specified a custom location for the `.tsbuildinfo` with the `tsBuildInfo
 
 `.tsbuildinfo` files can be safely deleted and don’t have any impact on our code at runtime - they’re purely used to make compilations faster. We can also name them anything that we want, and place them anywhere we want using the `tsBuildInfoFile` option.
 
-## What you should do 💎
+## Summary 💎 - Key Actions
 
 1. Add the `incremental` option to your current `tsconfig.json`.
 2. Add custom path (optional) with the `tsBuildInfoFile` option.
 3. Add `.tsbuildinfo` to your SCM (e.g. `git`) ignore file (e.g. `.gitignore`).
 
-## Recommendations 🙌
+## Quote 🦜
 
-> This `.tsbuildinfo` file is used to figure out the smallest set of files that might be re-checked/re-emitted since it last ran.
+> The `--incremental` flag allows TypeScript to save state from the last compilation to a `.tsbuildinfo` file. This file is used to figure out the smallest set of files that might to be re-checked/re-emitted since it last ran.
 >
 > - **[TypeScript Team](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit)**
 
-## Definition
-
-Incremental build - When a compiler/transpiler program based on previous compilation can detect the least costly way to do the compilation next time.
-It does it by saving information about the project graph from the last compilation,
-and uses that information to re-build only what's necessary.
-
-## What's next 🧐
+## What's next ⏭
 
 To take `incremental` builds one step forward,
 read my article about `TypeScript` projects `composite`.
@@ -131,9 +128,6 @@ It is more advanced, and requires some changes of how we work with `TypeScript`,
 More detailed
 
 - [TypeScript 3.4 Release Note][ts-incremental-build] - When the `incremental` option released
-- [TypeScript Performance Wiki](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit) - "Incremental Project Emit" section, this page explain many ways to improve build times.
-
-Configurations
-
+- [TypeScript Performance Wiki](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit) - "Incremental Project Emit" section, explains generally how incremental builds work, I based on its answer in this article.
 - [TypeScript incremental option](https://www.typescriptlang.org/tsconfig#incremental)
 - [TypeScript tsBuildInfoFile option](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile)

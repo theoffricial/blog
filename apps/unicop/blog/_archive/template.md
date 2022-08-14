@@ -10,11 +10,21 @@
 
 ## Article Prerequisite 🔒
 
-## Issue 🦚
+## The Issue 🦚 - Where does it come from?
 
-## The Solution 🛠
+## Concept 💭 - XXXX
+
+## The Solution 🛠 - Your implementation guide
+
+## Summary 💎 - Key Actions
 
 ## Important Notes ⚠️
+
+## Recommendations 🙌
+
+## Quote 🦜
+
+## What's next ⏭
 
 ## Takeaway Notes 🦄
 
