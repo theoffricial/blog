@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/unicop-art-minimal.png',
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
@@ -53,10 +53,10 @@ const config = {
     ({
       navbar: {
         title: 'unicop',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: ''
-        // },
+        logo: {
+          alt: 'be unico be a part',
+          src: 'img/unicop-art.svg'
+        },
         items: [
           // {
           //   type: 'doc',
