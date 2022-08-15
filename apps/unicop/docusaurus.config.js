@@ -43,6 +43,9 @@ const config = {
         },
         googleAnalytics: {
           trackingID: 'G-S5TKJR0D2J'
+        },
+        gtag:{
+          trackingID: 'G-S5TKJR0D2J'
         }
       }),
     ],
