@@ -25,9 +25,9 @@ which simply mean faster progression.
 
 ## How 🤯 - how does it affect my work?
 
-Setup incremental builds will enables `TypeScript` to save information of the previous compilation to calculates the least-costly way to build the next one.
+Setup incremental builds will enable `TypeScript` to save information of the previous compilation and to calculate the least-costly way to build the next one.
 
-It does it in a generated `.tsbuildinfo` file, which not affects the dist-code, and is described in details below.
+It does it in a generated `.tsbuildinfo` file, which doesn't affects the dist-code, and is described in details below.
 
 Rather than that nothing.
 
@@ -57,7 +57,7 @@ Then on the next time TypeScript compiler invokes, it will use that information 
 ## Concept 💭 - Incremental Build
 
 Incremental build - When a compiler/transpiler program save information on previous compilation, to have a sort of understanding and detecting the least costly way to do the compilation next time.
-The information usually maps the project dependencies graph and use it to re-builds only parts depends on the latest changes, which each tool implements it in its own method.
+The information usually maps the project dependencies graph and use it to re-build only parts that depend on the latest changes, which each tool implements it in its own method.
 
 ## The Solution 🛠 - Your implementation guide
 
@@ -88,7 +88,7 @@ So with these settings, when we run tsc, TypeScript will look for a file called 
 
 ### 2. [Optional] Customize `.tsbuildinfo` location with `tsBuildInfoFile` option
 
-You can specified a custom location for the `.tsbuildinfo` with the `tsBuildInfoFile` option:
+You can specify a custom location for the `.tsbuildinfo` with the `tsBuildInfoFile` option:
 
 ```json
 {
