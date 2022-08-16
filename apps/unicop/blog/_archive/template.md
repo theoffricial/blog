@@ -12,9 +12,19 @@
 
 ## Issue 🦚 - The root-cause a solution is necessary
 
+## Concept 💭 - XXXX
+
 ## The Solution 🛠 - Your implementation guide
 
 ## Important Notes ⚠️
+
+## Recommendations 🙌
+
+## Summary 💎 - Key Actions
+
+## Quote 🦜
+
+## What's next ⏭
 
 ## Takeaway Notes 🦄
 
