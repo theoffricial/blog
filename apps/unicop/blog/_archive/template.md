@@ -10,9 +10,9 @@
 
 ## Article Prerequisite 🔒
 
-## Issue 🦚
+## Issue 🦚 - The root-cause a solution is necessary
 
-## The Solution 🛠
+## The Solution 🛠 - Your implementation guide
 
 ## Important Notes ⚠️
 
