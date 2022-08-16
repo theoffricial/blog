@@ -16,6 +16,8 @@
 
 ## The Solution 🛠 - Your implementation guide
 
+## Summary 💎 - Key Actions
+
 ## Important Notes ⚠️
 
 ## Recommendations 🙌
