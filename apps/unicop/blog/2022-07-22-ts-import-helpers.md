@@ -1,7 +1,7 @@
 ---
 slug: tslib
 title: TypeScript - Optimized Artifact with tslib 🧿
-authors: [unicop, neri]
+authors: [unicop]
 tags: [TypeScript, Optimize, Unknown, Artifact]
 ---
 
