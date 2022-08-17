@@ -49,7 +49,7 @@ This article is covering the following subjects:
 ## Article Prerequisite 🔒
 
 - Be familiar with the concept of `incremental` builds, and how it works in `TypeScript` for 'regular' setup (without project references).
-  If you're not, I'm covering this subject on part 1 in this series **[TypeScript - Build Faster with Incremental Builds ⚡️](../2022-08-06-ts-incremental-build.md)**.
+  If you're not, I'm covering this subject on part 1 in this series **[TypeScript - Build Faster with Incremental Builds ⚡️](../2022-08-06-typescript-type-checking-faster-part-1-incremental-builds.md)**.
 
 ## Issue 🦚 - Interoperability with other tools
 
