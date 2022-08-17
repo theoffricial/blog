@@ -19,7 +19,7 @@ This improves compilation, improves `editors`' speed and reduces memory usage wh
 
 Using this feature, you will turn `TypeScript` from a simple transpiler into a smart build orchestrator.
 
-## What 🤔 - what will changed
+## What 🤔 - what should I change?
 
 Once configured, You will start running `tsc -b` <sub><sup>[1]</sup></sub> in your repository and it will build each project in the right order.
 

@@ -131,3 +131,10 @@ More detailed
 - [TypeScript Performance Wiki](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit) - "Incremental Project Emit" section, explains generally how incremental builds work, I based on its answer in this article.
 - [TypeScript incremental option](https://www.typescriptlang.org/tsconfig#incremental)
 - [TypeScript tsBuildInfoFile option](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile)
+
+<!-- <h2 align="left">Bla  -->
+<!-- </h2> -->
+<p align="center">
+<br/>
+<img src="img/unicop.art.svg" alt="drawing" width="100"/>
+</p>
