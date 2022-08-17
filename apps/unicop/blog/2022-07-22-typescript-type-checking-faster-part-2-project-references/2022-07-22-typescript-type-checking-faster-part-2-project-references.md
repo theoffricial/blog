@@ -252,7 +252,7 @@ https://github.com/unicop-art/typescript-projects-references-example/blob/main/s
 https://github.com/unicop-art/typescript-projects-references-example/blob/main/src/wonderland/tsconfig.json
 ``` -->
 
-Dependency between project means that whenever TypeScript re-builds a file on the `formatting` he will verify that `creatures` project build is up-to-date, if not TypeScript will re-build the `creatures` project as well.
+Dependency between project means that whenever TypeScript re-builds a file on the `formatting` he verifies that `creatures` project build is up-to-date, if not, TypeScript re-builds the `creatures` project before re-builds the `formatting`.
 
 ### 7 Create/update package.json for libraries
 

@@ -61,7 +61,7 @@ const config = {
         title: 'unicop',
         logo: {
           alt: 'be unico be a part',
-          src: 'img/unicop-art.svg'
+          src: 'img/unicop.art.svg'
         },
         items: [
           // {
