@@ -15,9 +15,9 @@ While making sure actions like `build` or `test` run faster with tools which use
 ## How 🤯 - how it will look like
 
 [TypeScript project references][ts-project-references-link] allows you to break your project up into a number of smaller projects.
-This improves compilation and improves `editors` both speed and reduces memory usage while working with `TypeScript` etc.
+This improves compilation, improves `editors`' speed and reduces memory usage while working with `TypeScript` etc.
 
-Using this feature you will turn `TypeScript` from a simple transpiler into smart build orchestrator.
+Using this feature, you will turn `TypeScript` from a simple transpiler into a smart build orchestrator.
 
 ## What 🤔 - what will changed
 
@@ -42,7 +42,7 @@ Essentially it allows TypeScript to treat our projects just like it treats `NPM`
 This article is covering the following subjects:
 
 - What configurations should be added, and how to use them with examples for everything
-- Setup your project to interoperable with other tools such as `webpack`, `jest`, `babel`, etc.
+- Setup your project to be interoperable with other tools such as `webpack`, `jest`, `babel`, etc.
 - How to use [TypeScript Path Mapping][ts-path-mapping-link] to setup [monorepo][nx-monorepo-explanation-link]s
 - Using an [example project][example-repo-link] that shows how to use the project references setup
 
@@ -53,9 +53,9 @@ This article is covering the following subjects:
 
 ## Issue 🦚 - Interoperability with other tools
 
-The main struggle exists with `TypeScript project references` is getting them working nicely with tools like `Jest`, `Webpack`, `ESbuild` etc for the same project.
+The main struggle that exists with `TypeScript project references` is getting them working nicely with tools like `Jest`, `Webpack`, `ESbuild` etc for the same project.
 
-I got into conclusion that I want my `type-checking` to use project references, but builds and tests executions will follow [TypeScript path mapping][ts-path-mapping-link] and treat the whole project as a single project.
+I got to a conclusion that I want my `type-checking` to use project references, but builds and tests executions will follow [TypeScript path mapping][ts-path-mapping-link] and treat the whole project as a single project.
 
 This allows to run the `TypeScript compiler` in `watch` mode with `incremental compilation`, giving fast feedback on type errors during development, then tools like `ESBuild` can parse `TypeScript` code without `type-checking` and compile my apps **really** fast. Same with `Jest`, it should just use `babel-jest` so the `TypeScript compiler` is not in the mix. Same with `webpack` either use `esbuild-loader` or `babel-loader`.
 
@@ -146,8 +146,8 @@ This config file is important for
 1. Enabling to run `tsc -b` from the root dir to transpile and type-check all codes.
 2. Enabling editor discover all projects.
 
-The [disableSourceOfProjectReferenceRedirectis][ts-disable-source-of-project-reference-redirect-option-link] important, so your editor's [TypeScript language service][ts-language-service-link] does not ignore the project references and and lose the performance gains you will put efforts to configure.
-Using this option are good for performance but also it means that you have to run the typescript compiler in [watch mode][ts-watch-mode]<sub><sup>[1]</sup></sub> in the background so your code's output<sub><sup>[2]</sup></sub> is always up to date.
+The [disableSourceOfProjectReferenceRedirectis][ts-disable-source-of-project-reference-redirect-option-link] important, so your editor's [TypeScript language service][ts-language-service-link] does not ignore the project references and lose the performance gains you will put efforts to configure.
+Using this option is good for performance but also it means that you have to run the typescript compiler in [watch mode][ts-watch-mode]<sub><sup>[1]</sup></sub> in the background so your code's output<sub><sup>[2]</sup></sub> is always up to date.
 
 <sub><sup>[1] - watch mode means - typescript's watching input files. </sup></sub>
 <sub><sup>[2] - Make sure you understand the difference between [dist files vs src file referencing](#dist-files-vs-src-files-referencing) </sup></sub>
@@ -257,7 +257,7 @@ Dependency between project means that whenever TypeScript re-builds a file on th
 ### 7 Create/update package.json for libraries
 
 The `package.json` is important for `TypeScript` to know where the built versions of the code is (via the `main`, `module`, etc. options).
-If your package is published to `NPM` depending on your package manager and how you publish this approach will be different.
+If your package is published to `NPM`, depending on your package manager and how you publish, this approach will be different.
 
 This will allow you to have one main `entry` when working in the repo, but have a different setup when the package is published and consumed as a `3rd party library`.
 
