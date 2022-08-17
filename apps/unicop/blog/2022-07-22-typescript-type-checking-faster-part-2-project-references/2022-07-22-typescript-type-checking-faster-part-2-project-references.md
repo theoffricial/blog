@@ -41,7 +41,7 @@ Essentially it allows TypeScript to treat our projects just like it treats `NPM`
 
 This article is covering the following subjects:
 
-- What configurations should be added, and how to use them with examples for everything
+- Which configurations should be added, and how to use them with examples for everything
 - Setup your project to be interoperable with other tools such as `webpack`, `jest`, `babel`, etc.
 - How to use [TypeScript Path Mapping][ts-path-mapping-link] to setup [monorepo][nx-monorepo-explanation-link]s
 - Using an [example project][example-repo-link] that shows how to use the project references setup
