@@ -13,6 +13,8 @@ However, the jest team wanted to support many different environments to make jes
 The code-transformation output (or transpilation output) will be in a form jest can work with, which I already covered that is `CommonJS` module system, and the syntax of the JS language should be supported to the `Nodejs` version that runs jest.
 e.g. for incompatible syntax: spread operators [...myArray], doesn't work for `node < 14.x.x`, so if you use the spread operator in your test or source files and the runtime version of node you run jest with is lower than 14.x.x, the execute will fail.
 
+<!--truncate-->
+
 ## The solution 🛠
 
 You should add to your `jest config` a transformer.
