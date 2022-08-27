@@ -21,3 +21,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.tsButton {
+  background-color: #3178c6;
+  color: var(--ifm-color-white)
+}
+.tsButton[data-theme='dark'] {
+  border-color: var(--ifm-button-color);
+}
+
+.tsButtonImg {
+  position: relative;
+  top: 3px;
+  left: 7px;
+}

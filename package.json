@@ -9,7 +9,9 @@
   },
   "private": true,
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-beta.13",
+    "@docusaurus/core": "^2.0.1",
+    "@docusaurus/module-type-aliases": "^2.0.1",
+    "@docusaurus/preset-classic": "^2.0.1",
     "@nrwl/cli": "14.4.3",
     "@nrwl/eslint-plugin-nx": "14.4.3",
     "@nrwl/jest": "14.4.3",
@@ -36,8 +38,6 @@
     "url": "^0.11.0"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.13",
-    "@docusaurus/preset-classic": "2.0.0-beta.13",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
     "prism-react-renderer": "^1.2.1",

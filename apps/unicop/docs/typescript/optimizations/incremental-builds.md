@@ -1,8 +1,8 @@
 ---
-slug: typescript-type-checking-faster-part-1-incremental-builds
-title: TypeScript - Type-Checking Faster - Part 1 - Incremental Builds ⚡️
+# slug: typescript-type-checking-faster-part-1-incremental-builds
+title: TypeScript - Optimizations - Incremental Builds ⚡️
 authors: [unicop]
-tags: [TypeScript, Incremental Builds, Optimize, Unknown, Advanced]
+tags: [TypeScript, Optimizations, Incremental Builds, Unknown, Advanced]
 ---
 
 <details>
@@ -50,9 +50,9 @@ Incremental builds tells `TypeScript` to change its default behavior by save inf
 
 Then on the next time TypeScript compiler invokes, it will use that information to detect the least costly way to `type-check` and `emit` <sub><sup>[2]</sup></sub> changes to your project.
 
-<sub><sup>[1] - TypeScript finds files based on the `include`, `exclude` or `files` configurations.</sup></sub>
-
-<sub><sup>[2] - TypeScript in comparison to other transpilers (e.g. [Babel][babel-site]) which only `emit` project, also `type-check` the project.</sup></sub>
+<sub><sup>[1] - TypeScript finds files based on the include, exclude or files configurations.</sup></sub>
+<br/>
+<sub><sup>[2] - TypeScript in comparison to other transpilers (e.g. <a href="https://babeljs.io/">Babel</a>) which only emit project, also type-check the project.</sup></sub>
 
 ## Concept 💭 - Incremental Build
 
@@ -115,7 +115,7 @@ You can specify a custom location for the `.tsbuildinfo` with the `tsBuildInfoFi
 
 > The `--incremental` flag allows TypeScript to save state from the last compilation to a `.tsbuildinfo` file. This file is used to figure out the smallest set of files that might to be re-checked/re-emitted since it last ran.
 >
-> > **[TypeScript Team](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit)**
+> - **[TypeScript Team](https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit)**
 
 ## What's next ⏭
 
@@ -132,9 +132,6 @@ More detailed
 - [TypeScript incremental option](https://www.typescriptlang.org/tsconfig#incremental)
 - [TypeScript tsBuildInfoFile option](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile)
 
-<!-- <h2 align="left">Bla  -->
-<!-- </h2> -->
-<p align="center">
-<br/>
-<img src="img/unicop.art.svg" alt="drawing" width="100"/>
-</p>
+<!-- links -->
+
+[ts-3.4-release-note-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html
