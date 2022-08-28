@@ -61,6 +61,18 @@ const sidebars = {
             { type: 'doc', id: 'typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
             { type: 'doc', id: 'typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
           ]
+        },
+        {
+          type: 'category',
+          label: 'Common Bugs Solved 🐞',
+          link: { type: 'generated-index' },
+          items: [
+            {
+              id: 'typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
+              type: 'doc',
+              label: 'TS + Jest 🤡 - "Cannot use import statement outside module"'
+            }
+          ]
         }
       ] 
     }
