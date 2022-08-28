@@ -17,8 +17,8 @@ function HomepageHeader() {
       <img
         className={clsx(styles.heroBannerLogo, "margin-vert--md")}
         src={useBaseUrl("img/unicop.art.svg")}
-        width="200"
-        height="200"
+        width="300"
+        height="300"
       />
       <h1 className="hero__title">{siteConfig.title}</h1>
       <p className="hero__subtitle">{siteConfig.tagline}</p>

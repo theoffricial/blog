@@ -6,7 +6,7 @@ sidebar_position: 1
 
 <!-- ![x](/img/typescript/ts-logo-128.svg) -->
 
-Advance topics in TypeScript, like optimizations, how to work with TypeScript better, and some fundamentals explained that I find confusing for many developers.
+Advance topics in TypeScript like optimizations, Guides how to work with TypeScript better, and fundamentals terms and concepts that clarifies what I find confusing for many developers.
 
 <p align="center">
     <img src="/img/typescript/ts-logo-256.svg" width="150" />

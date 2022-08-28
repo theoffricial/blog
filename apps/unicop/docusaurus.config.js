@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'unicop',
   tagline: 'be unico, be part',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://unicop.art',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
