@@ -1,6 +1,6 @@
 ---
 # slug: typescript-type-checking-faster-part-1-incremental-builds
-title: TypeScript - Optimizations - Incremental Builds ⚡️
+title: TypeScript - Optimizations - Incremental Builds 🧱
 pagination_prev: typescript/optimizations/index
 pagination_next: null
 last_update:
