@@ -30,6 +30,7 @@ const config = {
           // // Please change this to your repo.
           editUrl: 'https://github.com/unicop-art/blog/edit/main/apps/unicop/',
           breadcrumbs: true,
+          showLastUpdateAuthor: true
         },
         blog: false,
         // blog: {

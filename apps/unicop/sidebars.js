@@ -19,7 +19,9 @@ const sidebars = {
   // But you can create a sidebar manually
   typescriptSidebar: [
     {
-      type: 'category', label: 'TypeScript', items: [
+      type: 'category', 
+      label: 'TypeScript', 
+      items: [
         {
           type: 'doc',
           id: 'typescript/index',
@@ -31,9 +33,11 @@ const sidebars = {
           collapsed: true,
           collapsible: true,
           link: { 
-            type: 'generated-index', 
-            title: 'TypeScript Glossary 📚',
-            description: "All fundamental terms that simplify TypeScript!",
+            // slug: 'typescript/glossary',
+            type: 'doc',
+            id: 'typescript/glossary/index', 
+            // title: 'TypeScript Glossary 📚',
+            // description: "All fundamental terms that simplify TypeScript!",
             // keywords: ['guides'], 
           },
           // link: { type: 'doc', id: 'typescript/glossary/index' },
@@ -42,7 +46,7 @@ const sidebars = {
             { type: 'doc', id: 'typescript/glossary/compiler-vs-transpiler' },
             { type: 'doc', id: 'typescript/glossary/js-module-systems-compatibility' },
             { type: 'doc', id: 'typescript/glossary/javascript-module-systems-explained' },
-            { type: 'doc', id: 'typescript/glossary/bundlers-and-the-isomorphic-code-confusion' },
+            { type: 'doc', id: 'typescript/glossary/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
             { type: 'doc', id: 'typescript/glossary/incremental-vs-naive-build' },
           ]
         },
@@ -50,10 +54,12 @@ const sidebars = {
           type: 'category',
           label: 'Optimizations ⚡️',
           link: { 
-            title: 'TypeScript Optimizations ⚡️',
-            type: 'generated-index',
-            description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
-            All the articles here unlock you crucial optimization that can be made for your project.`
+            // slug: 'typescript/optimizations',
+            // title: 'TypeScript Optimizations ⚡️',
+            id: 'typescript/optimizations/index',
+            type: 'doc',
+            // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
+            // All the articles here unlock you crucial optimization that can be made for your project.`
           },
           items: [
             // { type: 'doc', id: 'typescript/optimizations/index', label: 'Introduction ✨'},
@@ -65,12 +71,12 @@ const sidebars = {
         {
           type: 'category',
           label: 'Common Bugs Solved 🐞',
-          link: { type: 'generated-index' },
+          link: { type: 'doc', id: 'typescript/bugs-solved/index' },
           items: [
             {
               id: 'typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
               type: 'doc',
-              label: 'TS + Jest 🤡 - "Cannot use import statement outside module"'
+              label: 'ts-jest: "Cannot use import statement outside module" 🤡'
             }
           ]
         }

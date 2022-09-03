@@ -1,3 +1,11 @@
+---
+pagination_prev: typescript/glossary/index
+pagination_next: null
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # JavaScript Modules Compatibility 📐
 
 Familiarity with the common tools compatibility clarify what is allowed and how it can be used correctly. <br/>
@@ -25,7 +33,8 @@ Here is a short version of the different JS modules compatibility with some refe
 
 ## More about JS Modules
 
-To understand what defines each module system and how it works, <br/> Read my other paper - **[JavaScript Module Systems Explained 🫀][js-module-explained]**.
+- **[JavaScript Module Systems Explained 🫀][js-module-explained]** - Article that explain what defines each module system and how it works
+- [The JS Isomorphic Code Confusion 🔮](./bundlers-and-the-isomorphic-code-confusion.md) - The misconception that promotes ignorance among the JS eco-system
 
 ## References 🔗
 

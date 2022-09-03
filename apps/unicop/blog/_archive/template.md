@@ -28,7 +28,7 @@
 
 ## What's next ⏭
 
-## Takeaway Notes 🦄
+## Key Notes 🦄
 
 ## 🎖️ Credits
 

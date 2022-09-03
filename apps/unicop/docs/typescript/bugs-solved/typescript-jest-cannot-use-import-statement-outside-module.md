@@ -1,9 +1,16 @@
 ---
 slug: typescript-jest-cannot-use-import-statement-outside-module
-title: TS Jest - "Cannot use import statement outside module" Solved
+title: Solve ts-jest 🤡 - cannot use import statement outside module
+
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+
 authors: [unicop]
 tags: [TypeScript, Jest, Modules, Import]
 ---
+
+# TS Jest 🤡 - "Cannot use import statement outside module" Solved
 
 ## The Issue 🦚
 

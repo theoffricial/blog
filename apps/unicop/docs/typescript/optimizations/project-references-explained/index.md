@@ -1,50 +1,51 @@
 ---
 slug: typescript-type-checking-faster-part-2-project-references
-title: Project References Explained 🧬
+title: TypeScript - Optimizations - Project References Explained 🧬
+pagination_prev: typescript/optimizations/index
+pagination_next: null
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
 authors: [unicop]
 tags: [TypeScript, Incremental Builds, Project References, Optimize, Advanced]
 ---
 
-## Why 💡 - why is it important
+<!-- TypeScript 3.4 announced the project references feature, which is huge and changes the way we work with TypeScript, and make it more modular, make [incremental builds](../../glossary/incremental-vs-naive-build.md#incremental-build-🏷) even better and with more advance capabilities as a build orchestrator tool.
+The hard parts are to work with project references conveniently, and to make it work with the other tools we usually use besides TypeScript. -->
 
-Optimize your non-trivial TypeScript project size to `type-checking` the fastest possible for good development experience,
-While making sure actions like `build` or `test` run faster with tools which use esbuild/webpack/babel that are **not** leveraging `TypeScript`, such as `ts-jest`, `ts-loader`, etc.
+TypeScript 3.4 announced the project references feature that has developed as a solution for non-trivial size projects, and as the work with [monorepo][nx-monorepo-explanation-link] becomes common in the eco-system, this solution become more necessary.
 
-<!--truncate-->
+This article is advance and deep dive into project references, and it is covering:
 
-## How 🤯 - how it will look like
-
-[TypeScript project references][ts-project-references-link] allows you to break your project up into a number of smaller projects.
-This improves compilation, improves `editors`' speed and reduces memory usage while working with `TypeScript` etc.
-
-Using this feature, you will turn `TypeScript` from a simple transpiler into a smart build orchestrator.
-
-## What 🤔 - what should I change?
-
-Once configured, You will start running `tsc -b` <sub><sup>[1]</sup></sub> in your repository and it will build each project in the right order.
-
-<br/>
-<sub><sup>[1] - Build one or more projects and their dependencies, if out of date</sup></sub>
-<br/>
-
-### dist files vs src files referencing
-
-Once built, projects will reference the built artifacts (the `.js` + `.d.ts` files) rather than the source (the `.ts` files) - i.e. reference the `/dist`, not the `/src`.
-Essentially it allows TypeScript to treat our projects just like it treats `NPM` modules.
-`.d.ts` files are much quicker for `TypeScript` to parse and understand than the `source code`.
+- Using an [example project][example-repo-link] that gives example and a step-by-step guide
+- How to configure your TypeScript project from A to Z, examples included
+- Make your TypeScript project interoperable with other common tools such as `webpack`, `jest`, `babel`, etc.
+- How to setup [monorepo][nx-monorepo-explanation-link]s using [TypeScript Path Mapping][ts-path-mapping-link]
 
 ---
 
-## Introduction ✨
+## Why 💡 - why is it important
 
-[TypeScript project references][ts-project-references-link] developed as a solution for non-trivial size projects, and as more projects move to [monorepo][nx-monorepo-explanation-link] it becomes common.
+Optimize non-trivial size TypeScript projects, and improves incremental builds even more.
 
-This article is covering the following subjects:
+<!-- size to `type-checking` the fastest possible for good development experience,
+While making sure actions like `build` or `test` run faster with tools which use esbuild/webpack/babel that are **not** leveraging `TypeScript`, such as `ts-jest`, `ts-loader`, etc. -->
 
-- Which configurations should be added, and how to use them with examples for everything
-- Setup your project to be interoperable with other tools such as `webpack`, `jest`, `babel`, etc.
-- How to use [TypeScript Path Mapping][ts-path-mapping-link] to setup [monorepo][nx-monorepo-explanation-link]s
-- Using an [example project][example-repo-link] that shows how to use the project references setup
+## How 🤯 - how it will look like
+
+Configure TypeScript to look at your single project as multiple modular pieces with dependencies between each other, do so enables to leverage TypeScript **[TypeScript - Optimizations - Incremental Builds 🧱](../incremental-builds.md)** even more.
+
+<!-- [TypeScript project references][ts-project-references-link] allows you to break your project up into a number of smaller projects.
+This improves compilation, improves `editors`' speed and reduces memory usage while working with `TypeScript` etc. -->
+
+Using project references feature turns TypeScript from a simple **[transpiler](../../glossary/compiler-vs-transpiler.md#transpiler-definition-🏷)** into a smart build orchestrator.
+
+## What 🤔 - what should I change?
+
+1. How you work with typescript completely <br/>
+1. Change Your TypeScript project configuration completely <br/>
+
+---
 
 ## Article Prerequisite 🔒
 
@@ -61,26 +62,35 @@ This allows to run the `TypeScript compiler` in `watch` mode with `incremental c
 
 ## The Solution 🛠
 
+Using TypeScript project references allows to break your project up into a number of smaller TypeScript projects. This improves `tsc` compilation and editor (e.g. VSCode) speed and reduces memory usage etc.
+Once configured, You will start running `tsc -b` <sub><sup>[1]</sup></sub> in your repository and it will build each project in the right order.
+
+<sub><sup>[1] - Build one or more projects and their dependencies, if out of date</sup></sub>
+<br/>
+<br/>
+
+Once built, projects will reference the built artifacts (the `.js` + `.d.ts` files) rather than the source (the `.ts` files) - i.e. reference the `/dist`, not the `/src`.
+Essentially it allows TypeScript to treat our projects just like it treats `NPM` modules.
+`.d.ts` files are much quicker for `TypeScript` to parse and understand than the `source code`.
+
+---
+
 The TypeScript team introduced 2 suggestions to use project references.
 
 1. Divide large logical parts into separate projects
 2. Implement (1), plus separate the tests of each project into an independent project as well.
 
-I wrote an example project that follows approach (2).
-On the sections below I will overview the project, and explain the different configuration files and settings involved in making [TypeScript project references][ts-project-references-link] work well.
+I added a step-by-step guide with example project I wrote that allows you to start using project references, make other tools compatible with it, and truly understand how it works.
 
-### Project Diagram
+---
+
+First I want you to overview how the example project looks like so I added a diagram and the file structure of it.
+
+### Example Project Diagram
 
 ![Diagram](./project-references-example-repo-diagram.png)
 
-<!-- <details>
-  <summary>File Structure</summary>
-  <br/>
- <code ></code>
-<br/>
-</details> -->
-
-### Project File Structure
+### Example Project File Structure
 
 ```
 // <link to repo>
@@ -136,6 +146,8 @@ On the sections below I will overview the project, and explain the different con
 │
 └── ...
 ```
+
+---
 
 ### 1. `tsconfig.json`
 
@@ -335,7 +347,7 @@ By avoid type-checking and use path-mapping, you should expect your project to b
 
 Some tools that work in these method are: `ESBuild`/`SWC`/`Babel`, etc. any tool that uses one of these under the hood should do the job at scale!
 
-## Takeaway notes 🦄
+## Key Notes 🦄
 
 - The `TypeScript project references` are hard and not intuitive to get working with the rest of the `JavaScript` cco-system.
 - Avoid using `loaders` or `plugins` which use the `TypeScript compiler` internally like `ts-loader`, `ts-jest`, etc. They are great to get started with `TypeScript` but as the eco-system move into [monorepo][nx-monorepo-explanation-link]s which means larger single codebase, they slows us down.
@@ -344,13 +356,13 @@ Some tools that work in these method are: `ESBuild`/`SWC`/`Babel`, etc. any tool
 
 [Jake Ginnivan - Breaking down TypeScript project references](https://jakeginnivan.medium.com/breaking-down-typescript-project-references-260f77b95913) - His article inspired me writing this one. Also he shares some of his opinions and experience about the direction of the JS eco-system.
 
-## 🔗 Sources
+## 🔗 References
 
 - [TypeScript Projects][ts-project-references-link]
-- [TypeScript 3.4 - Releasing Projects][ts-3.4-release-note-link]
-- [What monorepo is][nx-monorepo-explanation-link] - NX monorepo technology great site which explains and benchmark EVERYTHING.
-- [TypeScript Performance Wiki - Using Project References][ts-performance-wiki-link] - An official Wiki the TypeScript team maintain in which they add recommendations how to help the TypeScript compiler to be better.
-- [TypeScript Config References - Projects][ts-config-project-options-link] - All options available for project references
+- [TypeScript 3.4][ts-3.4-release-note-link] - Release Note
+  <!-- - [What monorepo is][nx-monorepo-explanation-link] - NX monorepo technology great site which explains and benchmark EVERYTHING. -->
+  <!-- - [TypeScript Performance Wiki - Using Project References][ts-performance-wiki-link] - An official Wiki the TypeScript team maintain in which they add recommendations how to help the TypeScript compiler to be better. -->
+  <!-- - [TypeScript Config References - Projects][ts-config-project-options-link] - All options available for project references -->
 
 <!-- Links to specific pages -->
 

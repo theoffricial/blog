@@ -1,8 +1,13 @@
 ---
 slug: javascript-module-systems-explained
 title: JavaScript Module Systems Explained 🫀
+pagination_prev: typescript/glossary/index
+pagination_next: null
 authors: [unicop]
 tags: [JavaScript, Modules]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
 ---
 
 ## A background on JavaScript Module Systems 🐾
@@ -35,35 +40,10 @@ As you can see, the eco-system is messy, but the mess just drove it to develop a
 
 - Important Note: `UMD` supports all module systems but `ESM`.
 
-<!-- ## The isomorphic code confusion 🔮
+## Compatibility
 
-The less obvious complication is browser compatibility.
-
-Both Browsers and The NodeJS ecosystems initially started separate, but since tools like `webpack`, `parcels`, `rollup` and others enabled CommonJS modules to be used in the browser, the scene of isomorphic code, which runs both under NodeJS and the browser, has exploded.
-Which caused everything to mixed up but where conflicts happens from time to time.
-
-This is why `Transpilers` in the JS eco-system are so fundamental component, so let's understand what are they compared to compilers. -->
-
-<!-- ## Compiler Vs. Transpiler And the JavaScript eco-system 📜
-
-- **Compiler** is an umbrella term to describe a program that takes source code written in one language and produce a (or many) output file in some other language. In practice we mostly use this term to describe a compiler such as gcc which takes in C code as input and produces a binary executable (machine code) as output.
-
-Examples of compilers
-
-- JavaScript Interpreter (turns JS into machine-level code)
-- C# Compiler
-
-- **Transpilers** (also called "Transformers") are also known as source-to-source compilers. So in essence they are a subset of compilers which take in a source code file and convert it to another source code file in some other language or a different version of the same language. The output is generally understandable by a human. This output still has to go through a compiler or interpreter to be able to run on the machine.
-
-- `TypeScript Compiler, or tsc` - transpile TS into JS, that humans can read
-- `babel` - transpile higher version JS to lower version JS (e.g. es2022 to es5)
-- `jest's transformers` - turns each module jest maps into JS with CommonJS module system
-- `module bundlers`, like `webpack` - transpile each module it finds into `JS` (optimizations and minifying are not relevant to here) -->
-
-<!-- ## Common Errors Caused by the Isomorphic Confusion ⛔
-
-- [TypeScript Jest "Cannot use import statement outside module"](../common-bugs-solved/typescript-jest-cannot-use-import-statement-outside-module.md) -->
+- **[Compatibility Table 📐](./js-module-systems-compatibility.md)**
 
 ## Credits 🎖️
 
-This blog post inspired by **[jameshfisher](https://jameshfisher.com/)** blog, and also, I added some references to his blog posts.
+This blog post inspired by **[jameshfisher](https://jameshfisher.com/)** blog, and I added links to his examples for each module system.
