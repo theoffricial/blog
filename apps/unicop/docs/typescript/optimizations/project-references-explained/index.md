@@ -10,9 +10,6 @@ authors: [unicop]
 tags: [TypeScript, Incremental Builds, Project References, Optimize, Advanced]
 ---
 
-<!-- TypeScript 3.4 announced the project references feature, which is huge and changes the way we work with TypeScript, and make it more modular, make [incremental builds](../../glossary/incremental-vs-naive-build.md#incremental-build-🏷) even better and with more advance capabilities as a build orchestrator tool.
-The hard parts are to work with project references conveniently, and to make it work with the other tools we usually use besides TypeScript. -->
-
 TypeScript 3.4 announced the project references feature that has developed as a solution for non-trivial size projects, and as the work with [monorepo][nx-monorepo-explanation-link] becomes common in the eco-system, this solution become more necessary.
 
 This article is advance and deep dive into project references, and it is covering:
