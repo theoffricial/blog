@@ -22,6 +22,7 @@ function HomepageHeader() {
       />
       <h1 className="hero__title">{siteConfig.title}</h1>
       <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <h2>Blog Topics</h2>
       <div className={styles.buttons}>
         <Link
           className={clsx(styles.tsButton,"button", "button--lg")}

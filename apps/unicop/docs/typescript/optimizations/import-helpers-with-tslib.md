@@ -94,7 +94,7 @@ And it does it for every helper function, and for every module.
 For instance see how long is the `__awaiter` helper function, and think that TypeScript will print it for every module that uses `async-await`.
 
 :::note
-TypeScript currently has [24 different helper functions](<(https://github.com/microsoft/tslib/blob/main/tslib.js#L16-L41)>)
+TypeScript currently has [24 different helper functions](https://github.com/microsoft/tslib/blob/main/tslib.js#L16-L41)
 :::
 
 ## The Solution 🛠
