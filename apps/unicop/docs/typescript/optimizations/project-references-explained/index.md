@@ -59,6 +59,8 @@ This allows to run the `TypeScript compiler` in `watch` mode with `incremental c
 
 ## The Solution 🛠
 
+### Background
+
 Using TypeScript project references allows to break your project up into a number of smaller TypeScript projects. This improves `tsc` compilation and editor (e.g. VSCode) speed and reduces memory usage etc.
 Once configured, You will start running `tsc -b` <sub><sup>[1]</sup></sub> in your repository and it will build each project in the right order.
 
@@ -159,7 +161,7 @@ The [disableSourceOfProjectReferenceRedirectis][ts-disable-source-of-project-ref
 Using this option is good for performance but also it means that you have to run the typescript compiler in [watch mode][ts-watch-mode]<sub><sup>[1]</sup></sub> in the background so your code's output<sub><sup>[2]</sup></sub> is always up to date.
 
 <sub><sup>[1] - watch mode means - typescript's watching input files. </sup></sub>
-<sub><sup>[2] - Make sure you understand the difference between [dist files vs src file referencing](#dist-files-vs-src-files-referencing) </sup></sub>
+<sub><sup>[2] - Make sure you understand the difference between [dist files vs src file referencing](#background) </sup></sub>
 <br/>
 
 ```json reference title="<rootDir>/tsconfig.json"
