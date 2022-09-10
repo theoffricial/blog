@@ -49,4 +49,11 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   --ifm-hero-background-color: var(var(--ifm-color-primary-darkest)) !important
 }
 
+.blog-topics { 
+  display: flex;
+  gap: 0px 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
 /* background: radial-gradient(circle, rgba(212,175,111,1) 0%, rgba(189,151,93,1) 35%, rgba(170,131,75,0.9514180672268907) 100%) */

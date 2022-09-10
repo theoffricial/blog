@@ -1,5 +1,5 @@
 ---
-pagination_prev: typescript/glossary/index
+pagination_prev: typescript/fundamentals/index
 pagination_next: null
 last_update:
   date: 03/09/2022

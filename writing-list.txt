@@ -1,0 +1,13 @@
+Unit Tests
+
+- Classification to cases
+- The concept of "FTU"
+- What are the key values of unit Tests
+- What you should leave for other types of tests - component/integration/api/e2e tests
+- The tests trade-off
+- How to work while write tests
+    -  How to work with jest and vscode specifically
+- Unit Testing and CI
+- jest
+    - how to mock
+    - how does jest work behind-the-scenes

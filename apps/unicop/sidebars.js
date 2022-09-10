@@ -29,25 +29,25 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Glossary 📚',
+          label: 'Fundamentals 🪢',
           collapsed: true,
           collapsible: true,
           link: { 
-            // slug: 'typescript/glossary',
+            // slug: 'typescript/fundamentals',
             type: 'doc',
-            id: 'typescript/glossary/index', 
-            // title: 'TypeScript Glossary 📚',
+            id: 'typescript/fundamentals/index', 
+            // title: 'TypeScript Fundamentals 📚',
             // description: "All fundamental terms that simplify TypeScript!",
             // keywords: ['guides'], 
           },
-          // link: { type: 'doc', id: 'typescript/glossary/index' },
+          // link: { type: 'doc', id: 'typescript/fundamentals/index' },
           items: [
-            // 'typescript/glossary/index',
-            { type: 'doc', id: 'typescript/glossary/compiler-vs-transpiler' },
-            { type: 'doc', id: 'typescript/glossary/js-module-systems-compatibility' },
-            { type: 'doc', id: 'typescript/glossary/javascript-module-systems-explained' },
-            { type: 'doc', id: 'typescript/glossary/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
-            { type: 'doc', id: 'typescript/glossary/incremental-vs-naive-build' },
+            // 'typescript/fundamentals/index',
+            { type: 'doc', id: 'typescript/fundamentals/compiler-vs-transpiler', label: 'Compiler Vs. Transpiler 📜' },
+            { type: 'doc', id: 'typescript/fundamentals/js-module-systems-compatibility' },
+            { type: 'doc', id: 'typescript/fundamentals/javascript-module-systems-explained' },
+            { type: 'doc', id: 'typescript/fundamentals/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
+            { type: 'doc', id: 'typescript/fundamentals/incremental-vs-naive-build' },
           ]
         },
         {
@@ -81,8 +81,76 @@ const sidebars = {
           ]
         }
       ] 
-    }
+    },
   ],
+  unitTestsSideBar: [
+    {
+      type: 'category',
+      label: 'Unit Tests',
+      items: [
+        {
+          type: 'doc',
+          id: 'unit-tests/index',
+          label: 'Introduction ✨',
+        },
+        {
+          type: 'category',
+          label: 'Theory 🔭',
+          link: { type: 'doc', id: 'unit-tests/theory/index' },
+          items: [
+            {
+              id: 'unit-tests/theory/pros',
+              type: 'doc',
+              label: 'Pros 👍'
+            },
+            {
+              id: 'unit-tests/theory/cons',
+              type: 'doc',
+              label: 'Cons 👎'
+            },
+            {
+              id: 'unit-tests/theory/production-code-to-test-code-ratio',
+              type: 'doc',
+              label: 'Production/Test Code Ratio ☯'
+            },
+            {
+              id: 'unit-tests/theory/verify-test-code',
+              type: 'doc',
+              label: 'Verify Test Code ✅'
+            },
+            {
+              type: 'category',
+              label: 'Low-Effort/High-Value Cases 🤩',
+              link: { type: 'doc', id: 'unit-tests/theory/low-effort-high-value-cases/index' },
+              items: [
+                {
+                  id: 'unit-tests/theory/low-effort-high-value-cases/the-entry-module',
+                  type: 'doc',
+                  label: 'The Entry Module 🧭'
+                },
+                {
+                  id: 'unit-tests/theory/low-effort-high-value-cases/data-transform',
+                  type: 'doc',
+                  label: 'Data Transform 🧭'
+                },
+                {
+                  id: 'unit-tests/theory/low-effort-high-value-cases/conditional-validation',
+                  type: 'doc',
+                  label: 'Conditional Validation 🧭'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Jest 🤡 (Coming soon..)',
+          link: { type: 'doc', id: 'unit-tests/jest/index' },
+          items: []
+        }
+      ],
+    }
+  ]
 };
 
 module.exports = sidebars;

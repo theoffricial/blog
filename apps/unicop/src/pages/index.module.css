@@ -26,6 +26,12 @@
   background-color: #3178c6;
   color: var(--ifm-color-white)
 }
+
+.unitTestsButton {
+  background-color: #8369bb;
+  color: var(--ifm-color-white)
+}
+
 .tsButton[data-theme='dark'] {
   border-color: var(--ifm-button-color);
 }

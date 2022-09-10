@@ -22,7 +22,7 @@ tags: [TypeScript, Optimizations, Incremental Builds, Unknown, Advanced]
 </details>
 
 If the term "incremental build" is foreign to you, <br/>
-I would recommend you to read **[Glossary - Build Incremental vs. Naive 🧠](../glossary/incremental-vs-naive-build.md)** first, <br/>
+I would recommend you to read **[Fundamentals - Build Incremental vs. Naive 🧠](../fundamentals/incremental-vs-naive-build.md)** first, <br/>
 it will take you 2 minutes to read.
 
 <!-- truncate -->
@@ -64,7 +64,7 @@ Now let's begin! -->
 
 ## The issue 🦚 - The root-cause a solution is necessary
 
-By default, TypeScript build is **[naive](../glossary/incremental-vs-naive-build.md)**. <br/>
+By default, TypeScript build is **[naive](../fundamentals/incremental-vs-naive-build.md)**. <br/>
 It means that TypeScript takes all source-files it finds <sub><sup>[1]</sup></sub> and builds dist-files out of them.
 
 Incremental build tells TypeScript to change its default behavior by save information about the project graph from the last compilation.

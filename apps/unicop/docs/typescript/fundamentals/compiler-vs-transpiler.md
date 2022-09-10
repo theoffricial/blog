@@ -1,12 +1,18 @@
 ---
-pagination_prev: typescript/glossary/index
+pagination_prev: typescript/fundamentals/index
 pagination_next: null
 last_update:
   date: 03/09/2022
   author: Ofri Peretz
 ---
 
-# Compiler Vs. Transpiler 📜
+# TypeScript - Fundamentals Compiler Vs. Transpiler 📜
+
+import Author from '@theme/BlogPostItem/Header/Author';
+
+<Author author={{email: 'its.op.the.unicorn@gmail.com',title: 'Software Developer @ Snappy',name: 'Ofri Peretz',url: 'https://unicop.art',imageURL: 'https://github.com/unicop.png'}} className="hero\_\_subtitle"></Author>
+
+---
 
 Too many popular tools in the JS eco-system have mixed the difference between of compiler and transpiler, that causes a huge confusion among developers.
 

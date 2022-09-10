@@ -28,7 +28,7 @@ const config = {
           // sidebarCollapsible: true,
           // sidebarCollapsed: true,
           // // Please change this to your repo.
-          editUrl: 'https://github.com/unicop-art/blog/edit/main/apps/unicop/',
+          // editUrl: 'https://github.com/unicop-art/blog/edit/main/apps/unicop/',
           breadcrumbs: true,
           showLastUpdateAuthor: true
         },
@@ -75,9 +75,15 @@ const config = {
             position: 'left',
             label: 'TypeScript',
           },
+          {
+            type: 'doc',
+            docId: 'unit-tests/index',
+            position: 'left',
+            label: 'Unit Tests',
+          },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/unicop-art/blog',
+            href: 'https://github.com/unicop',
             label: 'GitHub',
             position: 'right',
           },
@@ -112,7 +118,7 @@ const config = {
               // },
               {
                 label: 'GitHub',
-                href: 'https://github.com/unicop-art/blog',
+                href: 'https://github.com/unicop',
               },
             ],
           },
