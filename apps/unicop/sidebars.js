@@ -144,9 +144,69 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Jest 🤡 (Coming soon..)',
+          label: 'Jest 🤡',
           link: { type: 'doc', id: 'unit-tests/jest/index' },
-          items: []
+          items: [
+            {
+              type: 'category',
+              label: 'Mocks 🃏',
+              link: {id: 'unit-tests/jest/mocks/index', type: 'doc'},
+              items: [
+                {
+                  id: 'unit-tests/jest/mocks/jest-do-mock',
+                  type: 'doc',
+                  label: 'jest.doMock(🤡)'
+                }
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Architecture 🏛',
+              link: { id: 'unit-tests/jest/architecture/architecture-diagram', type: 'doc' },
+              items: [
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/configs', 
+                  label: 'Configs 🧰'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/dependency-resolutions', 
+                  label: 'Dependencies Resolution 🌳'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/determining-how-to-run-tests', 
+                  label: 'Test Run Order Determination ⏳'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/running-tests', 
+                  label: 'Running Tests 💨'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/build-runtime-environment', 
+                  label: 'The Runtime Environment 💽'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/modules-transformation', 
+                  label: 'Modules Transformation 🦠'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/test-results', 
+                  label: 'Test Results 🧪'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/watch-mode', 
+                  label: 'Watch Mode ⏱'
+                },
+              ]
+            }
+          ]
         }
       ],
     }

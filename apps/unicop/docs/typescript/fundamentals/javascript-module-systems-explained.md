@@ -16,21 +16,27 @@ During the time JavaScript released back in 2005, unlike languages such as `C#`,
 
 These is why four (without including `UMD`) different `module systems` developed during JavaScript has released, you can find more detailed background on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#a_background_on_modules).
 
-### What Module Systems Exists
+## What Module Systems Exists
 
-🧩 **Raw `<script>`**s loading (The original use of `JavaScript`), where dependencies are implicit, and exports are overloaded onto the `window` object, weirdly this convention has no name.
+### 🧩 **Raw `<script>`**
 
-🧩 **[Asynchronous Module Definition, or shortly "AMD"](https://jameshfisher.com/2020/10/03/what-are-amd-modules/)**, where a module calls `define(dependencies, callback)` used by tools like [RequireJS](https://requirejs.org/).
+**Raw `<script>`**s loading (The original use of `JavaScript`), where dependencies are implicit, and exports are overloaded onto the `window` object, weirdly this convention has no name.
+
+### 🧩 **Asynchronous Module Definition, or shortly "AMD"**
+
+**[Asynchronous Module Definition, or shortly "AMD"](https://jameshfisher.com/2020/10/03/what-are-amd-modules/)**, where a module calls `define(dependencies, callback)` used by tools like [RequireJS](https://requirejs.org/).
 
 - module keywords: `define`
 
-<!--truncate-->
+### **🧩 CommonJS**
 
-🧩 **[CommonJS](https://jameshfisher.com/2020/09/27/what-does-the-require-function-do-in-nodejs/)**, where a module’s dependencies are synchronously, dynamically `require()`d, and its exports are placed on an `module.exports object`.
+**[CommonJS](https://jameshfisher.com/2020/09/27/what-does-the-require-function-do-in-nodejs/)**, where a module’s dependencies are synchronously, dynamically `require()`d, and its exports are placed on an `module.exports object`.
 
 - module keywords: `require`, `module.exports`, `exports`
 
-🧩 **[“ECMAScript modules”](https://jameshfisher.com/2020/09/25/javascript-modules-for-grumpy-developers-from-2005/)**, or `"ESM"`, where a module’s dependencies are statically imported before execution, and its exports are statically defined, as top-level variables.
+### **🧩 ECMAScript modules, or "ESM"**
+
+**[“ECMAScript modules”](https://jameshfisher.com/2020/09/25/javascript-modules-for-grumpy-developers-from-2005/)**, or `"ESM"`, where a module’s dependencies are statically imported before execution, and its exports are statically defined, as top-level variables.
 
 - module keywords: `import`, `export`, `export default`
 
