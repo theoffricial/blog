@@ -167,43 +167,63 @@ const sidebars = {
                 {
                   type: 'doc',
                   id: 'unit-tests/jest/architecture/configs', 
-                  label: 'Configs 🧰'
+                  label: 'Chapter 1: Configs 🧰'
                 },
                 {
                   type: 'doc',
                   id: 'unit-tests/jest/architecture/dependency-resolutions', 
-                  label: 'Dependencies Resolution 🌳'
+                  label: 'Chapter 2: File System & Dependency Resolution 🌳'
                 },
                 {
                   type: 'doc',
                   id: 'unit-tests/jest/architecture/determining-how-to-run-tests', 
-                  label: 'Test Run Order Determination ⏳'
+                  label: 'Chapter 3: Test Order Optimization ⏳'
                 },
                 {
                   type: 'doc',
                   id: 'unit-tests/jest/architecture/running-tests', 
-                  label: 'Running Tests 💨'
+                  label: 'Chapter 4: Test Run 💨'
                 },
                 {
                   type: 'doc',
-                  id: 'unit-tests/jest/architecture/build-runtime-environment', 
-                  label: 'The Runtime Environment 💽'
+                  id: 'unit-tests/jest/architecture/the-runtime-environment', 
+                  label: 'Chapter 5: The Runtime Environment 💽'
                 },
                 {
                   type: 'doc',
                   id: 'unit-tests/jest/architecture/modules-transformation', 
-                  label: 'Modules Transformation 🦠'
+                  label: 'Chapter 6: Module Transformation 🦠'
                 },
                 {
                   type: 'doc',
-                  id: 'unit-tests/jest/architecture/test-results', 
-                  label: 'Test Results 🧪'
+                  id: 'unit-tests/jest/architecture/appendix-1-hoisting', 
+                  label: 'Appendix Ⅰ: Jest Hoisting 🆙'
                 },
                 {
                   type: 'doc',
-                  id: 'unit-tests/jest/architecture/watch-mode', 
-                  label: 'Watch Mode ⏱'
+                  id: 'unit-tests/jest/architecture/appendix-2-jest-worker', 
+                  label: 'Appendix Ⅱ: jest-worker 👷‍♂️'
                 },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/appendix-3-cache-summary', 
+                  label: 'Appendix Ⅲ: Cache Summary 💵'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/appendix-4-test-result-summary', 
+                  label: 'Appendix Ⅳ: Test Result Summary 🧪'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/appendix-5-watch-mode', 
+                  label: 'Appendix Ⅴ: Watch Mode ⏱'
+                },
+                {
+                  type: 'doc',
+                  id: 'unit-tests/jest/architecture/sharing-thoughts', 
+                  label: 'Sharing Thoughts 🦉'
+                }
               ]
             }
           ]

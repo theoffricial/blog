@@ -1,8 +1,8 @@
 # Unit Tests - Jest - Architecture - 2. File System & Dependencies Resolution
 
-## Step Diagram
+![Jest Architecture Dependencies Resolution](/img/jest/2-architecture-dependency-resolution.svg)
 
-<!-- [![]()] -->
+## Introduction ✨
 
 At this point jest has already built all **[configs](./1-configs.md)** and can use them.
 
@@ -11,12 +11,44 @@ The next question jest asks is "What is the code base jest operates on? and what
 To answers these questions jest calls the `jest-haste-map` package.
 `jest-haste-map` does static analysis to figure out all the files in the codebase and extract metadata about them, including dependencies.
 
-And this is `jest-haste-map` final output back to the `jest-cli`
+Most of the functionality `jest-haste-map` does is to build `HasteMap` object, which is a file map between a file location (path) and its metadata (dependencies, id, etc.).
+
+`jest-haste-map` doesn't return `HasteMap` as-is but build from it an `HasteContext` object,
+which is (talking high-level) is the `HasteMap` wrapped as internal classes instances to support different abilities out-of-the-box for the rest of the jest system.
+
+See types highlights
 
 ```ts
+type HasteContext = { hasteFS: IHasteFS; moduleMap: IModuleMap };
+
+// key = filepath
+type FileData = Map<string, FileMetaData>;
+
+class HasteFS extends IHasteFS {
+  // jest-haste-map constructor
+  // receives files map from haste map and implement some functions on it
+  constructor({ rootDir, files }: { rootDir: string; files: FileData }) {
+    // ...
+  }
+  // ...
+}
+
+export interface IHasteFS {
+  exists(path: string): boolean;
+  getAbsoluteFileIterator(): Iterable<string>;
+  getAllFiles(): Array<string>;
+  getDependencies(file: string): Array<string> | null;
+  getSize(path: string): number | null;
+  matchFiles(pattern: RegExp | string): Array<string>;
+  matchFilesWithGlob(
+    globs: ReadonlyArray<string>,
+    root: string | null
+  ): Set<string>;
+}
+
 type HasteMap = {
   clocks: WatchmanClocks;
-  files: { [filepath: string]: FileMetaData };
+  files: FileData;
   map: { [id: string]: ModuleMapItem };
   mocks: { [id: string]: string };
 };
@@ -230,7 +262,7 @@ The default extractor reads file's content and look for `require` calls when wor
 See how jest default [dependency extractor](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/lib/dependencyExtractor.ts) works.
 :::
 
-## Store New HasteMap To Cache
+## 4 - Store New HasteMap To Cache
 
 Wether `jest-haste-map` crawl and extract the entire file system or just a small number of changed files, the final result is a new `HasteMap` object,
 And to optimize future runs, each time something has changed `jest-haste-map` will store it in cache.
@@ -277,6 +309,29 @@ After storing the new `hasteMap`, it returns only the entire file map including 
   // ...
 ```
 
+## What is Haste? - Historical Brief 🦕
+
+HasteMap is a JavaScript implementation of Facebook's haste module system developed at around 2010 and used internally at Facebook (Meta) in the times before any other module system exist, before the era of CommonJS/ESM/AMD/UMD/etc.
+
+The `jest-haste-map` implementation inspired by https://github.com/facebook/node-haste and was built with for high-performance in large code repositories with
+hundreds of thousands of files which Facebook had at the time haste developed.
+This implementation is scalable and provides predictable performance.
+
+The idea of how Haste works is that Facebook used to manage all their codebase at a single huge project, and all the different modules were under a folder called `html/js`.
+
+### Haste Evolution
+
+So what they did was to add an header to each file, like this [one](https://github.com/facebook/fbjs/blob/main/packages/fbjs/src/dom/BrowserSupportCore.js#L7) that provides the unique name associates with that module, and was inside the file, the module name is global, it means that you could not provide the same name for 2 modules, although it might happened and also that no relative path was needed like the present module systems (as long as you don't use an alias), these relative paths can be sometimes really long and exhausting.
+
+So in Hate instead of using `../my/relative/path/to/my-module.js`, you just had to call `my-module`.
+
+Later on, instead of using declarative headers inside files, the implementation had changed to take the file-path/ name as the unique identifier. That way Facebook avoided to read the content of files for the modules list, but only for the step of building the tree of dependencies resolution, so it improved performance.
+
+## Credits 🎖️
+
+- [Christoph Nakazawa](https://twitter.com/cpojer) - For the great (but old) [Jest Architecture](https://youtu.be/3YDiloj8_d0) video, without it I won't be able to build this series.
+- The past and present members/maintainers of jest 🙏
+
 <!-- ### How Haste Dependency Detection Happen -->
 
 <!-- The static analysis is simple, `jest-worker` is looking for `require` calls, when working with [CommonJS](../../../typescript/fundamentals/javascript-module-systems-explained.md#-commonjs) module system, and for `import` calls when working with [ES](../../../typescript/fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system. -->
@@ -308,26 +363,3 @@ Then on the next time jest will run, it will ask `fb-watchman` the following: "T
 Now `fb-watchman` will have to read once again only the changed files to verify dependencies, and to detect what modules might be affected by the changes.
 
 It means that jest has to scan and read the entire codebase only once, which enables jest to be much faster. -->
-
-## [History] Where is the name "Haste" come from 🦕
-
-HasteMap is a JavaScript implementation of Facebook's haste module system developed at around 2010 and used internally at Facebook (Meta) in the times before any other module system exist, before the era of CommonJS/ESM/AMD/UMD/etc.
-
-The `jest-haste-map` implementation inspired by https://github.com/facebook/node-haste and was built with for high-performance in large code repositories with
-hundreds of thousands of files which Facebook had at the time haste developed.
-This implementation is scalable and provides predictable performance.
-
-The idea of how Haste works is that Facebook used to manage all their codebase at a single huge project, and all the different modules were under a folder called `html/js`.
-
-### Haste Evolution
-
-So what they did was to add an header to each file, like this [one](https://github.com/facebook/fbjs/blob/main/packages/fbjs/src/dom/BrowserSupportCore.js#L7) that provides the unique name associates with that module, and was inside the file, the module name is global, it means that you could not provide the same name for 2 modules, although it might happened and also that no relative path was needed like the present module systems (as long as you don't use an alias), these relative paths can be sometimes really long and exhausting.
-
-So in Hate instead of using `../my/relative/path/to/my-module.js`, you just had to call `my-module`.
-
-Later on, instead of using declarative headers inside files, the implementation had changed to take the file-path/ name as the unique identifier. That way Facebook avoided to read the content of files for the modules list, but only for the step of building the tree of dependencies resolution, so it improved performance.
-
-## Credits 🎖️
-
-- [Christoph Nakazawa](https://twitter.com/cpojer) - For the great (but old) [Jest Architecture](https://youtu.be/3YDiloj8_d0) video, without it I won't be able to build this series.
-- The past and present members/maintainers of jest 🙏

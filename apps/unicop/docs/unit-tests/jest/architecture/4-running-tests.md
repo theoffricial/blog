@@ -1,13 +1,23 @@
-# Unit Tests - Jest - Architecture - 4. How Tests Run
+# Unit Tests - Jest - Architecture - 4. Test Run
 
 The Jest Architecture Series
 
+0. [Jest Full Architecture](./0-architecture-diagram.md)
 1. [Jest - Configs](./1-configs.md)
 2. [Jest - Dependencies Resolution](./2-dependency-resolutions.md)
 3. [Jest - Determine Tests Run Order](./3-determining-how-to-run-tests.md)
 4. **_[Jest - How Tests Run](./4-running-tests.md) 👈 You are here_**
+5. [Jest - The Runtime Environment](./5-the-runtime-environment.md)
 
 ---
+
+![Jest Architecture Test Run](/img/jest/4-architecture-test-run.svg)
+
+## Introduction ✨
+
+After receiving ordered tests to run, jest now is ready to start the test run itself.
+
+The main component for the test run management is `TestScheduler` that sits on the `@jest/core` package.
 
 On this step jest calls a component name `TestScheduler`,
 With 2 main inputs:
@@ -19,47 +29,124 @@ And in charge on how to actually run them optimally.
 
 It is the most important module on jest to actually make sure that your tests run.
 
-## Run In Band Or Concurrently
+## Run InBand Or Concurrently
 
 This first thing `TestScheduler` does is to check if jest prefers to run the tests on the same process as `jest-cli` itself runs, known as "in band", or should it schedule a great amount of work processes and then schedule the test run over them, and get back those results.
 
-##
-
-Some parts of the `TestScheduler` were extracted to different modules to make jest more generic.
-
-One of them is the `jest-runner` that actually manages the test run, something cool is that the `jest-runner` allows you to use custom runners, for instance allows to run `eslint` on the project using jest with the custom `jest-runner-eslint` package.
-
 After the `TestScheduler` decided whether to run the tests in the same process or schedule multiple processes, it delegates the decision to the `jest-runner` together with the rest of the data.
 
-Then `jest-runner` calls the `jest-worker` package that creates however many processes needed, set them and run the tests.
+Something I find interesting is that the jest team have noticed that the start-up time of jest takes long time when establishing multiple processes.
+For this reason, another heuristic implemented in the `TestScheduler`, which tries to figure out how long it takes the test run for whole project.
+If it finds it relatively small, even if you didn't pass the `--runInBand` option, instead of establishing multiple processes it run all tests on the same process, which is the exact behavior when passing the `--runInBand` option.
 
-The cool thing about the jest-worker process as you can see when it has being used in the `jest-haste-map` package, that you can use it anywhere in your own projects to parallelized work across multi processes.
+It is possible only when cache is available, and the jest team found it better for user experience.
 
-While setting up, the `jest-runner` will pick a testing framework to use for actually running the tests, originally jest used to use `jasmine` under-the-hood, but the FB team found it too heavy and jest doesn't use every ability jasmine supports, so they stripped out irrelevant parts abd made it lighter and called that package `jest-jasmine2`.
+<!-- But because initializing workers is expensive, the `TestScheduler` is checking the cache, if exists, for how long is the total duration of the project test run, if it finds it relatively short, it follows an heuristic that instead of establishing multiple workers, it runs all test in a single worker, because it finds it faster, and it does it to improve user experience. -->
 
-But at the same time another test framework call `jest-circus` which is a completely different test framework that inspired in its architecture from flux to build up the tree of how which tests have to run and more obvious to figure out how tests are run so when your test get stuck you can kind of debug to see what happens, and gradually the FB using it instead of `jest-jasmine2`,
-So if you're working with more up-to-date jest version, you can find in your dependencies the `jest-circus` otherwise, you will see only `jest-jasmine2`.
+### Example
 
-Both libraries implements the original jasmine syntax e.g. `describe`, `test`, `beforeEach`, etc.
+Let's say you have in a project 10 tests that running all together take up to 5 seconds, it doesn't make sense to spawn 10 new processes that takes longer start-up time than the time it takes to actually run the tests, so such cases to improve user experience all the tests will run immediately on the same process as jest.
 
-## Reporters
+## Runners
 
-The `TestScheduler` is also in charge to give information to reporters after receiving all test results, for any custom reporter defined in the configuration.
+Runner in jest is basically a piece of code that receive an input match a specific interface, do what ever it programmed to do and can return a result,
+for instance, `jest-runner` returns an object with an `EventEmitter` to listen for asynchronous results.
 
-The `TestScheduler` is in charge of the establish as many parallel workers as the machine can run in parallel, to achieve the fastest test run.
+```ts
+// https://github.com/facebook/jest/blob/main/packages/jest-core/src/TestScheduler.ts#L51-L54
+// The interface TestScheduler expect jest-runner-* to follow
+type TestRunnerConstructor = new (
+  globalConfig: Config.GlobalConfig,
+  testRunnerContext: TestRunnerContext
+) => JestTestRunner;
 
-But the FB team have noticed that the start-up time of jest takes long time when establishing multiple processes.
-For this reason, there is an heuristic in the `TestScheduler` that tries to figure out how long is the project test run take,
-if it finds it relatively small, instead of establishing multiple processes, it run the tests in a single one like if the `--runInBand` option is on.
+// https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L169-L193
+// How the emitter being returned back to the TestScheduler
+const runAllTests = Promise.all(
+  tests.map((test) =>
+    runTestInWorker(test).then(
+      (result) => this.#eventEmitter.emit('test-file-success', [test, result]),
+      (error) => this.#eventEmitter.emit('test-file-failure', [test, error])
+    )
+  )
+);
+// ...
+return Promise.race([runAllTests, onInterrupt]).then(cleanup, cleanup);
+```
 
-But because initializing workers is expensive, the `TestScheduler` is checking the cache, if exists, for how long is the total duration of the project test run, if it finds it relatively short, it follows an heuristic that instead of establishing multiple workers, it runs all test in a single worker, because it finds it faster, and it does it to improve user experience.
+jest default runner call `jest-runner`, which in charge to actually run tests, I will better cover how it works on the next articles in the series.
 
-For example, when having 10 tests that take in total 5 seconds to run, it doesn't make sense to spawn 10 processes that have long start-up time, longer than the time it takes to run the tests, and then to run a single test in each process.
-Instead, jest runs project like this in a single process.
+A cool thing about how the runner is plugged to the `TestScheduler`, is that it can be customized, for instance you can run `eslint` on your code base with jest using a custom runner call [jest-runner-eslint](https://github.com/jest-community/jest-runner-eslint) and with configuring the other jest configs you can build an optimized `eslint` run.
 
-The FB team mentioned that this small optimization, doesn't sound smart but has a big effect on the user experience.
+## Call the Test Runner
 
-After determine if to run everything in a single process or in metabolic processes, it calls a package call `jest-runner`
+The main job of the `TestScheduler` is to setup runners and execute them with the proper configuration, including what tests to run, with what context information, and should it run on the same process or in parallel in multiple processes.
 
-<!-- but initial these
-While initializing the `TestScheduler` also take a look on the cache, if exists, and check for the total duration of the test run, if it finds it relatively short, it follows another heuristic that instead of initial -->
+To be able to work in parallel, the `TestScheduler` supports listening to events or calling callbacks.
+
+And returns `aggregatedResults` object back to the `@jest/core runJest` caller.
+
+See implementation highlight 🤩
+
+```ts
+async scheduleTests(
+    tests: Array<Test>,
+    watcher: TestWatcher,
+  ): Promise<AggregatedResult> {
+    // ...
+
+    // https://github.com/facebook/jest/blob/main/packages/jest-core/src/TestScheduler.ts#L248-L280
+    if (testRunner.supportsEventEmitters) {
+        const unsubscribes = [
+        testRunner.on('test-file-start', ([test]) =>
+            onTestFileStart(test),
+        ),
+        testRunner.on('test-file-success', ([test, testResult]) =>
+            onResult(test, testResult),
+        ),
+        testRunner.on('test-file-failure', ([test, error]) =>
+            onFailure(test, error),
+        ),
+        testRunner.on(
+            'test-case-result',
+            ([testPath, testCaseResult]) => {
+            const test: Test = {context, path: testPath};
+            this._dispatcher.onTestCaseResult(test, testCaseResult);
+            },
+        ),
+        ];
+
+        await testRunner.runTests(tests, watcher, testRunnerOptions);
+
+        unsubscribes.forEach(sub => sub());
+    } else {
+        // otherwise support callback
+        await testRunner.runTests(
+            tests,
+            watcher,
+            onTestFileStart,
+            onResult,
+            onFailure,
+            testRunnerOptions,
+        );
+    }
+    // ...
+    return aggregatedResults;
+}
+```
+
+## Dispatching Reporters
+
+The `TestScheduler` is also in charge to dispatch the `TestResult`s information to the reporters you configured.
+
+Because of the event-based or callback-based implementation it is also possible to dispatch reporters every time the `TestScheduler` receives an update from the runner, that way the reporters, for instance the CLI reporter can be interactive an update you when a test succeed or failed, instead of waiting for the whole run to be completed.
+
+## On Run Completion
+
+The `TestScheduler` initialize an `aggregatedResult` object that should contains all results when all tests execution completed, it initialize it empty, aggregate results on each `TestResult` returned,
+while the runner is waiting for all tests to be completed before it completes its run that the `TestScheduler` waits for its completion.
+
+When all tests completed, the `TestScheudler` dispatch reporters that the test run completed, and return the `aggregatedResults`.
+Then the `jestRun` who called the scheduler cache all tests results using the `@jest/test-sequencer` to use these results for future test runs.
+
+## Credits 🎖️

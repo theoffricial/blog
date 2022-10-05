@@ -1,5 +1,9 @@
 # Unit Tests - Jest - Architecture - 1. Configs
 
+![Jest Architecture Configs](/img/jest/1-architecture-configs.svg)
+
+## Introduction ✨
+
 When running the jest CLI command:
 
 ```bash
@@ -30,7 +34,7 @@ that enables jest to look for a dedicated configuration file from a custom locat
 jest [extract](https://github.com/facebook/jest/blob/e21c5aba950f6019bbfde2f8233ac96d1fcaef42/packages/jest-cli/src/cli/index.ts#L51) all CLI argument into an object using the [yargs](https://github.com/yargs/yargs) package.
 
 :::note
-See all [Jest CLI Options](https://jestjs.io/docs/cli)
+See [Jest CLI Options](https://jestjs.io/docs/cli)
 :::
 
 ```js
@@ -121,7 +125,7 @@ export const JEST_CONFIG_EXT_ORDER = Object.freeze([
 ```
 
 :::note
-See all [Jest Configuration Options](https://jestjs.io/docs/configuration)
+See [Jest Configuration Options](https://jestjs.io/docs/configuration)
 :::
 
 ## Normalize Run Options
