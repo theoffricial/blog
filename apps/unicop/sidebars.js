@@ -19,13 +19,82 @@ const sidebars = {
   // But you can create a sidebar manually
   typescriptSidebar: [
     {
-      type: 'category', 
-      label: 'TypeScript', 
+      type: 'category',
+      label: 'JS eco-system',
       items: [
         {
-          type: 'doc',
-          id: 'typescript/index',
+          // type: 'doc',
+          type: 'category',
+          // id: 'js-es/index',
           label: 'Introduction ✨',
+          link: { id: 'js-es/index', type: 'doc' },
+          items: [],
+          // items: [
+          //   {
+          //     type: 'category', 
+          //     label: 'TypeScript', 
+          //     items: [
+                // {
+                //   type: 'doc',
+                //   id: 'js-es/typescript/index',
+                //   label: 'TypeScript Introduction ✨',
+                // },
+          //       {
+          //         type: 'category',
+          //         label: 'Fundamentals 🪢',
+          //         collapsed: true,
+          //         collapsible: true,
+          //         link: { 
+          //           // slug: 'js-es/fundamentals',
+          //           type: 'doc',
+          //           id: 'js-es/fundamentals/index', 
+          //           // title: 'TypeScript Fundamentals 📚',
+          //           // description: "All fundamental terms that simplify TypeScript!",
+          //           // keywords: ['guides'], 
+          //         },
+          //         // link: { type: 'doc', id: 'js-es/fundamentals/index' },
+          //         items: [
+          //           // 'js-es/fundamentals/index',
+          //           { type: 'doc', id: 'js-es/fundamentals/compiler-vs-transpiler', label: 'Compiler Vs. Transpiler 📜' },
+          //           { type: 'doc', id: 'js-es/fundamentals/js-module-systems-compatibility' },
+          //           { type: 'doc', id: 'js-es/fundamentals/javascript-module-systems-explained' },
+          //           { type: 'doc', id: 'js-es/fundamentals/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
+          //           { type: 'doc', id: 'js-es/fundamentals/incremental-vs-naive-build' },
+          //         ]
+          //       },
+          //       {
+          //         type: 'category',
+          //         label: 'Optimizations ⚡️',
+          //         link: { 
+          //           // slug: 'js-es/typescript/optimizations',
+          //           // title: 'TypeScript Optimizations ⚡️',
+          //           id: 'js-es/typescript/optimizations/index',
+          //           type: 'doc',
+          //           // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
+          //           // All the articles here unlock you crucial optimization that can be made for your project.`
+          //         },
+          //         items: [
+          //           // { type: 'doc', id: 'js-es/typescript/optimizations/index', label: 'Introduction ✨'},
+          //           { type: 'doc', id: 'js-es/typescript/optimizations/incremental-builds', label: 'TS Incremental builds 🧱' },
+          //           { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
+          //           { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
+          //         ]
+          //       },
+          //       {
+          //         type: 'category',
+          //         label: 'Common Bugs Solved 🐞',
+          //         link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
+          //         items: [
+          //           {
+          //             id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
+          //             type: 'doc',
+          //             label: 'ts-jest: "Cannot use import statement outside module" 🤡'
+          //           }
+          //         ]
+          //       }
+          //     ] 
+          //   },
+          // ]
         },
         {
           type: 'category',
@@ -33,203 +102,232 @@ const sidebars = {
           collapsed: true,
           collapsible: true,
           link: { 
-            // slug: 'typescript/fundamentals',
+            // slug: 'js-es/fundamentals',
             type: 'doc',
-            id: 'typescript/fundamentals/index', 
+            id: 'js-es/fundamentals/index', 
             // title: 'TypeScript Fundamentals 📚',
             // description: "All fundamental terms that simplify TypeScript!",
             // keywords: ['guides'], 
           },
-          // link: { type: 'doc', id: 'typescript/fundamentals/index' },
+          // link: { type: 'doc', id: 'js-es/fundamentals/index' },
           items: [
-            // 'typescript/fundamentals/index',
-            { type: 'doc', id: 'typescript/fundamentals/compiler-vs-transpiler', label: 'Compiler Vs. Transpiler 📜' },
-            { type: 'doc', id: 'typescript/fundamentals/js-module-systems-compatibility' },
-            { type: 'doc', id: 'typescript/fundamentals/javascript-module-systems-explained' },
-            { type: 'doc', id: 'typescript/fundamentals/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
-            { type: 'doc', id: 'typescript/fundamentals/incremental-vs-naive-build' },
+            // 'js-es/fundamentals/index',
+            { type: 'doc', id: 'js-es/fundamentals/compiler-vs-transpiler', label: 'Compiler Vs. Transpiler 📜' },
+            { type: 'doc', id: 'js-es/fundamentals/js-module-systems-compatibility' },
+            { type: 'doc', id: 'js-es/fundamentals/javascript-module-systems-explained' },
+            { type: 'doc', id: 'js-es/fundamentals/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
+            { type: 'doc', id: 'js-es/fundamentals/incremental-vs-naive-build' },
           ]
         },
         {
-          type: 'category',
-          label: 'Optimizations ⚡️',
-          link: { 
-            // slug: 'typescript/optimizations',
-            // title: 'TypeScript Optimizations ⚡️',
-            id: 'typescript/optimizations/index',
+          type: 'category', 
+          label: 'TypeScript', 
+          link: {
+            id: 'js-es/typescript/index',
             type: 'doc',
-            // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
-            // All the articles here unlock you crucial optimization that can be made for your project.`
           },
           items: [
-            // { type: 'doc', id: 'typescript/optimizations/index', label: 'Introduction ✨'},
-            { type: 'doc', id: 'typescript/optimizations/incremental-builds', label: 'TS Incremental builds 🧱' },
-            { type: 'doc', id: 'typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
-            { type: 'doc', id: 'typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Common Bugs Solved 🐞',
-          link: { type: 'doc', id: 'typescript/bugs-solved/index' },
-          items: [
-            {
-              id: 'typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
-              type: 'doc',
-              label: 'ts-jest: "Cannot use import statement outside module" 🤡'
-            }
-          ]
-        }
-      ] 
-    },
-  ],
-  unitTestsSideBar: [
-    {
-      type: 'category',
-      label: 'Unit Tests',
-      items: [
-        {
-          type: 'doc',
-          id: 'unit-tests/index',
-          label: 'Introduction ✨',
-        },
-        {
-          type: 'category',
-          label: 'Theory 🔭',
-          link: { type: 'doc', id: 'unit-tests/theory/index' },
-          items: [
-            {
-              id: 'unit-tests/theory/pros',
-              type: 'doc',
-              label: 'Pros 👍'
-            },
-            {
-              id: 'unit-tests/theory/cons',
-              type: 'doc',
-              label: 'Cons 👎'
-            },
-            {
-              id: 'unit-tests/theory/production-code-to-test-code-ratio',
-              type: 'doc',
-              label: 'Production/Test Code Ratio ☯'
-            },
-            {
-              id: 'unit-tests/theory/verify-test-code',
-              type: 'doc',
-              label: 'Verify Test Code ✅'
-            },
+            // {
+            //   type: 'doc',
+            //   id: 'js-es/typescript/index',
+            //   label: 'Introduction ✨',
+            // },
             {
               type: 'category',
-              label: 'Low-Effort/High-Value Cases 🤩',
-              link: { type: 'doc', id: 'unit-tests/theory/low-effort-high-value-cases/index' },
+              label: 'Optimizations ⚡️',
+              link: { 
+                // slug: 'js-es/typescript/optimizations',
+                // title: 'TypeScript Optimizations ⚡️',
+                id: 'js-es/typescript/optimizations/index',
+                type: 'doc',
+                // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
+                // All the articles here unlock you crucial optimization that can be made for your project.`
+              },
               items: [
-                {
-                  id: 'unit-tests/theory/low-effort-high-value-cases/the-entry-module',
-                  type: 'doc',
-                  label: 'The Entry Module 🧭'
-                },
-                {
-                  id: 'unit-tests/theory/low-effort-high-value-cases/data-transform',
-                  type: 'doc',
-                  label: 'Data Transform 🧭'
-                },
-                {
-                  id: 'unit-tests/theory/low-effort-high-value-cases/conditional-validation',
-                  type: 'doc',
-                  label: 'Conditional Validation 🧭'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          type: 'category',
-          label: 'Jest 🤡',
-          link: { type: 'doc', id: 'unit-tests/jest/index' },
-          items: [
-            {
-              type: 'category',
-              label: 'Mocks 🃏',
-              link: {id: 'unit-tests/jest/mocks/index', type: 'doc'},
-              items: [
-                {
-                  id: 'unit-tests/jest/mocks/jest-do-mock',
-                  type: 'doc',
-                  label: 'jest.doMock(🤡)'
-                }
+                // { type: 'doc', id: 'js-es/typescript/optimizations/index', label: 'Introduction ✨'},
+                { type: 'doc', id: 'js-es/typescript/optimizations/incremental-builds', label: 'TS Incremental builds 🧱' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
               ]
             },
             {
               type: 'category',
-              label: 'Architecture 🏛',
-              link: { id: 'unit-tests/jest/architecture/architecture-diagram', type: 'doc' },
+              label: 'Common Bugs Solved 🐞',
+              link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
               items: [
                 {
+                  id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
                   type: 'doc',
-                  id: 'unit-tests/jest/architecture/configs', 
-                  label: 'Chapter 1: Configs 🧰'
+                  label: 'ts-jest: "Cannot use import statement outside module" 🤡'
+                }
+              ]
+            }
+          ] 
+        },
+        {
+          type: 'category',
+          label: 'Testing Frameworks',
+          // link: { id: 'js-es/testing-frameworks/index', type: 'doc'},
+          items: [
+            {
+              type: 'category',
+              label: 'Jest 🤡',
+              link: { type: 'doc', id: 'js-es/testing-frameworks/jest/index' },
+              items: [
+                {
+                  type: 'category',
+                  label: 'Mocks 🃏',
+                  link: {id: 'js-es/testing-frameworks/jest/mocks/index', type: 'doc'},
+                  items: [
+                    {
+                      id: 'js-es/testing-frameworks/jest/mocks/jest-do-mock',
+                      type: 'doc',
+                      label: 'jest.doMock(🤡)'
+                    }
+                  ]
                 },
                 {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/dependency-resolutions', 
-                  label: 'Chapter 2: File System & Dependency Resolution 🌳'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/determining-how-to-run-tests', 
-                  label: 'Chapter 3: Test Order Optimization ⏳'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/running-tests', 
-                  label: 'Chapter 4: Test Run 💨'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/the-runtime-environment', 
-                  label: 'Chapter 5: The Runtime Environment 💽'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/modules-transformation', 
-                  label: 'Chapter 6: Module Transformation 🦠'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/appendix-1-hoisting', 
-                  label: 'Appendix Ⅰ: Jest Hoisting 🆙'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/appendix-2-jest-worker', 
-                  label: 'Appendix Ⅱ: jest-worker 👷‍♂️'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/appendix-3-cache-summary', 
-                  label: 'Appendix Ⅲ: Cache Summary 💵'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/appendix-4-test-result-summary', 
-                  label: 'Appendix Ⅳ: Test Result Summary 🧪'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/appendix-5-watch-mode', 
-                  label: 'Appendix Ⅴ: Watch Mode ⏱'
-                },
-                {
-                  type: 'doc',
-                  id: 'unit-tests/jest/architecture/sharing-thoughts', 
-                  label: 'Sharing Thoughts 🦉'
+                  type: 'category',
+                  label: 'Architecture 🏛',
+                  link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
+                  items: [
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/sharing-thoughts', 
+                      label: 'Sharing Thoughts 🦉'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/configs', 
+                      label: 'Chapter 1: Configs 🧰'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/dependency-resolutions', 
+                      label: 'Chapter 2: File System & Dependency Resolution 🌳'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/determining-how-to-run-tests', 
+                      label: 'Chapter 3: Test Order Optimization ⏳'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/running-tests', 
+                      label: 'Chapter 4: Test Run 💨'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/the-runtime-environment', 
+                      label: 'Chapter 5: The Runtime Environment 💽'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/modules-transformation', 
+                      label: 'Chapter 6: Module Transformation 🦠'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-1-hoisting', 
+                      label: 'Appendix Ⅰ: Jest Hoisting 🆙'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-2-jest-worker', 
+                      label: 'Appendix Ⅱ: jest-worker 👷‍♂️'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-3-cache-summary', 
+                      label: 'Appendix Ⅲ: Cache Summary 💵'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-4-test-result-summary', 
+                      label: 'Appendix Ⅳ: Test Result Summary 🧪'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-5-watch-mode', 
+                      label: 'Appendix Ⅴ: Watch Mode ⏱'
+                    },
+                  ]
                 }
               ]
             }
           ]
         }
       ],
+    },
+    {
+      'type': 'category',
+      label: 'Testing',
+      items: [
+        {
+          type: 'category',
+          label: 'Unit Tests',
+          link: {
+            id: 'testing/unit/index',
+            type: 'doc',
+          },
+          items: [
+            {
+              type: 'category',
+              label: 'Theory 🔭',
+              link: { type: 'doc', id: 'testing/unit/theory/index' },
+              items: [
+                {
+                  id: 'testing/unit/theory/pros',
+                  type: 'doc',
+                  label: 'Pros 👍'
+                },
+                {
+                  id: 'testing/unit/theory/cons',
+                  type: 'doc',
+                  label: 'Cons 👎'
+                },
+                {
+                  id: 'testing/unit/theory/production-code-to-test-code-ratio',
+                  type: 'doc',
+                  label: 'Production/Test Code Ratio ☯'
+                },
+                {
+                  id: 'testing/unit/theory/verify-test-code',
+                  type: 'doc',
+                  label: 'Verify Test Code ✅'
+                },
+                {
+                  type: 'category',
+                  label: 'Low-Effort/High-Value Cases 🤩',
+                  link: { type: 'doc', id: 'testing/unit/theory/low-effort-high-value-cases/index' },
+                  items: [
+                    {
+                      id: 'testing/unit/theory/low-effort-high-value-cases/the-entry-module',
+                      type: 'doc',
+                      label: 'The Entry Module 🧭'
+                    },
+                    {
+                      id: 'testing/unit/theory/low-effort-high-value-cases/data-transform',
+                      type: 'doc',
+                      label: 'Data Transform 🧭'
+                    },
+                    {
+                      id: 'testing/unit/theory/low-effort-high-value-cases/conditional-validation',
+                      type: 'doc',
+                      label: 'Conditional Validation 🧭'
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+        }
+      ],
     }
+
+  ],
+  unitTestsSideBar: [
+
   ]
 };
 

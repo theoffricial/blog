@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'unicop',
-  tagline: 'be unico, be part',
+  title: 'unic(o|p)art',
+  // tagline: 'unic(o|p)art',
   url: 'https://unicop.art',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -71,13 +71,13 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'typescript/index',
+            docId: 'js-es/typescript/index',
             position: 'left',
             label: 'TypeScript',
           },
           {
             type: 'doc',
-            docId: 'unit-tests/index',
+            docId: 'testing/unit/index',
             position: 'left',
             label: 'Unit Tests',
           },
