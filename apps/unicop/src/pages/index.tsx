@@ -5,39 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import HomepageFeatures from '../components/HomepageFeatures';
-import HomepageContent from '../components/HomepageContent';
-import Author from '@theme/BlogPostItem/Header/Authors'
-import DocCardList from '@theme/DocCardList';
 
-{/* <DocCardList items={[{type: 'category',items: [],label: 'blabla',collapsed: true,collapsible: true }]}></DocCardList> */}
-// import {typescriptSidebar} from '../../sidebars.js';
-<DocCardList items={[{
-  type: 'link', 
-  docId: 'js-es/typescript/index',
-  href: '/blog/js-es/typescript',
-  label: 'Introduction ✨'
-  // label: 'bla', 
-  // items: [
-  //   {
-  //     type: 'link',
-  //     docId: 
-  //     href: 'http://localhost:3000',
-  //     label: 'TypeScript Introduction ✨',
-  //   },
-  // ],
-  // collapsed: true,
-  // collapsible: true,
-}]} />
-
-      {/* <Author author={{
-        email: 'its.op.the.unicorn@gmail.com',
-        title: 'Software Developer @ Snappy',
-        name: 'Ofri Peretz',
-        url: 'https://unicop.art',
-        imageURL: 'https://github.com/unicop.png'
-      }} className="hero__subtitle"></Author> */}
-// import HomepageFeatures from '../components/HomepageFeatures';
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
@@ -99,8 +67,6 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         
-
-        {/* <HomepageContent /> */}
       </main>
       
     </Layout>

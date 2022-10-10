@@ -21,8 +21,18 @@ See types highlights
 ```ts
 type HasteContext = { hasteFS: IHasteFS; moduleMap: IModuleMap };
 
+// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/types.ts#L103
 // key = filepath
 type FileData = Map<string, FileMetaData>;
+
+export type FileMetaData = [
+  id: string,
+  mtime: number,
+  size: number,
+  visited: 0 | 1,
+  dependencies: string,
+  sha1: string | null | undefined
+];
 
 class HasteFS extends IHasteFS {
   // jest-haste-map constructor
@@ -33,6 +43,7 @@ class HasteFS extends IHasteFS {
   // ...
 }
 
+// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/types.ts#L42
 export interface IHasteFS {
   exists(path: string): boolean;
   getAbsoluteFileIterator(): Iterable<string>;
@@ -257,7 +268,7 @@ export async function worker(data: WorkerMessage): Promise<WorkerMetadata> {
 ```
 
 :::info
-The default extractor reads file's content and look for `require` calls when working with [CommonJS](../../../js-es/fundamentals/javascript-module-systems-explained.md#-commonjs) module system, or for `import` calls when configured to look for [ES](../../../js-es/fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system modules.
+The default extractor reads file's content and look for `require` calls when working with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) module system, or for `import` calls when configured to look for [ES](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system modules.
 
 See how jest default [dependency extractor](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/lib/dependencyExtractor.ts) works.
 :::
@@ -334,7 +345,7 @@ Later on, instead of using declarative headers inside files, the implementation 
 
 <!-- ### How Haste Dependency Detection Happen -->
 
-<!-- The static analysis is simple, `jest-worker` is looking for `require` calls, when working with [CommonJS](../../../js-es/fundamentals/javascript-module-systems-explained.md#-commonjs) module system, and for `import` calls when working with [ES](../../../js-es/fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system. -->
+<!-- The static analysis is simple, `jest-worker` is looking for `require` calls, when working with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) module system, and for `import` calls when working with [ES](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system. -->
 <!--
 ### The Output
 

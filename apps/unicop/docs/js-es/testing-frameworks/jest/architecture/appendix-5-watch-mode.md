@@ -1,10 +1,16 @@
+---
+last_update:
+  date: 07/10/2022
+  author: Ofri Peretz
+---
+
 # Appendix Ⅴ: Watch Mode
 
 import PageStarter from '@site/src/components/PageStarter';
 
 <PageStarter />
 
-The watch mode turns jest into a continuos test run that besides running tests it also listening to file system changes you do and respond accordingly.
+The watch mode turns jest into a continuos test run that besides running tests is also listening to file system changes you do and respond accordingly.
 
 On watch mode, in comparison to a single test run, the expectation for a different development experience. for example you would expect jest to respond immediately on file system changes, be responsive when interacting directly with the CLI to interrupt the current test run and so on.
 
@@ -55,6 +61,7 @@ const _run10000 = async (
 
 ```ts
 // jest-core/src/watch.ts
+// https://github.com/facebook/jest/blob/main/packages/jest-core/src/watch.ts#L89
 // This function is the main function running inside the "runWatch" from above.
 export default async function watch(
   initialGlobalConfig: Config.GlobalConfig,

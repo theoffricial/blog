@@ -123,7 +123,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} unicop. Built with Docusaurus 🦖.`,
+        copyright: `Copyright ${new Date().getFullYear()} © unicop.` // <a href="/">All Rights Reserved</a>. <a href="/">Privacy Policy</a>.`,
       },
       prism: {
         theme: lightCodeTheme,
