@@ -1,6 +1,4 @@
-# Unit Tests - Jest - Architecture - 2. File System & Dependencies Resolution
-
-![Jest Architecture Dependencies Resolution](/img/jest/2-architecture-dependency-resolution.svg)
+# Part 2. File System & Dependencies Resolution
 
 ## Introduction ✨
 
@@ -16,7 +14,19 @@ Most of the functionality `jest-haste-map` does is to build `HasteMap` object, w
 `jest-haste-map` doesn't return `HasteMap` as-is but build from it an `HasteContext` object,
 which is (talking high-level) is the `HasteMap` wrapped as internal classes instances to support different abilities out-of-the-box for the rest of the jest system.
 
-See types highlights
+The haste map creation and synchronization is critical to jest startup performance.
+
+Let's breakdown how the magic works
+
+## Part 2: Diagram ✍️
+
+import JestArchitectureSVG from './2-jest-architecture-dependency-resolution.svg';
+
+<JestArchitectureSVG />
+
+### Type Summary
+
+_ The main types for general and better understanding, printed in here but relevant for the entire article, so if something is not clear, just skip it._
 
 ```ts
 type HasteContext = { hasteFS: IHasteFS; moduleMap: IModuleMap };
@@ -64,14 +74,6 @@ type HasteMap = {
   mocks: { [id: string]: string };
 };
 ```
-
-This haste map creation and synchronization is critical to jest startup performance.
-
-Let's breakdown how the magic works
-
-<!-- To answer it, jest needs to know what is the code base it operates on, and to map all files in it, and it does it by invoking the -->
-
-<!-- `jest-haste-map` does static analysis to build the dependencies tree in the project, the tree is a flat map that the key is the module unique identifier, jest uses file-path as an identifier for each module, and the value stores the dependencies modules IDs. jest is using this map to traverse the dependencies tree. -->
 
 ## 1 - Initialize HasteMap
 
@@ -278,6 +280,8 @@ See how jest default [dependency extractor](https://github.com/facebook/jest/blo
 Wether `jest-haste-map` crawl and extract the entire file system or just a small number of changed files, the final result is a new `HasteMap` object,
 And to optimize future runs, each time something has changed `jest-haste-map` will store it in cache.
 
+Here is how `jest-haste-map` stores `hasteMap` in cache:
+
 ```ts
 // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L733-L738
   // ...
@@ -291,12 +295,37 @@ And to optimize future runs, each time something has changed `jest-haste-map` wi
   // ...
 ```
 
-After storing the new `hasteMap`, it returns only the entire file map including metadata in an object call `HasteContext`.
+The `_persist` function being called as part of the `build(..)` function, which you can see its implementation on the next section (but also on the diagram).
+
+## 5 - Build HasteContext Output
+
+After storing the new `hasteMap`, `jest-haste-map` returns it in a wrapper call object all `HasteContext` (see types above).
+
+See how `HasteContext` is being built in `jest-haste-map` `build(..)` function right before being returned:
 
 ```ts
-// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L362
+class HasteMap extends EventEmitter implements IHasteMap {
   // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L362
   build(): Promise<InternalHasteMapObject> {
+    // ...
+    const data = await this._buildFileMap();
+
+    // Persist when we don't know if files changed (changedFiles undefined)
+    // or when we know a file was changed or deleted.
+    let hasteMap: InternalHasteMap;
+    if (
+      data.changedFiles === undefined ||
+      data.changedFiles.size > 0 ||
+      data.removedFiles.size > 0
+    ) {
+      hasteMap = await this._buildHasteMap(data);
+      // Store hasteMap in cache
+      this._persist(hasteMap);
+    } else {
+      hasteMap = data.hasteMap;
+    }
+
     const rootDir = this._options.rootDir;
     const hasteFS = new HasteFS({
       files: hasteMap.files,
@@ -313,11 +342,12 @@ After storing the new `hasteMap`, it returns only the entire file map including 
     await this._watch(hasteMap);
     return {
       __hasteMapForTest,
-      hasteFS,
-      moduleMap,
+      hasteFS, // file map
+      moduleMap, // module map
     };
   }
   // ...
+}
 ```
 
 ## What is Haste? - Historical Brief 🦕
@@ -337,40 +367,3 @@ So what they did was to add an header to each file, like this [one](https://gith
 So in Hate instead of using `../my/relative/path/to/my-module.js`, you just had to call `my-module`.
 
 Later on, instead of using declarative headers inside files, the implementation had changed to take the file-path/ name as the unique identifier. That way Facebook avoided to read the content of files for the modules list, but only for the step of building the tree of dependencies resolution, so it improved performance.
-
-## Credits 🎖️
-
-- [Christoph Nakazawa](https://twitter.com/cpojer) - For the great (but old) [Jest Architecture](https://youtu.be/3YDiloj8_d0) video, without it I won't be able to build this series.
-- The past and present members/maintainers of jest 🙏
-
-<!-- ### How Haste Dependency Detection Happen -->
-
-<!-- The static analysis is simple, `jest-worker` is looking for `require` calls, when working with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) module system, and for `import` calls when working with [ES](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system. -->
-<!--
-### The Output
-
-When done `jest-worker` builds the `HasteContext` object and returns it back to the `jest-cli`.
-
-`HasteFS` is in the type of `Map<Path, Module>` where
-
-- `Path` - a string, holds the file-path of the module
-- `Module` - an object of type `{moduleID,mtime,number,dependencies}`
-  - `moduleID` - the module unique identifier
-  - `mtime` - last time the module modified, this one is used by the `fs-watchman` crawler.
-  - `number` - has the file read or not
-  - `dependencies` - array of strings of the the modules that this module depends on -->
-
-<!-- ## 3 - The jest-haste-map cache mechanism
-
-At this point `fb-watchman` has:
-
-- list of all files,
-- The capability to track any file system operation related to the project
-
-To leverage `cache` and avoid scanning the entire codebase again, each time `fb-watchman` detects a modification at any of the files, it logs that file internally for its own track.
-
-Then on the next time jest will run, it will ask `fb-watchman` the following: "This is the list of files you gave me, What has changed since then?".
-
-Now `fb-watchman` will have to read once again only the changed files to verify dependencies, and to detect what modules might be affected by the changes.
-
-It means that jest has to scan and read the entire codebase only once, which enables jest to be much faster. -->

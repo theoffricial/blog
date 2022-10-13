@@ -189,67 +189,78 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Architecture 🏛',
-                  link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
+                  // link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
+                  link: { type: 'generated-index' },
                   items: [
+                    // {
+                    //   type: 'doc',
+                    //   id: 'js-es/testing-frameworks/jest/architecture/sharing-thoughts', 
+                    //   label: 'Sharing Thoughts 🦉'
+                    // },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/sharing-thoughts', 
-                      label: 'Sharing Thoughts 🦉'
+                      id: 'js-es/testing-frameworks/jest/architecture/introduction', 
+                      label: 'Introduction ✨'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', 
+                      label: 'The Complete Architecture Diagram 🏛'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/configs', 
-                      label: 'Chapter 1: Configs 🧰'
+                      label: 'P1: Configs 🧰'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/dependency-resolutions', 
-                      label: 'Chapter 2: File System & Dependency Resolution 🌳'
+                      label: 'P2: File System & Dependency Resolution 🌳'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/determining-how-to-run-tests', 
-                      label: 'Chapter 3: Test Order Optimization ⏳'
+                      label: 'P3: Test Order Optimization ⏳'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/running-tests', 
-                      label: 'Chapter 4: Test Run 💨'
+                      label: 'P4: Test Run 🃏'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/the-runtime-environment', 
-                      label: 'Chapter 5: The Runtime Environment 💽'
+                      label: 'P5: The Runtime Environment 💽'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/modules-transformation', 
-                      label: 'Chapter 6: Module Transformation 🦠'
+                      label: 'P6: Module Transformation 🦠'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-1-hoisting', 
-                      label: 'Appendix Ⅰ: Jest Hoisting 🆙'
+                      label: 'Appx. Ⅰ: Jest Hoisting 🆙'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-2-jest-worker', 
-                      label: 'Appendix Ⅱ: jest-worker 👷‍♂️'
+                      label: 'Appx. Ⅱ: jest-worker 👷‍♂️'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-3-cache-summary', 
-                      label: 'Appendix Ⅲ: Cache Summary 💵'
+                      label: 'Appx. Ⅲ: Cache Summary 💵'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-4-test-result-summary', 
-                      label: 'Appendix Ⅳ: Test Result Summary 🧪'
+                      label: 'Appx. Ⅳ: Test Result Summary 🧪'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-5-watch-mode', 
-                      label: 'Appendix Ⅴ: Watch Mode ⏱'
+                      label: 'Appx. Ⅴ: Watch Mode ⏱'
                     },
                   ]
                 }

@@ -1,6 +1,4 @@
-# Unit Tests - Jest - Architecture - 1. Configs
-
-![Jest Architecture Configs](/img/jest/1-architecture-configs.svg)
+# Part 1. Configs
 
 ## Introduction ✨
 
@@ -27,9 +25,13 @@ that enables jest to look for a dedicated configuration file from a custom locat
 
 `jest-config` depends on these 2 methods, and based on them it builds the configuration objects for the entire test run.
 
-## Collecting The Configs
+## Part 1: Diagram ✍️
 
-### CLI options
+import JestArchitectureSVG from './1-jest-architecture-configs.svg';
+
+<JestArchitectureSVG />
+
+## Step 1: Collecting the CLI options
 
 jest [extract](https://github.com/facebook/jest/blob/e21c5aba950f6019bbfde2f8233ac96d1fcaef42/packages/jest-cli/src/cli/index.ts#L51) all CLI argument into an object using the [yargs](https://github.com/yargs/yargs) package.
 
@@ -76,7 +78,7 @@ export async function buildArgv(
   );
 ```
 
-### Configuration File
+## Step 2: Reading Configuration File
 
 jest supports 2 methods to look for a configuration file
 
@@ -128,7 +130,7 @@ export const JEST_CONFIG_EXT_ORDER = Object.freeze([
 See [Jest Configuration Options](https://jestjs.io/docs/configuration)
 :::
 
-## Normalize Run Options
+## Step 3: Normalize All Configurations For Test Run
 
 At this point jest already extract the CLI argv, and the raw-options from the configuration file.
 
@@ -161,7 +163,7 @@ After receiving the `AllOptions` from the normalize function, there is a small s
 This options classification call [groupOptions](https://github.com/facebook/jest/blob/main/packages/jest-config/src/index.ts#L110).
 :::
 
-## Final Output
+## Step 4: Configs Final Output
 
 `jest-config` outputs 2 runtime objects that the whole jest system uses:
 
@@ -186,11 +188,11 @@ This config created only once, and includes all options that are relevant for ev
 See [GlobalConfig interface](https://github.com/facebook/jest/blob/main/packages/jest-types/src/Config.ts#357)
 :::
 
-## Options Hierarchy
+## Options Hierarchy - The Strongest Wins!
 
 > CLI arguments (1) > Configuration File Options (2) > Jest Default Options (3)
 
-### Hierarchy Example
+### Example - How The Hierarchy Works In Practice
 
 when running `jest` with the following command:
 
@@ -216,8 +218,3 @@ The final result of the `maxWorkers` option is 11, because:
 
 The `maxWorkers` option is part of the `GlobalConfig` because it is not related to a specific project but to the actual test run constraints.
 So `GlobalConfig.maxWorkers` will be 11.
-
-## Credits 🎖️
-
-- [Christoph Nakazawa](https://twitter.com/cpojer) - For the great (but old) [Jest Architecture](https://youtu.be/3YDiloj8_d0) video, without it I won't be able to build this series.
-- The past and present members/maintainers of jest 🙏
