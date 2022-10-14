@@ -2,17 +2,28 @@
 
 ## Introduction ✨
 
-At this point jest has already built all **[configs](./1-configs.md)** and can use them.
+This part discuss 2 key questions jest should ask to complete a test run,
+after figuring out **[configs](./1-configs.md)**.
 
-The next question jest asks is "What is the code base jest operates on? and what are the dependencies between the different modules?".
+1. "What is the code base am I operate on?"
+2. "What are the dependencies between files?"
 
-To answers these questions jest calls the `jest-haste-map` package.
-`jest-haste-map` does static analysis to figure out all the files in the codebase and extract metadata about them, including dependencies.
+<!-- Just to remind that jest able to answer these questions only after it figured out what are the **[configs](./1-configs.md)** it operates with. -->
 
-Most of the functionality `jest-haste-map` does is to build `HasteMap` object, which is a file map between a file location (path) and its metadata (dependencies, id, etc.).
+<!-- At this point jest has already built all and can use them.
+
+The next question jest asks is and what are the dependencies between the different modules?". -->
+
+To answer those question, jest uses the `jest-haste-map` package,
+which does static analysis to figure out data like, the list of all files of your project, the dependencies of every file, sizes of files, etc.
+
+<!-- To answers these questions jest calls the `jest-haste-map` package.
+`jest-haste-map` does static analysis to figure out all the files in the codebase and extract metadata about them, including dependencies. -->
+
+<!-- Most of the functionality `jest-haste-map` does is to build `HasteMap` object, which is a file map between a file location (path) and its metadata (dependencies, id, etc.).
 
 `jest-haste-map` doesn't return `HasteMap` as-is but build from it an `HasteContext` object,
-which is (talking high-level) is the `HasteMap` wrapped as internal classes instances to support different abilities out-of-the-box for the rest of the jest system.
+which is (talking high-level) is the `HasteMap` wrapped as internal classes instances to support different abilities out-of-the-box for the rest of the jest system. -->
 
 The haste map creation and synchronization is critical to jest startup performance.
 
@@ -24,64 +35,119 @@ import JestArchitectureSVG from './2-jest-architecture-dependency-resolution.svg
 
 <JestArchitectureSVG />
 
-### Type Summary
+## Understanding HasteMap
 
-_ The main types for general and better understanding, printed in here but relevant for the entire article, so if something is not clear, just skip it._
+`HasteMap` is an object that represents an entire file system.
+To fill `HasteMap` with data, the outputs of actions such as crawling file system or extracting files metadata being saved in `HasteMap`.
+
+### How HasteMap look like:
+
+Sharing the real types from the jest repository
 
 ```ts
-type HasteContext = { hasteFS: IHasteFS; moduleMap: IModuleMap };
+type HasteMap = {
+  clocks: WatchmanClocks; // related to file crawling, irrelevant for this article
+  files: FileData; // see below
+  map: { [id: string]: ModuleMapItem }; // modules in multiple platform support
+  // key {[id: string]} - mock file path
+  // value {string} - relative path of the actual file
+  mocks: { [id: string]: string }; // Managing how jest find and resolve mocks
+};
 
 // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/types.ts#L103
 // key = filepath
 type FileData = Map<string, FileMetaData>;
 
-export type FileMetaData = [
-  id: string,
-  mtime: number,
-  size: number,
-  visited: 0 | 1,
-  dependencies: string,
-  sha1: string | null | undefined
-];
-
-class HasteFS extends IHasteFS {
-  // jest-haste-map constructor
-  // receives files map from haste map and implement some functions on it
-  constructor({ rootDir, files }: { rootDir: string; files: FileData }) {
-    // ...
-  }
-  // ...
-}
-
-// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/types.ts#L42
-export interface IHasteFS {
-  exists(path: string): boolean;
-  getAbsoluteFileIterator(): Iterable<string>;
-  getAllFiles(): Array<string>;
-  getDependencies(file: string): Array<string> | null;
-  getSize(path: string): number | null;
-  matchFiles(pattern: RegExp | string): Array<string>;
-  matchFilesWithGlob(
-    globs: ReadonlyArray<string>,
-    root: string | null
-  ): Set<string>;
-}
-
-type HasteMap = {
-  clocks: WatchmanClocks;
-  files: FileData;
-  map: { [id: string]: ModuleMapItem };
-  mocks: { [id: string]: string };
+// Modules can be targeted to a specific platform based on the file name.
+// Example: platform.ios.js and Platform.android.js will both map to the same
+// `Platform` module. The platform should be specified during resolution.
+type ModuleMapItem = { [platform: string]: ModuleMetaData };
+//
+type ModuleMetaData = {
+  path: string; // the path to look up the file object in `files`.
+  type: string; // the module type (either `package` or `module`).
 };
+
+export type FileMetaData = [
+  id: string, // used to look up module metadata objects in `map`.
+  mtime: number, // check for outdated files.
+  size: number, // size of the file in bytes.
+  visited: 0 | 1, // whether the file has been parsed or not.
+  dependencies: Array<string>, // all relative dependencies of this file.
+  sha1: string | null | undefined // SHA-1 of the file, if requested via options, for cache validation
+];
 ```
 
-## 1 - Initialize HasteMap
+## 1+2 - Build HasteMap
 
-read data from the cache or create an empty structure.
+### 1 - Read Or Create New Map
+
+The first thing `jest-haste-map` does is trying to look for an existing `HasteMap` from cache, if it does not exist it initialize an empty one.
+
+### 2 - Discover The Codebase To Operate On (Crawl)
+
+After "reading" the initial `HasteMap` `jest-haste-map` is going to crawl the entire file system of your project, find and returns back the list of all files within the project.
+
+For the crawling job, jest supports 2 crawlers to do that
+
+1. [fb-watchman](https://github.com/facebook/watchman) - crawler developed by Facebook, it is the default option when available and has more advance capabilities and optimizations
+2. The native node-crawler which is the fallback when `fb-watchman` isn't available.
+
+The main difference between the crawlers is while `fb-watchman` can crawl deltas when cache already available, the node-crawler has to crawl the entire file system every time, this ability let jest to leverage cache and make test run much shorter when `fb-watchman` available.
+
+:::note
+`jest-haste-map` cache `HasteMap` each build.
+:::
+
+The crawling op builds metadata objects for every file. This builds the `files` part of the `HasteMap`.
+
+:::info
+[fb-watchman crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/watchman.ts#L92)
+[node-crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/node.ts#L196)
+:::
+
+### Build HasteMap Code Highlights 🔦
 
 ```ts
-  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L408-L418
+class HasteMap extends EventEmitter implements IHasteMap {
   // ...
+  // Being called from @jest/cli after creating HasteMap instance
+  build(): Promise<InternalHasteMapObject> {
+    // ...
+    // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L365
+    // Builds file map
+    const data = await this._buildFileMap();
+    // ...
+  }
+
+  // ..
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L433
+  private async _buildFileMap(): Promise<{
+    removedFiles: FileData;
+    changedFiles?: FileData;
+    hasteMap: InternalHasteMap;
+  }> {
+    let hasteMap: InternalHasteMap;
+    try {
+      /**
+       * 1. read data from the cache or create an empty structure.
+       */
+      const read = this._options.resetCache ? this._createEmptyMap : this.read;
+      hasteMap = read.call(this);
+    } catch {
+      hasteMap = this._createEmptyMap();
+    }
+    /**
+     * 2. crawl the file system.
+     */
+    return this._crawl(hasteMap);
+  }
+
+  // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L408-L418
+  /**
+   * 1. read data from the cache or create an empty structure.
+   */
   read(): InternalHasteMap {
     let hasteMap: InternalHasteMap;
 
@@ -94,37 +160,13 @@ read data from the cache or create an empty structure.
     return hasteMap;
   }
   // ...
-```
-
-## 2 - Codebase Discovery
-
-Right after calling `jest-haste-map` the first thing it should do is to crawl the entire file system to get the list of all relevant files.
-To do that jest supports the [fb-watchman](https://github.com/facebook/watchman) crawler, another library developed by Meta, and the native node-crawler.
-
-The main difference between them is when you already has a cached map, because [fb-watchman](https://github.com/facebook/watchman) can crawl delta changes, while the node-crawler has to crawl the entire file system for every change.
-
-:::note
-`jest-haste-map` cache previous calls, which you can read more at the Cache section below.
-:::
-
-The crawling op builds metadata objects for every file. This builds the `files` part of the `HasteMap`.
-
-```ts
-// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L762-L804
-  // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L762-L804
   private async _crawl(hasteMap: InternalHasteMap) {
     const options = this._options;
     const ignore = this._ignore.bind(this);
     const crawl = (await this._shouldUseWatchman()) ? watchmanCrawl : nodeCrawl;
     const crawlerOptions: CrawlerOptions = {
-      computeSha1: options.computeSha1,
-      data: hasteMap,
-      enableSymlinks: options.enableSymlinks,
-      extensions: options.extensions,
-      forceNodeFilesystemAPI: options.forceNodeFilesystemAPI,
-      ignore,
-      rootDir: options.rootDir,
-      roots: options.roots,
+      // ...options
     };
 
     const retry = (error: Error) => {
@@ -137,173 +179,110 @@ The crawling op builds metadata objects for every file. This builds the `files` 
       return retry(error);
     }
   }
+}
 ```
-
-:::info
-[fb-watchman crawl implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/watchman.ts#L92)
-[node-crawl implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/node.ts#L196)
-:::
-
-<!-- `jest-haste-map` is using another Meta package call [fb-watchman](''), what watchman does is to scan and list all files in the file system that is under the project main folder.
-
-This action is an heavy one and time consuming, especially for big projects.
-
-The runtime output object, that jest will use, is `HasteContext` that stores some metadata that jest needs but the most important metadata is the `HasteFS` that stores a list of all files, and a flat map between each module and its dependencies. -->
 
 ## 3 - Parse & Extract Metadata from Files
 
-To get file's metadata such as its dependencies you have to read its content and figure this out, and that is exactly what `jest-haste-map` does.
+Next, `jest-haste-map` wants to figure out the metadata for all the files found, such as dependencies.
 
-Now that `jest-haste-map` already has the entire file list in an object, it has to read every file and extract the metadata needed.
+To get metadata `jest-haste-map` has to read each file content and collect it.
 
-Because the haste map creation and synchronization is critical to startup performance and most tasks are blocked by I/O this step makes heavy use of
-synchronous operations. It uses worker processes for parallelizing file
-access and metadata extraction.
+### Metadata Extraction and jest-worker
 
-<!-- But the issue is that such I/O operation is expensive, especially when -->
+Maybe one of the most known limitations of nodejs is that it is a single threaded,
+and that's why I/O operations are thread blocking actions, and because `HasteMap` creation and synchronization is essential for jest to startup, but also critical to startup performance, For the heavy I/O actions metadata extraction requires, it uses the `jest-worker` package that in charge of parallelize work.
 
-To manage all I/O quickly as possible, the jest team created the `jest-worker` package to manage heavy jobs in parallel on multiple processes to improve performance.
+Because when starting metadata extraction task we expect the following scenarios:
 
-So when using the `jest-worker` we expect that
-
-- the worst case is to parse all files, e.g. the initial run.
-- the best case is no file system access and retrieving all data from the cache - when there are no file changes since last time.
-- the average case is a small number of changed files - You worked on a new feature.
-
-<!-- The jest team developed the `jest-worker` package specifically for jest.
-It's job is to build the dependency tree when receiving a list of files received by the `fb-watchman` execution.
-
-The job is simple, read all files, and for each extract from the content the dependencies and return a list of the dependencies module IDs. -->
+- worst case: parse all files, on first run for example.
+- best case: no file-system changes from last run, then retrieving all data from cache.
+- average case: small number of file system changes, like when working on a new feature.
 
 :::note
-The `jest-worker` is a module for executing heavy tasks under forked processes in parallel, by providing a `Promise` based interface, minimum overhead, and bound workers.
-Optimized to complete tasks the quickest possible, checking the number of available cores on the CPU, and ideally uses all, because of this "greedy" behavior
-When jest consumes too much memory or CPU it might cause machine resources throttling, for such cases use the [maxWorkers](https://jestjs.io/docs/configuration#maxworkers-number--string) option to limit the number of parallel workers.
+You can read more about jest-worker on [Appendix. Ⅱ: jest-worker 👷](./appendix-2-jest-worker.md) article.
 :::
 
-See some code highlights to see how it works from the inside.
+### How dependencies found
+
+After reading a file content, by default the extractor looks for `require` as nodejs works natively with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) and if nodejs configured to work with [ESM](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) it will look for `import` statements.
+
+The full metadata jest collects for each file can be found above on the `FileMetadata` interface.
+
+### Parse & Extract Metadata from Files Code Highlights 🔦
 
 ```ts
+// jest-haste-map/src/index.ts
+class HasteMap extends EventEmitter implements IHasteMap {
   // ...
+
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L451
+  // process a single file
   private _processFile(
     hasteMap: InternalHasteMap,
     map: ModuleMapData,
     mocks: MockData,
     filePath: string,
-    workerOptions?: {forceInBand: boolean},
+    workerOptions?: { forceInBand: boolean }
   ): Promise<void> | null {
     // ...
-    // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L535
-    // Callback called when the response from the worker is successful.
-    const workerReply = (metadata: WorkerMetadata) => {
-      // `1` for truthy values instead of `true` to save cache space.
-      fileMetadata[H.VISITED] = 1;
 
-      const metadataId = metadata.id;
-      const metadataModule = metadata.module;
+    // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L652
 
-      if (metadataId && metadataModule) {
-        fileMetadata[H.ID] = metadataId;
-        setModule(metadataId, metadataModule);
-      }
-
-      fileMetadata[H.DEPENDENCIES] = metadata.dependencies
-        ? metadata.dependencies.join(H.DEPENDENCY_DELIM)
-        : '';
-
-      if (computeSha1) {
-        fileMetadata[H.SHA1] = metadata.sha1;
-      }
-    };
-
-    // Callback called when the response from the worker is an error.
-    const workerError = (error: Error | any) => {
-      if (typeof error !== 'object' || !error.message || !error.stack) {
-        error = new Error(error);
-        error.stack = ''; // Remove stack for stack-less errors.
-      }
-
-      if (!['ENOENT', 'EACCES'].includes(error.code)) {
-        throw error;
-      }
-
-      // If a file cannot be read we remove it from the file list and
-      // ignore the failure silently.
-      hasteMap.files.delete(relativeFilePath);
-    };
-
-  // ...
-  return this._getWorker(workerOptions)
-    .worker({
-      computeDependencies: this._options.computeDependencies,
-      computeSha1,
-      dependencyExtractor: this._options.dependencyExtractor,
-      filePath,
-      hasteImplModulePath: this._options.hasteImplModulePath,
-      rootDir,
-    })
-    .then(workerReply, workerError);
-```
-
-```ts
-// worker.ts - the file executed in parallel by jest-worker
-// ...
-
-// A summary of all metadata being collected
-
-export async function worker(data: WorkerMessage): Promise<WorkerMetadata> {
-  // ...
-  dependencies = Array.from(
-    extractor.extract(content, filePath, defaultDependencyExtractor.extract)
-  );
-  // module map attributes
-  // H.MODULE = 0, H.PACKAGE = 1
-  module = [relativeFilePath, H.MODULE /** OR */ H.PACKAGE];
-  // If a SHA-1 is requested on update, compute it.
-  sha1 = sha1hex(content || fs.readFileSync(filePath));
-  // the file name
-  id = fileData.name || hasteImpl.getHasteName(filePath);
-
-  // ...
-  return { dependencies, id, module, sha1 };
+    // Get worker and pass file path and dependencyExtractor
+    return this._getWorker(workerOptions)
+      .worker({
+        computeDependencies: this._options.computeDependencies,
+        computeSha1,
+        dependencyExtractor: this._options.dependencyExtractor,
+        filePath,
+        hasteImplModulePath: this._options.hasteImplModulePath,
+        rootDir,
+      })
+      .then(workerReply, workerError);
+  }
 }
+
+// #####################################################
+
+// jest-haste-map/src/lib/dependencyExtractor.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/lib/dependencyExtractor.ts#L73-L91
+// The dependency extractor logic
+export const extractor: DependencyExtractor = {
+  extract(code) {
+    // initial dependency set
+    const dependencies = new Set<string>();
+
+    const addDependency = (match: string, _: string, dep: string) => {
+      dependencies.add(dep);
+      return match;
+    };
+
+    // Go over file content and,
+    // 1. Removing text
+    // 2. Add dependency when detecting one
+    code
+      .replace(BLOCK_COMMENT_RE, '')
+      .replace(LINE_COMMENT_RE, '')
+      .replace(IMPORT_OR_EXPORT_RE, addDependency)
+      .replace(REQUIRE_OR_DYNAMIC_IMPORT_RE, addDependency)
+      .replace(JEST_EXTENSIONS_RE, addDependency);
+
+    return dependencies;
+  },
+};
 ```
 
-:::info
-The default extractor reads file's content and look for `require` calls when working with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) module system, or for `import` calls when configured to look for [ES](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) module system modules.
-
-See how jest default [dependency extractor](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/lib/dependencyExtractor.ts) works.
-:::
-
-## 4 - Store New HasteMap To Cache
+## 4 - Store HasteMap in Cache
 
 Wether `jest-haste-map` crawl and extract the entire file system or just a small number of changed files, the final result is a new `HasteMap` object,
-And to optimize future runs, each time something has changed `jest-haste-map` will store it in cache.
+And to optimize future runs, Whenever files have changed `jest-haste-map` calculate the new `HasteMap` and store it in cache.
 
 Here is how `jest-haste-map` stores `hasteMap` in cache:
 
 ```ts
-// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L733-L738
-  // ...
-  /**
-   * 4. serialize the new `HasteMap` in a cache file.
-   * Worker processes can directly access the cache through `HasteMap.read()`.
-   */
-  private _persist(hasteMap: InternalHasteMap) {
-    writeFileSync(this._cachePath, serialize(hasteMap));
-  }`
-  // ...
-```
-
-The `_persist` function being called as part of the `build(..)` function, which you can see its implementation on the next section (but also on the diagram).
-
-## 5 - Build HasteContext Output
-
-After storing the new `hasteMap`, `jest-haste-map` returns it in a wrapper call object all `HasteContext` (see types above).
-
-See how `HasteContext` is being built in `jest-haste-map` `build(..)` function right before being returned:
-
-```ts
+// jest-haste-map/src/index.ts
 class HasteMap extends EventEmitter implements IHasteMap {
   // ...
   // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L362
@@ -320,26 +299,109 @@ class HasteMap extends EventEmitter implements IHasteMap {
       data.removedFiles.size > 0
     ) {
       hasteMap = await this._buildHasteMap(data);
-      // Store hasteMap in cache
       this._persist(hasteMap);
     } else {
       hasteMap = data.hasteMap;
     }
+  }
+  // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L733-L738
+  /**
+   * 4. serialize the new `HasteMap` in a cache file.
+   * Worker processes can directly access the cache through `HasteMap.read()`.
+   */
+  private _persist(hasteMap: InternalHasteMap) {
+    writeFileSync(this._cachePath, serialize(hasteMap));
+  }
+  // ...
+}
+```
+
+## 5 - Build Output - `HasteContext`
+
+After read, crawl, extract metadata and store in cache again, `jest-haste-map` is ready to return its output.
+
+Instead of returning the new `hasteMap` it has just built, the `build()` function wraps the new map in a new instance of wrapper class call `HasteFS`, This class exports convenient utility functions to reach files and metadata.
+
+After building the `HasteFS` instance, it returns in with a module map that match between a file and mock, platform and duplication and returns all together in an object call `HasteContext`.
+
+### Build HasteContext Output Code Highlights 🔦
+
+```ts
+// jest-core/src/lib/createContext.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-core/src/lib/createContext.ts#L13
+type HasteContext = { hasteFS: IHasteFS; moduleMap: IModuleMap };
+
+// ##############################################################
+
+// jest-haste-map/src/HasteFS.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/HasteFS.ts#L13
+class HasteFS extends IHasteFS {
+  // See FileData type above
+  constructor({ rootDir, files }: { rootDir: string; files: FileData }) {
+    // ...
+  }
+  // ...
+}
+
+// ##############################################################
+
+// jest-haste-map/src/types.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/types.ts#L42
+export interface IHasteFS {
+  exists(path: string): boolean;
+  getAbsoluteFileIterator(): Iterable<string>;
+  getAllFiles(): Array<string>;
+  getDependencies(file: string): Array<string> | null;
+  getSize(path: string): number | null;
+  matchFiles(pattern: RegExp | string): Array<string>;
+  matchFilesWithGlob(
+    globs: ReadonlyArray<string>,
+    root: string | null
+  ): Set<string>;
+}
+
+// ##############################################################
+
+// jest-haste-map/src/index.ts
+
+class HasteMap extends EventEmitter implements IHasteMap {
+  // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/index.ts#L362
+  build(): Promise<InternalHasteMapObject> {
+    // ...
+    // See above if you want to see the actual code but:
+    // 1.read/create
+    // 2. crawl file system
+    // 3. parse and extract metadata from changed files.
+    // 4. serialize the new `HasteMap` in a cache file.
+
+    // Now preparing output..
 
     const rootDir = this._options.rootDir;
+
+    // here the hasteMap files passed to a new HasteFS instance
     const hasteFS = new HasteFS({
       files: hasteMap.files,
       rootDir,
     });
+
+    // map between modules and different platforms, mocks, and detect duplications.
     const moduleMap = new HasteModuleMap({
       duplicates: hasteMap.duplicates,
       map: hasteMap.map,
       mocks: hasteMap.mocks,
       rootDir,
     });
+
     const __hasteMapForTest =
       (process.env.NODE_ENV === 'test' && hasteMap) || null;
     await this._watch(hasteMap);
+
+    // Then return an object call "HasteContext"
     return {
       __hasteMapForTest,
       hasteFS, // file map

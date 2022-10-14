@@ -1,14 +1,21 @@
 # Unit Tests - Jest - Architecture - jest-worker Appendix
 
-The jest system requires many I/O operations from access files and the need for cache, and due to the fact the node is a single thread technology, forking multiple process to load and do calculation are extremely important for the test run time.
+The jest system requires some heavy I/O operations like files access, cache CRUD, and module transformation.
 
-So the jest team created the [jest-worker][jw] as a solution for executing heavy tasks under forked processes in parallel. They great part that [jest-worker][jw] is an independent package that can parallelize any task, and it means that you can adopt it as a solution for your own needs.
+Because nodejs is a single thread technology, forking blocking tasks, e.g. I/O ops, into multiple processes is extremely important for achieving shorter test run time.
 
-It is great because myself can treat [jest-worker][jw] an amazing solution I can use for my own needs knowing that it made by the best, and used by millions.
+In fact, because this issue is so centric in the problems jest is facing,
+the jest team created [jest-worker][jw] as a core module as the solution to manage execution for heavy tasks that can be run in parallel.
+
+The [jest-worker][jw] is generic meaning it can run any task, not just jest tasks and also it is an independent package, it means you can take it and use it for your own needs.
 
 The [jest-worker][jw] module works by providing an absolute path of the module to be loaded in all forked processes. All methods are exposed on the parent process as promises, so they can be `await`'ed. Child (worker) methods can either be synchronous or asynchronous.
 
-## How Jest Use Jest-Worker
+## How Jest Config Can Utilize `jest-worker`
+
+`jest-worker` is optimized to complete tasks as quickest as possible, It does it by checking the number of available cores on the CPU, and ideally uses them all. That is greedy behavior, that sometimes leads jest to consume too much memory or too many CPU that might slow down the machine it is operating on (personally I experienced it mostly on CI pipelines), To limit `jest-worker` you can use the [maxWorkers](https://jestjs.io/docs/configuration#maxworkers-number--string) option to limit the number of threads jest allowed to use in parallel.
+
+## How Jest Uses `jest-worker`
 
 ### 1. Build File Map & Module Resolution
 
@@ -25,12 +32,14 @@ When the `TestScheduler` schedule `jest-runner`/s to run, by default `jest-runne
 
 You can read the full explanation of that process at the [4. Run Tests](./4-running-tests.md) chapter.
 
-## How the Eco-System Use Jest-Worker
+## How JS Eco-System Uses `jest-worker`
 
-Because it is generic and is a well solution made by the best, there are more than 600 packages at `npm` that depends on [jest-worker][jw], and many of them are bundler optimization plugins and static code analysis like eslint.
-Like testing frameworks bundlers and static code analysis have to heavily deal with I/O and file access tasks.
+As mentioned above, as an independent package, other packages can leverage `jest-worker` to their own needs.
 
-Some of the most popular packages that use jest-worker:
+A quick search in NPM found that +600 public packages are using `jest-worker`,
+Where the most popular of them are module bundlers and module bundlers' plugins.
+
+Here sharing a short list of some of the popular packages that are using `jest-worker`:
 
 - [terser-webpack-plugin](https://www.npmjs.com/package/terser-webpack-plugin)
 - [rollup-plugin-uglify](https://www.npmjs.com/package/rollup-plugin-uglify)
@@ -38,3 +47,5 @@ Some of the most popular packages that use jest-worker:
 - [eslint-webpack-plugin](https://www.npmjs.com/package/eslint-webpack-plugin)
 - [css-minimizer-webpack-plugin](https://www.npmjs.com/package/css-minimizer-webpack-plugin)
 - [metro](https://www.npmjs.com/package/metro)
+
+Also jest used on over [6,700,000+ public repositories](https://github.com/facebook/jest/network/dependents).
