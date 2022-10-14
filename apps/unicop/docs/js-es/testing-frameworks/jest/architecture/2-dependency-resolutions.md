@@ -1,5 +1,9 @@
 # Part 2. File System & Dependencies Resolution
 
+import PageStarter from '@site/src/components/PageStarter';
+
+<PageStarter />
+
 ## Introduction ✨
 
 This part discuss 2 key questions jest should ask to complete a test run,
@@ -8,22 +12,8 @@ after figuring out **[configs](./1-configs.md)**.
 1. "What is the code base am I operate on?"
 2. "What are the dependencies between files?"
 
-<!-- Just to remind that jest able to answer these questions only after it figured out what are the **[configs](./1-configs.md)** it operates with. -->
-
-<!-- At this point jest has already built all and can use them.
-
-The next question jest asks is and what are the dependencies between the different modules?". -->
-
 To answer those question, jest uses the `jest-haste-map` package,
 which does static analysis to figure out data like, the list of all files of your project, the dependencies of every file, sizes of files, etc.
-
-<!-- To answers these questions jest calls the `jest-haste-map` package.
-`jest-haste-map` does static analysis to figure out all the files in the codebase and extract metadata about them, including dependencies. -->
-
-<!-- Most of the functionality `jest-haste-map` does is to build `HasteMap` object, which is a file map between a file location (path) and its metadata (dependencies, id, etc.).
-
-`jest-haste-map` doesn't return `HasteMap` as-is but build from it an `HasteContext` object,
-which is (talking high-level) is the `HasteMap` wrapped as internal classes instances to support different abilities out-of-the-box for the rest of the jest system. -->
 
 The haste map creation and synchronization is critical to jest startup performance.
 

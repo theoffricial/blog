@@ -219,12 +219,12 @@ const sidebars = {
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/determining-how-to-run-tests', 
-                      label: 'P3: Test Order Optimization ⏳'
+                      id: 'js-es/testing-frameworks/jest/architecture/test-run-order', 
+                      label: 'P3: Test Run Order (Optimizations) ⏳'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/running-tests', 
+                      id: 'js-es/testing-frameworks/jest/architecture/test-run', 
                       label: 'P4: Test Run 🃏'
                     },
                     {

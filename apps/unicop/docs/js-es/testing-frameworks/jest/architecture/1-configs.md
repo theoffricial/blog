@@ -1,5 +1,9 @@
 # Part 1. Configs
 
+import PageStarter from '@site/src/components/PageStarter';
+
+<PageStarter />
+
 ## Introduction ✨
 
 When running the jest CLI command:
