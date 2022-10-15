@@ -19,8 +19,8 @@ Except how jest is ordering tests, I also combined with it the step of how jest 
 
 jest reaching the test run order determination step after it:
 
-1. Part 1: Figured out **[configs](./1-configs.md)**.
-2. Part 2: Built the up-to-date **[HasteContext](./2-dependency-resolutions.md)** that enable jest to find files and use their metadata (metadata like dependencies resolution).
+1. Part 1: Figured out **[configs](./part-1-configs.md)**.
+2. Part 2: Built the up-to-date **[HasteContext](./part-2-dependency-resolutions.md)** that enable jest to find files and use their metadata (metadata like dependencies resolution).
 
 The main input when reaching the test order step:
 
@@ -35,7 +35,7 @@ const TestContext = {
 
 ## Part 3. Test Run Order Diagram ✍️
 
-import JestArchitectureSVG from './3-jest-architecture-run-order.svg';
+import JestArchitectureSVG from './svg/part-3-run-order.svg';
 
 <JestArchitectureSVG />
 

@@ -15,12 +15,12 @@ Let's break down the steps one by one to find out how jest manages the test run.
 
 :::note
 This article concentrate on how the test run being manages and how the main components communicate with each other.
-The next article **[Part 5. The Runtime Environment](./5-the-runtime-environment.md)** focused on the detail how jest is actually taking a test file and running it.
+The next article **[Part 5. The Runtime Environment](./part-5-the-runtime-environment.md)** focused on the detail how jest is actually taking a test file and running it.
 :::
 
 ## Part 4. Test Run Diagram ✍️
 
-import JestArchitectureSVG from './4-jest-architecture-test-run.svg';
+import JestArchitectureSVG from './svg/part-4-test-run.svg';
 
 <JestArchitectureSVG />
 
@@ -288,7 +288,7 @@ class TestScheduler {
 
 :::note
 
-1. A drill down into how the `jest-runner` package works can be found on the next part **[Part 5. The Runtime Environment 💽](./5-the-runtime-environment.md)**.
+1. A drill down into how the `jest-runner` package works can be found on the next part **[Part 5. The Runtime Environment 💽](./part-5-the-runtime-environment.md)**.
 
 2. The default `jest-runner` is event based.
 

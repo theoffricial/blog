@@ -31,7 +31,7 @@ that enables jest to look for a dedicated configuration file from a custom locat
 
 ## Part 1: Diagram ✍️
 
-import JestArchitectureSVG from './1-jest-architecture-configs.svg';
+import JestArchitectureSVG from './svg/part-1-configs.svg';
 
 <JestArchitectureSVG />
 

@@ -6,7 +6,7 @@ import PageStarter from '@site/src/components/PageStarter';
 
 ## Introduction ✨
 
-If you have read [Part 4. Test Run](./4-test-run.md), you probably have read about the different interactions between
+If you have read [Part 4. Test Run](./part-4-test-run.md), you probably have read about the different interactions between
 the `TestScheduler` that initial and orchestrates all runners, and the runners themselves.
 
 Well this article is about the default `jest-runner` and the major things it does to actually run tests.
@@ -19,7 +19,7 @@ Here are `jest-runner` major responsibilities in high-level:
 
 ## Part 5. The Runtime Environment Diagram ✍️
 
-import JestArchitectureSVG from './5-jest-architecture-the-runtime-environment.svg';
+import JestArchitectureSVG from './svg/part-5-the-runtime-environment.svg';
 
 <JestArchitectureSVG />
 

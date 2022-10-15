@@ -204,37 +204,37 @@ const sidebars = {
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', 
+                      id: 'js-es/testing-frameworks/jest/architecture/the-complete-architecture', 
                       label: 'The Complete Architecture Diagram 🏛'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/configs', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-1-configs', 
                       label: 'P1: Configs 🧰'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/dependency-resolutions', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-2-dependency-resolutions', 
                       label: 'P2: File System & Dependency Resolution 🌳'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/test-run-order', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-3-test-run-order', 
                       label: 'P3: Test Run Order (Optimizations) ⏳'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/test-run', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-4-test-run', 
                       label: 'P4: Test Run 🃏'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/the-runtime-environment', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-5-the-runtime-environment', 
                       label: 'P5: The Runtime Environment 💽'
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/modules-transformation', 
+                      id: 'js-es/testing-frameworks/jest/architecture/part-6-modules-transformation', 
                       label: 'P6: Module Transformation 🦠'
                     },
                     {

@@ -7,7 +7,7 @@ import PageStarter from '@site/src/components/PageStarter';
 ## Introduction ✨
 
 This part discuss 2 key questions jest should ask to complete a test run,
-after figuring out **[configs](./1-configs.md)**.
+after figuring out **[configs](./part-1-configs.md)**.
 
 1. "What is the code base am I operate on?"
 2. "What are the dependencies between files?"
@@ -21,7 +21,7 @@ Let's breakdown how the magic works
 
 ## Part 2: Diagram ✍️
 
-import JestArchitectureSVG from './2-jest-architecture-dependency-resolution.svg';
+import JestArchitectureSVG from './svg/part-2-dependency-resolution.svg';
 
 <JestArchitectureSVG />
 

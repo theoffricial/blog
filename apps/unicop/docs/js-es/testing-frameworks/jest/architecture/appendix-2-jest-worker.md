@@ -22,7 +22,7 @@ The [jest-worker][jw] module works by providing an absolute path of the module t
 While jest is using the `jest-haste-map` package that find all files in the project, access them and collect their metadata including dependencies,
 `jest-haste-map` call jest-worker to execute the I/O and metadata extraction actions in parallel.
 
-You can read the full explanation of that process at the [5. FS & Dependency Resolution](./2-dependency-resolutions.md) chapter.
+You can read the full explanation of that process at the [5. FS & Dependency Resolution](./part-2-dependency-resolutions.md) chapter.
 
 ### 2. Run Tests
 
@@ -30,7 +30,7 @@ You can read the full explanation of that process at the [5. FS & Dependency Res
 
 When the `TestScheduler` schedule `jest-runner`/s to run, by default `jest-runner` call [jest-worker][jw] to run tests in parallel to complete the test run quickly as possible.
 
-You can read the full explanation of that process at the [4. Run Tests](./4-test-run.md) chapter.
+You can read the full explanation of that process at the [4. Run Tests](./part-4-test-run.md) chapter.
 
 ## How JS Eco-System Uses `jest-worker`
 

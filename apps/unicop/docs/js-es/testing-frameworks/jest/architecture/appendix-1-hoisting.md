@@ -11,13 +11,13 @@ jest has its own hoist for the declarations of [jest.disableAutomock(🤡)](../m
 To make the point of jest hoisting clear I'll use my own words, if you ever wondered how jest know to import the mock implementation you defined in the test file, hoisting is a big part of that magic.
 
 :::info
-The rest of jest mocking magic explained at [Jest Architecture - The Runtime Environment](./5-the-runtime-environment.md) chapter.
+The rest of jest mocking magic explained at [Jest Architecture - The Runtime Environment](./part-5-the-runtime-environment.md) chapter.
 :::
 
 jest hoist a test file during the module transformation step.
 
 :::info
-Read more module transformation, at the [Module Transformation](./6-modules-transformation.md) chapter.
+Read more module transformation, at the [Module Transformation](./part-6-modules-transformation.md) chapter.
 :::
 
 jest is using `babel-jest` out-of-the-box, which use Babel behind the scenes, for the hoisting the jest team developed a custom Babel plugin [babel-plugin-jest-hoist][babel-plugin-jest-hoist-link] that `jest-babel` uses.

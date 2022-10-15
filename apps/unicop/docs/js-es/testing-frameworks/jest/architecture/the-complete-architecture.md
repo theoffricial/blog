@@ -4,8 +4,8 @@ import PageStarter from '@site/src/components/PageStarter';
 
 <PageStarter />
 
-## Complete Architecture Diagram ✍️
+## The Complete Architecture Diagram ✍️
 
-import JestArchitectureSVG from './0-architecture.svg';
+import JestArchitectureSVG from './svg/architecture.svg';
 
 <JestArchitectureSVG />
