@@ -188,7 +188,7 @@ const sidebars = {
                 },
                 {
                   type: 'category',
-                  label: 'Architecture 🏛',
+                  label: 'Jest Architecture Series 🏛',
                   // link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
                   link: { type: 'generated-index' , slug: 'js-es/testing-frameworks/jest/architecture' },
                   items: [
