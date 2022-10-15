@@ -22,7 +22,7 @@ Read more module transformation, at the [Module Transformation](./6-modules-tran
 
 jest is using `babel-jest` out-of-the-box, which use Babel behind the scenes, for the hoisting the jest team developed a custom Babel plugin [babel-plugin-jest-hoist][babel-plugin-jest-hoist-link] that `jest-babel` uses.
 
-## Hoisting and Community Transformers
+## Hoisting and Custom Community Transformers
 
 Because jest relies on hoisting to work, community transformers has to support it.
 

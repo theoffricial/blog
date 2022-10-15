@@ -1,126 +1,215 @@
-# Unit Tests - Jest - Architecture - 5. The Runtime Environment
+# Part 5. The Runtime Environment 💽
 
-The Jest Architecture Series
+import PageStarter from '@site/src/components/PageStarter';
 
-0. [Jest Full Architecture](./0-architecture-diagram.md)
-1. [Jest - Configs](./1-configs.md)
-2. [Jest - Dependencies Resolution](./2-dependency-resolutions.md)
-3. [Jest - Determine Tests Run Order](./3-determining-how-to-run-tests.md)
-4. [Jest - How Tests Run](./4-running-tests.md)
-5. **_[Jest - The Runtime Environment](./5-the-runtime-environment.md) 👈 You are here_**
-6.
-
----
-
-![Jest Architecture The Runtime Environment](/img/jest/5-architecture-the-runtime-environment.svg)
+<PageStarter />
 
 ## Introduction ✨
 
-Runtime environment is the part that makes jest to work as we expect as jest consumers.
+If you have read [Part 4. Test Run](./4-test-run.md), you probably have read about the different interactions between
+the `TestScheduler` that initial and orchestrates all runners, and the runners themselves.
 
-It is in charge of the jest syntax, and know how to read and execute it.
+Well this article is about the default `jest-runner` and the major things it does to actually run tests.
 
-If other parts of jest system like `@jest-sequencer` and `TestScheduler` are in charge to optimize the test run, and they're transparent for us the jest users, as long as we.
+Here are `jest-runner` major responsibilities in high-level:
 
-The runtime environment part we face when we try to solve failed tests, or debug.
-Although it would sound obvious, The runtime environment is what jest is familiar with when we run `jest`.
+1. Setup the environment that the tests should operate in, which known as `jest-environment`
+2. Setup and manage an isolated environment that verifies tests does not affect each other. known as `jest-runtime`
+3. Setup and run the test framework `jest-runner` is using to actually supports jest globals and syntax, that also tear down the jest syntax and run tests. known as `test framework`.
 
-As I see it, there are 4 main components in the jest runtime environment, `jest-environment`, `jest-runtime`, and `jest-test-framework`. Understanding these will give you a good sense how it works, and that is the focus of the article.
+## Part 5. The Runtime Environment Diagram ✍️
 
-<!-- Generally speaking there are 3 main and very interesting components that compounds the runtime environment.
+import JestArchitectureSVG from './5-jest-architecture-the-runtime-environment.svg';
 
-This article will discuss especially on the "default" runner of jest, the `jest-runner` package and how it works.
+<JestArchitectureSVG />
 
-Rather than interesting, understanding how jest implemented it can give you a great sense how to use similar patterns in your future solutions. -->
+## 1 - Following The Run Method - "In-Band" Or In-Parallel (passed by `TestScheduler`)
 
-## jest-runner-\*
+First, the default `jest-runner` is an emitter runner, that is why it doesn't receive and callbacks (on the previous part, I introduced you that jest supports callback runners as well.).
 
-By default, jest use the `jest-runner` package to run tests.
-
-It receives an array of tests and `options.serial` that determine how the test run should be managed.
+The `TestScheduler` call the `jest-runner` `runTests(..)` function that receiving an `options` argument that has a `serial` property, and simply just following its value.
 
 ```ts
+export default class TestRunner extends EmittingTestRunner {
   // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L45-L53
   async runTests(
     tests: Array<Test>,
     watcher: TestWatcher,
-    options: TestRunnerOptions,
+    options: TestRunnerOptions
   ): Promise<void> {
     return options.serial
-      ? this.#createInBandTestRun(tests, watcher)
-      : this.#createParallelTestRun(tests, watcher);
+      ? // "in-band"
+        this.#createInBandTestRun(tests, watcher)
+      : // in parallel
+        this.#createParallelTestRun(tests, watcher);
   }
+  // ...
+}
 ```
 
-:::note
-`runTests(...)` called by the `TestScheduler`, that manage all runners execution, which discussed in detail on the [previous part](./4-running-tests.md) of the series.
-:::
+### Run "in-band" Implementation
 
-As the code tells us, `jest-runner` supports two running methods:
+"in-band" means to run tests synchronously, one by one.
 
-1. Run in parallel (`#createParallelTestRun`) - Manage the test run in multiple processes `jest-runner` establish to run tests in parallel, in this method tests are not running on the process as jest is running.
+#### Run "in-band" method - Code Highlights 🔦
 
-2. Run in a single process, or "in-band" (`createInBandTestRun`) -
-   Run tests on the same process jest is running.
+```ts
+export default class TestRunner extends EmittingTestRunner {
+  // ...
+  // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L55
+  async #createInBandTestRun(tests: Array<Test>, watcher: TestWatcher) {
+    process.env.JEST_WORKER_ID = '1';
+    // limit concurrency to 1 process
+    const mutex = pLimit(1);
+    // run tests in loop
+    return tests.reduce(
+      (promise, test) =>
+        mutex(() =>
+          promise
+            .then(async () => {
+              // ...
 
-The method is being decide by the caller, who can determine `options.serial` value.
+              // Helper function to emit events back to "TestScheduler"
+              // `deepCyclicCopy` used here to avoid mem-leak
+              const sendMessageToJest: TestFileEvent = (eventName, args) =>
+                this.#eventEmitter.emit(
+                  eventName,
+                  deepCyclicCopy(args, { keepPrototype: false })
+                );
 
-### Run "in-band" (single process) Explained
+              await this.#eventEmitter.emit('test-file-start', [test]);
 
-The tests simply just run in a loop, test by test, when a test completed it is emitting the result with the other parts of the jest system.
-On any case here is the [implementation](https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L83).
+              return runTest(
+                test.path,
+                this._globalConfig,
+                test.context.config,
+                test.context.resolver,
+                this._context,
+                sendMessageToJest
+              );
+            })
+            .then(
+              (result) =>
+                this.#eventEmitter.emit('test-file-success', [test, result]),
+              (error) =>
+                this.#eventEmitter.emit('test-file-failure', [test, error])
+            )
+        ),
+      Promise.resolve()
+    );
+  }
+  // ...
+}
+```
 
-### Run in Parallel Explained
+### Run in Parallel Implementation
+
+When jest requires to run tasks in parallel, it calls `jest-worker`.
+
+You can read more how exactly the `jest-worker` package works on the series **[Appendix Ⅱ: jest-worker 👷](./appendix-2-jest-worker.md)**.
+
+In high-level `jest-runner` pass to `jest-worker`:
+
+1. On worker initial pass the `maxWorkers` option
+2. A test file path
+3. Test config
 
 When jest needs to run things in parallel it use the `jest-worker` package, and you pass to worker a path to task file to execute, the `jest-runner` package as a dedicated file written to pass to the worker called [testWorker](https://github.com/facebook/jest/blob/main/packages/jest-runner/src/testWorker.ts#L88) that has the implementation how tests will be run when running by the worker.
 
+#### Run in Parallel Implementation - Code Highlights 🔦
+
 ```ts
-// jest-runner/index.ts
-// https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L107
-async #createParallelTestRun(tests: Array<Test>, watcher: TestWatcher) {
+// packages/jest-runner/index.ts
+
+export default class TestRunner extends EmittingTestRunner {
+  // ...
+
+  // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L96
+  async #createParallelTestRun(tests: Array<Test>, watcher: TestWatcher) {
     // ...
-    // worker establish
+
+    // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L107
+    // Initial worker
     const worker = new Worker(require.resolve('./testWorker'), {
-        exposedMethods: ['worker'], // see how it exposed on "runTestInWorker"
-        // ...
-        numWorkers: this._globalConfig.maxWorkers,
-        // ...,
+      exposedMethods: ['worker'], // What methods to expose from the "testWorker" file/module.
+      // ...
+      numWorkers: this._globalConfig.maxWorkers, // max processes to spawn
+      // ...,
     }) as WorkerInterface;
+
     // ...
+
+    // Limit concurrency to "maxWorkers" option
+    const mutex = pLimit(this._globalConfig.maxWorkers);
+
+    // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L128
+    // Send test suites to workers continuously instead of all at once to track
     // the start time of individual tests.
     const runTestInWorker = (test: Test) =>
-        mutex(async () => {
+      mutex(async () => {
         // ...
+
+        // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L134
+        // Emit that test start its run
         await this.#eventEmitter.emit('test-file-start', [test]);
 
-        // 'worker' exposed from worker
-        const promise = worker.worker({ // see .worker(..) implementation below 👇
-            config: test.context.config,
+        // call the "worker" method exposed from the worker above.
+        // The worker implementation is below
+        const promise = worker.worker({
+          config: test.context.config,
+          context: {
             // ...
-            path: test.path,
+          },
+          globalConfig: this._globalConfig,
+          path: test.path,
         }) as PromiseWithCustomMessage<TestResult>;
 
         // ...
         return promise;
-    });
+      });
+
     //  ...
+
     // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L169
     const runAllTests = Promise.all(
-        tests.map(test =>
-            runTestInWorker(test).then(
-                result => this.#eventEmitter.emit('test-file-success', [test, result]),
-                error => this.#eventEmitter.emit('test-file-failure', [test, error]),
-            ),
-        ),
+      tests.map((test) =>
+        runTestInWorker(test).then(
+          (result) =>
+            // success event
+            this.#eventEmitter.emit('test-file-success', [test, result]),
+          // failure event
+          (error) => this.#eventEmitter.emit('test-file-failure', [test, error])
+        )
+      )
     );
-    // ...
+
+    // clean up worker processes
+    const cleanup = async () => {
+      const { forceExited } = await worker.end();
+      if (forceExited) {
+        console.error(
+          chalk.yellow(
+            'A worker process has failed to exit gracefully and has been force exited. ' +
+              'This is likely caused by tests leaking due to improper teardown. ' +
+              'Try running with --detectOpenHandles to find leaks. ' +
+              'Active timers can also cause this, ensure that .unref() was called on them.'
+          )
+        );
+      }
+    };
+
     return Promise.race([runAllTests, onInterrupt]).then(cleanup, cleanup);
+  }
+
+  // ...
 }
 ```
 
 ```ts
-// jest-runner/testWorker.ts
+// packages/jest-runner/testWorker.ts
+
 // ...
+
 // https://github.com/facebook/jest/blob/main/packages/jest-runner/src/testWorker.ts#L88-L112
 export async function worker({
   config,
@@ -129,11 +218,14 @@ export async function worker({
   context,
 }: WorkerData): Promise<TestResult> {
   try {
+    // running a single test
     return await runTest(
-      path,
+      path, // test path
       globalConfig,
-      config
-      // ...
+      config // project config
+      getResolver(config),
+      context,
+      sendMessageToJest, // helper for event emitting
     );
   } catch (error: any) {
     throw formatError(error);
@@ -143,38 +235,178 @@ export async function worker({
 
 ---
 
-## Running a Test File
+After understand how running methods work, let's break down how `jest-runner` is actually running a single test file.
 
-No matter which of the running method you choose, the magic happens a test is actually run.
+## 2 - Setup `jest-environment-*` - The Test Environment
 
-But there are no magic, and in fact that is where the runtime environment really take into place, which is a compound of 3 main components: `jest-environment`, `jest-runtime`, and `jest-test-framework`.
+> The test environment that will be used for testing. The default environment in Jest is a Node.js environment.
+> If you are building a web app, you can use a browser-like environment through jsdom instead.
+> _Jest Docs_
 
-## jest-environment-\* - The Test Environment
+jest also support custom environment, but personally I never used it, but there is some explanation about it in their [docs](https://jestjs.io/docs/configuration#testenvironment-string).
 
-The first thing a test file run is doing is to initial the environment.
+Let's think about it, If you write react code, it depends on having objects like the global `window` other `DOM` objects and functions, otherwise the code will crash pretty fast. While nodejs code depends on entirely different globals.
 
-The code you run with jest can be run on different environments, the most obvious examples are `node` environment or `browser/dom` environment.
-
-If I'll take for instance a frontend application, it assumes that on the global scope there is a `window` object, as long with all other `DOM` objects, without them the code will crash very quickly.
-
-But jest is based on `node` so maybe you thought about it and maybe you didn't - but how exactly jest has all objects a browser code need to run?
-The answer for that is `jest-environment`, because when initialize the test environment you should configure jest what environment the code expecting to have, so jest can setup the global scope to have everything your code need to run.
-
-I'll stick with the two obvious examples, which are also official environment developed as part of the jest repository:
-
-1. [jest-environment-node](https://github.com/facebook/jest/tree/main/packages/jest-environment-node) - Initial the global scope to match node environment
-2. [jest-environment-jsdom](https://github.com/facebook/jest/tree/main/packages/jest-environment-jsdom) - Uses [jsdom](https://github.com/jsdom/jsdom) and make sure the global scope matches browser's global scope.
+So jest makes sure that a test has the environment it needs to run successfully.
 
 :::note
-
-See how the node global object is being overload: <br/>
-
-1. [jest-environment-node](https://github.com/facebook/jest/blob/9ba555ba7af8e49d0eb8cf78f7f50b2fcbfd9ce9/packages/jest-environment-node/src/index.ts#L68-L105)
-2. [jest-environment-jsdom](https://github.com/facebook/jest/blob/main/packages/jest-environment-jsdom/src/index.ts#L47-L73)
-
+You can custom environment by using the **[testEnvironment](https://jestjs.io/docs/configuration#testenvironment-string)** option.
+The test environment also allows custom options using the **[testEnvironmentOptions](https://jestjs.io/docs/configuration#testenvironmentoptions-object)** option.
 :::
 
-## jest-runtime - Isolating Test Execution
+### `jest-environment-*` - Code Highlights 🔦
+
+#### `jest-environment-node`:
+
+```ts
+// packages/jest-environment-node/src/index.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-environment-node/src/index.ts#L37
+const nodeGlobals = new Map(
+  Object.getOwnPropertyNames(globalThis)
+    .filter((global) => !denyList.has(global))
+    .map((nodeGlobalsKey) => {
+      const descriptor = Object.getOwnPropertyDescriptor(
+        globalThis,
+        nodeGlobalsKey
+      );
+
+      if (!descriptor) {
+        throw new Error(
+          `No property descriptor for ${nodeGlobalsKey}, this is a bug in Jest.`
+        );
+      }
+
+      return [nodeGlobalsKey, descriptor];
+    })
+);
+
+// ...
+
+export default class NodeEnvironment implements JestEnvironment<Timer> {
+  // ...
+
+  // https://github.com/facebook/jest/blob/main/packages/jest-environment-node/src/index.ts#L69
+  //  while `context` is unused, it should always be passed
+  constructor(config: JestEnvironmentConfig, _context: EnvironmentContext) {
+    const { projectConfig } = config;
+    this.context = createContext();
+    const global = runInContext(
+      'this',
+      Object.assign(this.context, projectConfig.testEnvironmentOptions)
+    ) as Global.Global;
+    this.global = global;
+
+    const contextGlobals = new Set(Object.getOwnPropertyNames(global));
+    for (const [nodeGlobalsKey, descriptor] of nodeGlobals) {
+      if (!contextGlobals.has(nodeGlobalsKey)) {
+        Object.defineProperty(global, nodeGlobalsKey, {
+          configurable: descriptor.configurable,
+          enumerable: descriptor.enumerable,
+          get() {
+            // @ts-expect-error: no index signature
+            const val = globalThis[nodeGlobalsKey] as unknown;
+
+            // override lazy getter
+            Object.defineProperty(global, nodeGlobalsKey, {
+              configurable: descriptor.configurable,
+              enumerable: descriptor.enumerable,
+              value: val,
+              writable: descriptor.writable,
+            });
+            return val;
+          },
+          set(val: unknown) {
+            // override lazy getter
+            Object.defineProperty(global, nodeGlobalsKey, {
+              configurable: descriptor.configurable,
+              enumerable: descriptor.enumerable,
+              value: val,
+              writable: true,
+            });
+          },
+        });
+      }
+    }
+
+    // @ts-expect-error - Buffer and gc is "missing"
+    global.global = global;
+    global.Buffer = Buffer;
+    global.ArrayBuffer = ArrayBuffer;
+    // TextEncoder (global or via 'util') references a Uint8Array constructor
+    // different than the global one used by users in tests. This makes sure the
+    // same constructor is referenced by both.
+    global.Uint8Array = Uint8Array;
+
+    installCommonGlobals(global, projectConfig.globals);
+
+    // Node's error-message stack size is limited at 10, but it's pretty useful
+    // to see more than that when a test fails.
+    global.Error.stackTraceLimit = 100;
+
+    // ...
+  }
+}
+```
+
+#### `jest-environment-jsdom`:
+
+the `jest-environment-jsdom` uses the [jsdom](https://github.com/jsdom/jsdom) package to run browser code over nodejs.
+
+> jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG [DOM](<(https://dom.spec.whatwg.org/)>) and [HTML](https://html.spec.whatwg.org/multipage/) Standards, for use with Node.js.
+> In general, the goal of the project is to emulate enough of a subset of a web browser to be useful for testing and scraping real-world web applications.
+>
+> **_jsdom GitHub README.md_**
+
+---
+
+```ts
+export default class JSDOMEnvironment implements JestEnvironment<number> {
+  // ...
+
+  // https://github.com/facebook/jest/blob/main/packages/jest-environment-jsdom/src/index.ts#L42-L147
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
+    const { projectConfig } = config;
+
+    // ...
+
+    this.dom = new JSDOM(
+      typeof projectConfig.testEnvironmentOptions.html === 'string'
+        ? projectConfig.testEnvironmentOptions.html
+        : '<!DOCTYPE html>',
+      {
+        pretendToBeVisual: true,
+        resources:
+          typeof projectConfig.testEnvironmentOptions.userAgent === 'string'
+            ? new ResourceLoader({
+                userAgent: projectConfig.testEnvironmentOptions.userAgent,
+              })
+            : undefined,
+        runScripts: 'dangerously',
+        url: 'http://localhost/',
+        virtualConsole,
+        ...projectConfig.testEnvironmentOptions,
+      }
+    );
+
+    const global = (this.global = this.dom.window.document
+      .defaultView as unknown as Win);
+
+    if (global == null) {
+      throw new Error('JSDOM did not return a Window object');
+    }
+
+    // ...
+    installCommonGlobals(global, projectConfig.globals);
+
+    // ...
+  }
+
+  // ...
+}
+```
+
+## 3 - The Run Time Context - `jest-runtime`
 
 When the role of `jest-environment-*` is to define the global scope the test includes, the runtime build an isolated environment to ensure that when running one test can not affect another test with the global object defined for that test.
 
@@ -450,6 +682,221 @@ export type TestResult = {
   testResults: Array<AssertionResult>;
   v8Coverage?: V8CoverageResult;
 };
+```
+
+## jest-runner Implementation - Code Highlights 🔦
+
+The implementation is long, so I added it here, as a separate section.
+Take a look after you understand the main concepts of how the different components works!
+
+```ts
+// jest-runner/src/runTest.ts
+
+// https://github.com/facebook/jest/blob/main/packages/jest-runner/src/runTest.ts#L375-L403
+// This function call from the jest-runner/src/index.ts
+export default async function runTest(
+  path: string,
+  globalConfig: Config.GlobalConfig,
+  config: Config.ProjectConfig,
+  resolver: Resolver,
+  context: TestRunnerContext,
+  sendMessageToJest?: TestFileEvent
+): Promise<TestResult> {
+  const { leakDetector, result } = await runTestInternal(
+    path,
+    globalConfig,
+    config,
+    resolver,
+    context,
+    sendMessageToJest
+  );
+
+  if (leakDetector) {
+    // We wanna allow a tiny but time to pass to allow last-minute cleanup
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    // Resolve leak detector, outside the "runTestInternal" closure.
+    result.leaks = await leakDetector.isLeaking();
+  } else {
+    result.leaks = false;
+  }
+
+  return result;
+}
+
+// Keeping the core of "runTest" as a separate function (as "runTestInternal")
+// is key to be able to detect memory leaks. Since all variables are local to
+// the function, when "runTestInternal" finishes its execution, they can all be
+// freed, UNLESS something else is leaking them (and that's why we can detect
+// the leak!).
+//
+// If we had all the code in a single function, we should manually nullify all
+// references to verify if there is a leak, which is not maintainable and error
+// prone. That's why "runTestInternal" CANNOT be inlined inside "runTest".
+// https://github.com/facebook/jest/blob/main/packages/jest-runner/src/runTest.ts#L77-L373
+async function runTestInternal(
+  path: string,
+  globalConfig: Config.GlobalConfig,
+  projectConfig: Config.ProjectConfig,
+  resolver: Resolver,
+  context: TestRunnerContext,
+  sendMessageToJest?: TestFileEvent
+): Promise<RunTestInternalResult> {
+  // read file
+  const testSource = fs.readFileSync(path, 'utf8');
+  // extract docblocks
+  const docblockPragmas = docblock.parse(docblock.extract(testSource));
+  // look if "jest-environment" specified in docblock
+  const customEnvironment = docblockPragmas['jest-environment'];
+
+  // Assign test environment to "testEnvironment" option
+  let testEnvironment = projectConfig.testEnvironment;
+
+  // Check if a custom environment has specified through docblock
+  if (customEnvironment) {
+    if (Array.isArray(customEnvironment)) {
+      throw new Error(
+        `You can only define a single test environment through docblocks, got "${customEnvironment.join(
+          ', '
+        )}"`
+      );
+    }
+
+    // resolve environment file path
+    testEnvironment = resolveTestEnvironment({
+      ...projectConfig,
+      requireResolveFunction: require.resolve,
+      testEnvironment: customEnvironment,
+    });
+  }
+
+  const cacheFS = new Map([[path, testSource]]);
+  const transformer = await createScriptTransformer(projectConfig, cacheFS);
+
+  // require and transpile environment which is an "export default class"
+  const TestEnvironment: typeof JestEnvironment =
+    await transformer.requireAndTranspileModule(testEnvironment);
+
+  // require and transpile test framework
+  const testFramework: TestFramework =
+    await transformer.requireAndTranspileModule(
+      process.env.JEST_JASMINE === '1'
+        ? require.resolve('jest-jasmine2')
+        : projectConfig.testRunner
+    );
+
+  // require and transpile runtime environment which is an "export default class"
+  const Runtime: typeof RuntimeClass = interopRequireDefault(
+    projectConfig.runtime
+      ? require(projectConfig.runtime)
+      : require('jest-runtime')
+  ).default;
+
+  // ...
+
+  // Check if environment from docblock has custom options
+  const docblockEnvironmentOptions =
+    docblockPragmas['jest-environment-options'];
+
+  // if it has, parse them
+  if (typeof docblockEnvironmentOptions === 'string') {
+    extraTestEnvironmentOptions = JSON.parse(docblockEnvironmentOptions);
+  }
+
+  // Initial test environment, with configs, console implementation, test path
+  const environment = new TestEnvironment(
+    {
+      globalConfig,
+      projectConfig: extraTestEnvironmentOptions
+        ? {
+            ...projectConfig,
+            testEnvironmentOptions: {
+              ...projectConfig.testEnvironmentOptions,
+              ...extraTestEnvironmentOptions,
+            },
+          }
+        : projectConfig,
+    },
+    {
+      console: testConsole,
+      docblockPragmas,
+      testPath: path,
+    }
+  );
+
+  // ...
+
+  const runtime = new Runtime(
+    projectConfig,
+    environment,
+    resolver,
+    transformer,
+    cacheFS,
+    {
+      // changed files to re-transform
+      changedFiles: context.changedFiles,
+      // coverage options
+      collectCoverage: globalConfig.collectCoverage,
+      collectCoverageFrom: globalConfig.collectCoverageFrom,
+      coverageProvider: globalConfig.coverageProvider,
+      sourcesRelatedToTestsInChangedFiles:
+        context.sourcesRelatedToTestsInChangedFiles,
+    },
+    path, // test path
+    globalConfig
+  );
+
+  // ...
+
+  try {
+    // setup "hook" if necessary
+    await environment.setup();
+
+    let result: TestResult;
+
+    try {
+      // collect coverage
+      if (collectV8Coverage) {
+        await runtime.collectV8Coverage();
+      }
+
+      // start test framework run
+      // and getting test result in return
+      result = await testFramework(
+        globalConfig,
+        projectConfig,
+        environment, // pass environment
+        runtime, // pass runtime
+        path,
+        sendMessageToJest
+      );
+    } catch (err: any) {
+      // Access stack before uninstalling sourcemaps
+      err.stack;
+
+      throw err;
+    } finally {
+      if (collectV8Coverage) {
+        await runtime.stopCollectingV8Coverage();
+      }
+    }
+
+    // ...
+
+    // tear down environment
+    await tearDownEnv();
+
+    // Delay the resolution to allow log messages to be output.
+    return await new Promise((resolve) => {
+      setImmediate(() => resolve({ leakDetector, result }));
+    });
+  } finally {
+    // tear down environment
+    await tearDownEnv();
+
+    // ...
+  }
+}
 ```
 
 ## Outroduction 👋

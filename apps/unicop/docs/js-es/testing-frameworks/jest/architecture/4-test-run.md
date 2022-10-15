@@ -18,20 +18,6 @@ This article concentrate on how the test run being manages and how the main comp
 The next article **[Part 5. The Runtime Environment](./5-the-runtime-environment.md)** focused on the detail how jest is actually taking a test file and running it.
 :::
 
-<!-- After receiving ordered tests to run, jest now is ready to start the test run itself. -->
-
-<!-- The main component for the test run management is `TestScheduler` that sits on the `@jest/core` package. -->
-
-<!-- On this step jest calls a component name `TestScheduler`,
-With 2 main inputs:
-
-- An array of tests (`Array<Tests>`), received from the `SearchSource` component
-- The sequencing that we want the tests array to run in, received from the `TestSequencer` component -->
-
-<!-- And in charge on how to actually run them optimally. -->
-
-<!-- It is the most important module on jest to actually make sure that your tests run. -->
-
 ## Part 4. Test Run Diagram ✍️
 
 import JestArchitectureSVG from './4-jest-architecture-test-run.svg';

@@ -254,7 +254,7 @@ const sidebars = {
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/appendix-4-test-result-summary', 
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-4-reporters', 
                       label: 'Appx. Ⅳ: Test Result Summary 🧪'
                     },
                     {
