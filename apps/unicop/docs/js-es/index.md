@@ -6,7 +6,7 @@ last_update:
   author: Ofri Peretz
 ---
 
-# What you can find here 🧐
+# What You Will Find Here 🚀
 
 As the JS eco-system become mature, projects gets bigger, and the monorepo era is already here.
 

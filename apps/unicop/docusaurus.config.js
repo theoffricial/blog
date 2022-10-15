@@ -71,9 +71,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'js-es/typescript/index',
+            docId: 'js-es/index',
             position: 'left',
-            label: 'TypeScript',
+            label: 'The JS Eco-System',
           },
           {
             type: 'doc',

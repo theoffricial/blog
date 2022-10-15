@@ -32,7 +32,7 @@ function HomepageHeader() {
             className={clsx(styles.tsButton,"button", "button--lg")}
             to="/blog/js-es/typescript"
           >
-            TypeScript       
+            The JS Eco-System       
             <img
               className={clsx(styles.heroBannerLogo, styles.tsButtonImg)}
               src={useBaseUrl("img/typescript/ts-white.svg")}
