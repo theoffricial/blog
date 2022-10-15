@@ -177,7 +177,7 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Mocks 🃏',
-                  link: {id: 'js-es/testing-frameworks/jest/mocks/index', type: 'doc'},
+                  link: {id: 'js-es/testing-frameworks/jest/mocks/index', type: 'doc' },
                   items: [
                     {
                       id: 'js-es/testing-frameworks/jest/mocks/jest-do-mock',
@@ -190,7 +190,7 @@ const sidebars = {
                   type: 'category',
                   label: 'Architecture 🏛',
                   // link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
-                  link: { type: 'generated-index' },
+                  link: { type: 'generated-index' , slug: 'js-es/testing-frameworks/jest/architecture' },
                   items: [
                     // {
                     //   type: 'doc',
