@@ -30,7 +30,7 @@ You can read the full explanation of that process at the [5. FS & Dependency Res
 
 When the `TestScheduler` schedule `jest-runner`/s to run, by default `jest-runner` call [jest-worker][jw] to run tests in parallel to complete the test run quickly as possible.
 
-You can read the full explanation of that process at the [4. Run Tests](./4-running-tests.md) chapter.
+You can read the full explanation of that process at the [4. Run Tests](./4-test-run.md) chapter.
 
 ## How JS Eco-System Uses `jest-worker`
 

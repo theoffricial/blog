@@ -61,7 +61,7 @@ This is why `Transpilers` in the JS eco-system are so fundamental component, so 
 
 Bugs explained
 
-- [TypeScript Jest Resolved "Cannot use import statement outside module"](../bugs-solved/typescript-jest-cannot-use-import-statement-outside-module.md)
+- [TypeScript Jest Resolved "Cannot use import statement outside module"](../typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module.md)
 - more are coming
 
 ## References 🔗

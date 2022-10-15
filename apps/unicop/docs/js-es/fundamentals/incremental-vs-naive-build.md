@@ -22,5 +22,5 @@ The information usually maps the project dependencies graph and use it to re-bui
 
 ## References 🔗
 
-- **[TypeScript - Optimizations - Incremental Builds ⚡️](../optimizations/incremental-builds.md)**
-- **[TypeScript - Optimizations - Project References Explained 🧬](../optimizations/project-references-explained/index.md)**
+- **[TypeScript - Optimizations - Incremental Builds ⚡️](../typescript/optimizations/incremental-builds.md)**
+- **[TypeScript - Optimizations - Project References Explained 🧬](../typescript/optimizations/project-references-explained/index.md)**

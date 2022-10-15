@@ -1,14 +1,5 @@
 # Unit Tests - Jest - Architecture - 6. Modules Transformation
 
-The Jest Architecture Series
-
-1. [Jest - Configs](./1-configs.md)
-2. [Jest - Dependencies Resolution](./2-dependency-resolutions.md)
-3. [Jest - Determine Tests Run Order](./3-determining-how-to-run-tests.md)
-4. [Jest - How Tests Run](./4-running-tests.md)
-5. [Isolate Test Runtime Environment](./4-running-tests.md)
-6. **_[Module Transformation](./4-running-tests.md) 👈 You are here_**
-
 ---
 
 jest supports [CommonJS] out-of-the-box, but module transpilation is required when using TypeScript or Babel. The transpilation step call "transform" and it is happens the during a test run, this approach also known as transpile "just-in-time".

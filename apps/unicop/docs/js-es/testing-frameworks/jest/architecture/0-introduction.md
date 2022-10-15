@@ -26,12 +26,12 @@ Although I cover jest architecture much more in detail, I invite you to see the 
 | Full Diagram | **[Full Architecture Diagram 🏛](./0-architecture-diagram.md)**              |
 |    Part 1    | **[Configs 🧰](./1-configs.md)**                                            |
 |    Part 2    | **[File System & Dependency Resolution 🌳](./2-dependency-resolutions.md)** |
-|    Part 3    | **[Test Order Optimization ⏳](./3-determining-how-to-run-tests.md)**       |
-|    Part 4    | **[Test Run 🃏](./4-running-tests.md)**                                     |
+|    Part 3    | **[Test Order Optimization ⏳](./3-test-run-order.md)**       |
+|    Part 4    | **[Test Run 🃏](./4-test-run.md)**                                     |
 |    Part 5    | **[The Runtime Environment 💽](./5-the-runtime-environment.md)**            |
 |    Part 6    | **[Module Transformation 🦠](./6-modules-transformation.md)**               |
 |  Appendix Ⅰ  | **[Jest Hoisting 🆙](./appendix-1-hoisting.md)**                            |
 |  Appendix Ⅱ  | **[jest-worker 👷‍♂️](./appendix-2-jest-worker.md)**                           |
 |  Appendix Ⅲ  | **[Cache Summary 💵](./appendix-3-cache-summary.md)**                       |
-|  Appendix Ⅳ  | **[Test Result Summary 🧪](./appendix-4-test-result-summary.md)**           |
+|  Appendix Ⅳ  | **[Test Result Summary 🧪](./appendix-4-reporters.md)**           |
 |  Appendix Ⅴ  | **[Watch Mode ⏱](./appendix-5-watch-mode.md)**                              | -->

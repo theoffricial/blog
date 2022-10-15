@@ -353,7 +353,7 @@ export default class NodeEnvironment implements JestEnvironment<Timer> {
 
 the `jest-environment-jsdom` uses the [jsdom](https://github.com/jsdom/jsdom) package to run browser code over nodejs.
 
-> jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG [DOM](<(https://dom.spec.whatwg.org/)>) and [HTML](https://html.spec.whatwg.org/multipage/) Standards, for use with Node.js.
+> jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG [DOM](https://dom.spec.whatwg.org) and [HTML](https://html.spec.whatwg.org/multipage) Standards, for use with Node.js.
 > In general, the goal of the project is to emulate enough of a subset of a web browser to be useful for testing and scraping real-world web applications.
 >
 > **_jsdom GitHub README.md_**
