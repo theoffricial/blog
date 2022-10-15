@@ -97,7 +97,7 @@ export default class SearchSource {
 
 ### `SearchSource` Output
 
-The `SearchSource` instance that initialized at the `runJest` function, uses its public `getTestPaths` function that eventually returns an object call `SearchResult`, but the most important part of it are the `test` property that returns all tests.
+The `SearchSource` instance output (by calling `getTestPaths` function) back to `runJest` function, is an object call `SearchResult`, that has a `test` property with all tests optimally sorted.
 
 ```ts
 // https://github.com/facebook/jest/blob/main/packages/jest-core/src/SearchSource.ts#L21-L27
