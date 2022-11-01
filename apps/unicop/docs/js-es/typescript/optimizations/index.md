@@ -1,5 +1,5 @@
 ---
-pagination_prev: js-es/fundamentals/index
+pagination_prev: js-es/glossary/index
 pagination_next: js-es/typescript/bugs-solved/index
 last_update:
   date: 03/09/2022

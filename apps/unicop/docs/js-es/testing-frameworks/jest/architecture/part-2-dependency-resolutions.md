@@ -195,7 +195,7 @@ You can read more about jest-worker on [Appendix. Ⅱ: jest-worker 👷](./appen
 
 ### How dependencies found
 
-After reading a file content, by default the extractor looks for `require` as nodejs works natively with [CommonJS](../../../fundamentals/javascript-module-systems-explained.md#-commonjs) and if nodejs configured to work with [ESM](../../../fundamentals/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) it will look for `import` statements.
+After reading a file content, by default the extractor looks for `require` as nodejs works natively with [CommonJS](../../../glossary/javascript-module-systems-explained.md#-commonjs) and if nodejs configured to work with [ESM](../../../glossary/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) it will look for `import` statements.
 
 The full metadata jest collects for each file can be found above on the `FileMetadata` interface.
 

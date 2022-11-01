@@ -87,4 +87,4 @@ it('async-await test example 2', async () => {
 });
 ```
 
-[unicop-esm]: ../../../fundamentals/javascript-module-systems-explained.md#🧩-ecmascript-modules-or-esm
+[unicop-esm]: ../../../glossary/javascript-module-systems-explained.md#🧩-ecmascript-modules-or-esm

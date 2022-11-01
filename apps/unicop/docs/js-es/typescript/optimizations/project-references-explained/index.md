@@ -35,7 +35,7 @@ Configure TypeScript to look at your single project as multiple modular pieces w
 <!-- [TypeScript project references][ts-project-references-link] allows you to break your project up into a number of smaller projects.
 This improves compilation, improves `editors`' speed and reduces memory usage while working with `TypeScript` etc. -->
 
-Using project references feature turns TypeScript from a simple **[transpiler](../../../fundamentals/compiler-vs-transpiler.md#transpiler-definition-🏷)** into a smart build orchestrator.
+Using project references feature turns TypeScript from a simple **[transpiler](../../../glossary/compiler-vs-transpiler.md#transpiler-definition-🏷)** into a smart build orchestrator.
 
 ## What 🤔 - what should I change?
 
