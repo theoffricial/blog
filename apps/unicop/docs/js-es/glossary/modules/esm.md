@@ -5,7 +5,7 @@
 
 :::
 
-ECMAScript Modules, or ESM are the official standard format to package JavaScript code for reuse. Modules are defined using a variety of `import` and `export` statements.
+ECMAScript Modules, or ESM are the [official standard](https://tc39.es/ecma262/#sec-modules) format to package JavaScript code for reuse. Modules are defined using a variety of `import` and `export` statements.
 
 The following example of an ES module exports a function:
 

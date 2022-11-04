@@ -23,9 +23,7 @@ const sidebars = {
       label: 'JS eco-system',
       items: [
         {
-          // type: 'doc',
           type: 'category',
-          // id: 'js-es/index',
           label: 'Introduction ✨',
           link: { id: 'js-es/index', type: 'doc' },
           items: [],
@@ -112,24 +110,24 @@ const sidebars = {
           // link: { type: 'doc', id: 'js-es/glossary/index' },
           items: [
             // 'js-es/glossary/index',
-            { type: 'doc', id: 'js-es/glossary/compiler', label: 'Compiler 🏷' },
-            { type: 'doc', id: 'js-es/glossary/transpiler', label: 'Transpiler 🏷' },
-            { type: 'doc', id: 'js-es/glossary/environment', label: 'Environment 🏷' },
-            { type: 'doc', id: 'js-es/glossary/naive-build', label: 'Naive Build 🏷' },
-            { type: 'doc', id: 'js-es/glossary/incremental-build', label: 'Incremental Build 🏷' },
-            { type: 'doc', id: 'js-es/glossary/modules/modules-compatibility', label: 'JavaScript Modules Compatibility' },
-            { type: 'category', label: 'Modules 🧩', items: [
-              { type: 'doc', id: 'js-es/glossary/modules/summary', label: 'Module Systems Summary' },
-              { type: 'doc', id: 'js-es/glossary/modules/modules-compatibility', label: 'Environments Modules Compatibility 📊' },
-              { type: 'doc', id: 'js-es/glossary/modules/esm', label: 'ES Module System 🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/umd', label: 'UMD Module System 🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/amd', label: 'AMD Module System 🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/commonjs', label: 'CommonJS Module System 🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/raw', label: 'Raw <script>  🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/modules-bundler', label: 'Modules Bundler 🏷' },
-              { type: 'doc', id: 'js-es/glossary/modules/nodejs-modules-support', label: 'Node.js - Modules 🏷' }
-            ],  }
-            // { type: 'doc', id: 'js-es/glossary/incremental-vs-naive-build' },
+            { type: 'doc', id: 'js-es/glossary/compiler', label: 'Compiler Definition 🏷' },
+            { type: 'doc', id: 'js-es/glossary/transpiler', label: 'Transpiler Definition 🏷' },
+            { type: 'doc', id: 'js-es/glossary/environment', label: 'Environment Definition 🏷' },
+            { type: 'doc', id: 'js-es/glossary/naive-build', label: 'Naive Build Definition 🏷' },
+            { type: 'doc', id: 'js-es/glossary/incremental-build', label: 'Incremental Build Definition 🏷' },
+            { 
+              type: 'category', label: 'Modules 🧩', items: [
+                { type: 'doc', id: 'js-es/glossary/modules/summary', label: 'Module Systems Summary' },
+                { type: 'doc', id: 'js-es/glossary/modules/modules-compatibility', label: 'Environments Modules Compatibility 📊' },
+                { type: 'doc', id: 'js-es/glossary/modules/esm', label: 'ES Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/umd', label: 'UMD Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/amd', label: 'AMD Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/commonjs', label: 'CommonJS Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/raw', label: 'Raw <script> Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/modules-bundler', label: 'Modules Bundler Definition 🏷' },
+                { type: 'doc', id: 'js-es/glossary/modules/nodejs-modules-support', label: 'Node.js - Modules Support 🏷' }
+              ],  
+            }
           ]
         },
         {
@@ -158,7 +156,8 @@ const sidebars = {
               },
               items: [
                 // { type: 'doc', id: 'js-es/typescript/optimizations/index', label: 'Introduction ✨'},
-                { type: 'doc', id: 'js-es/typescript/optimizations/incremental-builds', label: 'TS Incremental builds 🧱' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/incremental-build', label: 'TS Incremental build 🧱' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/project-references', label: 'Project References (Composite Projects)' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
               ]
