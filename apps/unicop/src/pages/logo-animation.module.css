@@ -1,0 +1,43 @@
+.logoAnimation {
+  transform: perspective(500px) rotateY(-5deg);
+  -webkit-transform: perspective(500px) rotateY(-5deg);
+  -moz-transform: perspective(500px) rotateY(-5deg);
+  -ms-transform: perspective(500px) rotateY(-5deg);
+  -o-transform: perspective(500px) rotateY(-5deg);
+  animation-name: rotate-windows;
+  animation-iteration-count: 5;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes rotate-windows {
+  0% {
+    transform: perspective(500px) rotateY(-3deg);
+    -webkit-transform: perspective(500px) rotateY(-3deg);
+    -moz-transform: perspective(500px) rotateY(-3deg);
+    -ms-transform: perspective(500px) rotateY(-3deg);
+    -o-transform: perspective(500px) rotateY(-3deg);
+  }
+  31% {
+    -webkit-transform: perspective(500px) rotateX(2deg);
+
+  }
+  50% {
+    transform: perspective(500px) rotateY(7deg);
+    -webkit-transform: perspective(500px) rotateY(4deg) rotateX(-3deg) scale(1.01);
+    -moz-transform: perspective(500px) rotateY(7deg);
+    -ms-transform: perspective(500px) rotateY(7deg);
+    -o-transform: perspective(500px) rotateY(7deg);
+  }
+  63% {
+    -webkit-transform: perspective(500px) rotateY(2deg) rotateX(-1deg);
+  }
+  100% {
+    transform: perspective(500px) rotateY(-5deg);
+    -webkit-transform: perspective(500px) rotateY(-5deg);
+    -moz-transform: perspective(500px) rotateY(-5deg);
+    -ms-transform: perspective(500px) rotateY(-5deg);
+    -o-transform: perspective(500px) rotateY(-5deg);
+  }
+}

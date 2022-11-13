@@ -40,3 +40,5 @@ When languages is being designed for a [compiler](./compiler.md), the compiler h
 It make sense, that the less you need to be responsible at runtime, the faster code will execute.
 
 That's why it is very common for statically-typed languages to be compiled.
+
+<!-- https://stackoverflow.com/a/41624354/11554280 -->

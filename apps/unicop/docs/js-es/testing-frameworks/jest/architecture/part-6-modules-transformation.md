@@ -1,9 +1,5 @@
 # Part 6. Module Transformation
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 ## Introduction ✨
 
 ### Prerequisite Terms 🔓:
@@ -81,10 +77,4 @@ Here are some highlights references for you:
 ## Outroduction 👋
 
 That's it!
-You've just completed reading my Jest architecture series, I hope you enjoyed, learned and inspired.
-
-I wrote these series to share ideas, and to give value.
-I would appreciate to receive honest feedback/general impression,
-You can contact me via [LinkedIn](https://www.linkedin.com/in/unicop) or via [Email][email-with-subject].
-
-[email-with-subject]: mailto:its.op.the.unicorn@gmail.com?subject=🃏%20Feedback%20for%20The%20Jest%20architecture%20series%20🃏!
+You've just completed reading my Jest architecture series, I hope you enjoyed, and inspired.

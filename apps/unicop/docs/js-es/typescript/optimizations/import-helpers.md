@@ -1,5 +1,5 @@
 ---
-slug: import-helpers-with-tslib
+# slug: import-helpers-with-tslib
 title: TypeScript - Optimizations - Import Helpers 🧿
 pagination_prev: js-es/typescript/optimizations/index
 pagination_next: null
@@ -10,9 +10,12 @@ authors: [unicop]
 tags: [TypeScript, Optimization, Unknown, Advance]
 ---
 
+TypeScript takes source-code and emits it into output files that are executable in a JavaScript environment, so as the output will be mor efficient, it should be running faster.
+
+In this article, I will focus on the output files of the [tsc](../glossary/ts-compiler.md), show and explain to you how to help [tsc](../glossary/ts-compiler.md) to generate more efficient code, using an option call [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) and a library call [tslib](https://www.npmjs.com/package/tslib).
+
 <details>
     <summary>TL;DR ⚡️</summary>
-    
     1. Add to your <code>tsconifg.json</code> <code>compilerOptions.importHelpers</code> to <code>true</code>.
 
 <br/>
@@ -20,41 +23,27 @@ tags: [TypeScript, Optimization, Unknown, Advance]
 
 </details>
 
-When working with TypeScript, we should always be familiar that the code we write during development is not the same code our clients use at runtime.
+<!-- When working with TypeScript, we should always be familiar that the code we write during development is not the same code our clients use at runtime.
 Due to this fact, 2 main concerns should consistently bother us: <br/>
 
 1. The output works as expected <br/>
-2. The output efficiency <br/>
-
-This page shows how to optimize helper functions that TypeScript uses under-the-hood to compatible some of the common features TypeScript supports at runtime.
-
----
-
-## Why 💡 - why does it important?
-
-Optimize the runtime output, simply just make it smaller.
-
-<!--truncate-->
-
-## How 🤯 - how does it affect my work?
-
-Add `tslib` as a dependency and maintain it, like any other dependency you use.
-
-<!-- It won't. besides install `tslib` as a dependency and configure your `tsconfig.json` to use it. -->
-
-## What 🤔 - what should I change?
-
-Nothing.
+2. The output efficiency <br/> -->
+<!--
+This page shows how to optimize helper functions that TypeScript uses under-the-hood to compatible some of the common features TypeScript supports at runtime. -->
 
 ---
 
-## The Issue 🦚 - The root-cause a solution is necessary
+## The Issue 🦚
 
-As a fact, TypeScript uses internal helper functions to compatible the source-code to work at runtime.
-By default, TypeScript adds these functions to each module that uses a feature that required TypeScript to use one of these functions, but TypeScript does it by duplicate the helper functions for each modules.
+For compatibility with some of JavaScript features, TypeScript generates helper functions, in the output files.
 
-I created an example project, in which I show how TypeScript transpiles code:
-`export * from 'my-module'`, which is used very often.
+The weird default behavior is that `tsc` adds helper functions everywhere they needed, that creates a huge code duplication, because each module has helper functions implementation.
+
+Let's look at thus example project, to understand the issue better.
+
+First let's examine how TypeScript [emit](../glossary/emit.md)s the following code:
+
+`export * from 'my-module'`, which often use in source-code.
 
 Let's take for instance this source file:
 
@@ -62,48 +51,46 @@ Let's take for instance this source file:
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/math/index.ts
 ```
 
-This is how TypeScript transpiles this code:
+And here is the output code:
 
 ```js reference title="dist/no-import-helpers-out-tsc/math/index.js"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/math/index.js#L1-L18
 
 ```
 
-For this feature, TypeScript turned 1 line-of-code to 17.
-Which is just one example of this problematic behavior,
+For the "star-import" feature, TypeScript has to turn 1 line-of-code to 17.
 
-Now see how TypeScript handles multiple syntax such as: `async await`, `export * from 'myModule'`.
+Another example for `async await` feature.
 
-So this is the source file of the root index.ts file of my example project.
+source-code:
 
 ```ts reference title="src/index.ts"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/index.ts#L6-L20
 ```
 
-And here it's transpilation result:
+output:
 
 ```js reference title="dist/no-import-helpers-out-tsc/math/index.js"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/index.js#L1-L80
 
 ```
 
-This compilation is the same build that created the previous `math.ts` dist-file, so now you can also understand that TypeScript duplicated both the `__exportStar` and `__createBinding` helper functions.
-
-And it does it for every helper function, and for every module.
-
-For instance see how long is the `__awaiter` helper function, and think that TypeScript will print it for every module that uses `async-await`.
+So as you can see, TypeScript has generated `__exportStar`, `__createBinding`, and `__awaiter` helper functions.
+It does it in every file it [emit](../glossary/emit.md)s that using `async await`.
 
 :::note
 TypeScript currently has [24 different helper functions](https://github.com/microsoft/tslib/blob/main/tslib.js#L16-L41)
 :::
 
-## The Solution 🛠
+## Changing The Weird Behavior 🛠
 
-The TypeScript team realized this overhead and released a library call `tslib` which exports all TypeScript helper functions, but also created a flag, which is a `boolean` and call `importHelpers`, for the `tsconfig.json` (The TypeScript configuration file for your project) to let TypeScript know if to use `tslib` or generate it for each module.
+The TypeScript team realized this overhead and released a an option to change it.
 
-What `importHelpers` flag does is very simple, when it is set to `true` TypeScript transpile the source modules like before, BUT whenever TypeScript detects that an helper function is required, instead of generating it, TypeScript imports it from `tslib` and avoids the generated duplications!
+- They created a package call `tslib` that exports all TypeScript helper functions
 
-Now let's see how TypeScript transpile the same files, but now TypeScript will use `tslib`, and `importHelpers` set to `true`
+- Support a new [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) option, that tells TypeScript to import helper functions from `tslib`, and not generating them.
+
+Let's see the output of the same files from the previous example, but now TypeScript will use [tslib](https://www.npmjs.com/package/tslib), and enable the [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) option.
 
 ```json reference title="tsconfig.json when 'importHelpers' is set to 'true'"
 https://github.com/unicop-art/typescript-import-helpers-example/blob/main/tsconfig.true-import-helpers.json#L1-L17
@@ -193,8 +180,10 @@ npm install -D tslib
 >
 > <b><cite><a href="https://github.com/Microsoft/tslib#tslib">The TypeScript Team - From tslib README file</a></cite></b>
 
-## References 🔗
+## See more
 
-- **[tslib Repository](https://github.com/Microsoft/tslib#tslib)**
-- **[importHelpers - TypeScript Docs](https://www.typescriptlang.org/tsconfig#importHelpers)**
-- **[tslib vs. typescript NPM Trends](https://npmtrends.com/tslib-vs-typescript)**
+### Articles
+
+### TS Glossary
+
+### JS eco-system Glossary

@@ -6,10 +6,6 @@ last_update:
 
 # Appendix Ⅴ: Watch Mode
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 The watch mode turns jest into a continuos test run that besides running tests is also listening to file system changes you do and respond accordingly.
 
 On watch mode, in comparison to a single test run, the expectation for a different development experience. for example you would expect jest to respond immediately on file system changes, be responsive when interacting directly with the CLI to interrupt the current test run and so on.

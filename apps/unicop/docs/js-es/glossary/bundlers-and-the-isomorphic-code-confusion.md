@@ -34,8 +34,7 @@ I would confidently state is the best thing you can do to become a better JavaSc
 
 I already publish content that can help you understand it better, and more is coming.
 
-- **[All JavaScript Module Systems Explained 🫀](./javascript-module-systems-explained.md)**
-- **[Compatibility Table 📐](./js-module-systems-compatibility.md)** - Includes references
+- **[Modules Summary](./modules/summary.md)** - Includes references
 
 <!-- and what modules browsers and NodeJS are compatible with.
 This lack of understanding prevent developers to understand how things work, and this knowledge can help many of the issues developers experience on a daily basis.

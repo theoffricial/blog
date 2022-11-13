@@ -1,9 +1,5 @@
 # Part 3. Test Run Order (Optimizations) ⏳
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 ## Introduction ✨
 
 Tests run order determination is an important part for the optimization of the overall run time.

@@ -1,0 +1,51 @@
+.avatar__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar__details {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    align-items: center;
+    /* justify-content: center; */
+}   
+
+.avatar__photo-link {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 300px) {
+    .avatar-details__container {
+        flex-direction: column !important;
+        row-gap: .5rem;
+        align-items: center;
+    }
+
+    .avatar__photo-link {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.avatar__name--display {
+    display: flex; 
+    column-gap: 0.25rem;
+}
+
+.avatar__social {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+}
+
+.avatar__social > a:hover, .avatar__social > div:hover {
+    color: var(--ifm-color-white);
+}
+
+.avatar__social > a:active, .avatar__social > div:active {
+    color: var(--ifm-color-gray-200);
+}
+

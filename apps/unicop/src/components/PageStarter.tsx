@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-import styles from './HomepageFeatures.module.css';
 import clsx from 'clsx';
 import Author from '@theme/BlogPostItem/Header/Author';
 

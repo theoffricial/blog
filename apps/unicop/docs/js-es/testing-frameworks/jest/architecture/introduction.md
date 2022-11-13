@@ -1,9 +1,5 @@
 # Introduction ✨
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 Happy to introduce you the 6-parts series of jest which explains you step after step how jest works,
 Every concept is explained in high-level, but also drill down into the technical details.
 

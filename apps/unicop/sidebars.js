@@ -159,21 +159,21 @@ const sidebars = {
                 { type: 'doc', id: 'js-es/typescript/optimizations/incremental-build', label: 'TS Incremental build 🧱' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/project-references', label: 'Project References (Composite Projects)' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
-                { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers', label: 'Import Helpers 🧿' },
               ]
             },
-            {
-              type: 'category',
-              label: 'Common Bugs Solved 🐞',
-              link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
-              items: [
-                {
-                  id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
-                  type: 'doc',
-                  label: 'ts-jest: "Cannot use import statement outside module" 🤡'
-                }
-              ]
-            }
+            // {
+            //   type: 'category',
+            //   label: 'Common Bugs Solved 🐞',
+            //   link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
+            //   items: [
+            //     {
+            //       id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
+            //       type: 'doc',
+            //       label: 'ts-jest: "Cannot use import statement outside module" 🤡'
+            //     }
+            //   ]
+            // }
           ] 
         },
         {

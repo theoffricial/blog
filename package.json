@@ -40,9 +40,12 @@
   "dependencies": {
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
+    "docusaurus-plugin-sass": "^0.2.2",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "tslib": "^2.3.0"
+    "sass": "^1.56.0",
+    "tslib": "^2.3.0",
+    "typewriter-effect": "^2.19.0"
   }
 }

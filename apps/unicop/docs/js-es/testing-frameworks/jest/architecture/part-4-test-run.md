@@ -1,9 +1,5 @@
 # Part 4. Test Run 🃏
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 ## Introduction ✨
 
 Now is the money time, after figuring out configs, file system, what tests to run and their order,

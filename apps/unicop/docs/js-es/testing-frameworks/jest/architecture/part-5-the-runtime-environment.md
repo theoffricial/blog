@@ -1,9 +1,5 @@
 # Part 5. The Runtime Environment 💽
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 ## Introduction ✨
 
 This part is discussing how the jest-runner package works, which is responsible for running tests.

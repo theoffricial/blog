@@ -89,6 +89,10 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   margin-top: 0.25rem;
 }
 
+.author-margin {
+  margin: 1rem;
+}
+
 /* .author-text {
   line-height: 1.5 !important;
 }

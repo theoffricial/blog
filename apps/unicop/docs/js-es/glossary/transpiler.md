@@ -1,3 +1,7 @@
+---
+authors: [unicop]
+---
+
 # Transpiler 🏷
 
 A **transpiler**, describe as a source-to-source [compiler](./compiler.md). So in essence transpiler is a subset of [compiler](./compiler.md) which take in a source code file and convert it to another source code file in some other language or a different version of the same language. The output is generally understandable by a human. This output still has to go through a compiler or interpreter to be able to run by a machine.

@@ -30,7 +30,7 @@ While making sure actions like `build` or `test` run faster with tools which use
 
 ## How 🤯 - how it will look like
 
-Configure TypeScript to look at your single project as multiple modular pieces with dependencies between each other, do so enables to leverage TypeScript **[TypeScript - Optimizations - Incremental Builds 🧱](../incremental-builds.md)** even more.
+Configure TypeScript to look at your single project as multiple modular pieces with dependencies between each other, do so enables to leverage TypeScript **[TypeScript - Optimizations - Incremental Builds 🧱](../incremental-build.md)** even more.
 
 <!-- [TypeScript project references][ts-project-references-link] allows you to break your project up into a number of smaller projects.
 This improves compilation, improves `editors`' speed and reduces memory usage while working with `TypeScript` etc. -->

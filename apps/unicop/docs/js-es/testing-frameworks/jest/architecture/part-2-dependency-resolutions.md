@@ -1,9 +1,5 @@
 # Part 2. File System & Dependencies Resolution
 
-import PageStarter from '@site/src/components/PageStarter';
-
-<PageStarter />
-
 ## Introduction ✨
 
 This part discuss 2 key questions jest should ask to complete a test run,

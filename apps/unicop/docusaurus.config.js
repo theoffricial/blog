@@ -15,7 +15,7 @@ const config = {
   favicon: 'img/unicop.art.svg',
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
-
+  plugins: ['docusaurus-plugin-sass'],
   presets: [
     [
       'classic',
@@ -44,7 +44,7 @@ const config = {
         //     'https://github.com/uniorg/personal-blogs/edit/main/apps/unicop/',
         // },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [require.resolve('./src/css/custom.css')],
         },
         googleAnalytics: {
           trackingID: 'G-S5TKJR0D2J'
