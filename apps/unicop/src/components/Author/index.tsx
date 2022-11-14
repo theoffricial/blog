@@ -1,1 +1,2 @@
-export { default, Props } from './Author';
+export type { Props as AuthorProps } from './Author';
+export { default } from './Author';

@@ -81,10 +81,8 @@ const sidebars = {
           //       {
           //         type: 'category',
           //         label: 'Common Bugs Solved 🐞',
-          //         link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
           //         items: [
           //           {
-          //             id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
           //             type: 'doc',
           //             label: 'ts-jest: "Cannot use import statement outside module" 🤡'
           //           }
@@ -165,10 +163,8 @@ const sidebars = {
             // {
             //   type: 'category',
             //   label: 'Common Bugs Solved 🐞',
-            //   link: { type: 'doc', id: 'js-es/typescript/bugs-solved/index' },
             //   items: [
             //     {
-            //       id: 'js-es/typescript/bugs-solved/typescript-jest-cannot-use-import-statement-outside-module',
             //       type: 'doc',
             //       label: 'ts-jest: "Cannot use import statement outside module" 🤡'
             //     }

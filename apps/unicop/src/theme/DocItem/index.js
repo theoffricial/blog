@@ -7,7 +7,7 @@ import clsx from 'clsx';
 const ofriPeretz = 'unicop';
 // const honestFeedbackEmail = 'mailto:its.op.the.unicorn@gmail.com';
 // const mailSubject = 'here%20is%20my%20honest%20feedback%20(unicop.art)!';
-
+// window.ga = () => {};
 const note = `I seek what's true, and I can't do it alone! Please contact to share honest feedback.`
 
 export default function DocItemWrapper(props) {

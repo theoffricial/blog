@@ -8,10 +8,10 @@ export const AUTHORS: Author[] = [
         organization: 'Snappy',
         organizationURL: 'https://github.com/unicop.png',
         email: 'its.op.the.unicorn@gmail.com',
-        url: 'https://unicop.art',
+        url: 'https://www.linkedin.com/in/unicop',
         imageURL: 'https://github.com/unicop.png',
         social: {
-            linkedIn: 'https://www.linkedin.com/in/unicop/',
+            linkedIn: 'https://www.linkedin.com/in/unicop',
             github: 'https://github.com/unicop',
             twitter: 'https://twitter.com/_unicop'
         }

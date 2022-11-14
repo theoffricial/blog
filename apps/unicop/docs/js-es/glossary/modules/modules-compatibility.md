@@ -1,3 +1,7 @@
+---
+authors: [unicop]
+---
+
 # The Complete JS-ecosystem Modules Compatibility 📐
 
 Knowing the popular environments of the JS eco-system (browsers and server runtimes) is highly important to truly master them.
@@ -29,31 +33,31 @@ This page is mapping the most popular environments, and share valuable reference
             <td>bun <br />  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oven-sh/bun?style=flat-square" width="60px" /></td>
         </tr>
         <tr>
-            <td><b><a href="./esm.md">ESM</a></b></td>
+            <td><b><a href="./esm">ESM</a></b></td>
             <td colspan="3">✅ <a style={{ fontSize:"12px", fontWeight: "bold" }} href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#browser_compatibility">See ESM features full compatibility table</a></td>
             <td>✅</td>
         </tr>
         <tr>
-            <td><b><a href="./commonjs.md">CommonJS</a></b></td>
+            <td><b><a href="./commonjs">CommonJS</a></b></td>
             <td>📦</td>
             <td>✅</td>
             <td>❌</td>
             <td>✅</td>
         </tr>
         <tr>
-            <td><b><a href="./umd.md">UMD</a></b></td>
+            <td><b><a href="./umd">UMD</a></b></td>
             <td>🪅 (AMD) or 📦 (CommonJS)</td>
             <td>✅ CommonJS</td>
             <td>❌</td>
             <td>✅</td>
         </tr>
         <tr>
-            <td><b><a href="./amd.md">AMD</a></b></td>
+            <td><b><a href="./amd">AMD</a></b></td>
             <td>🪅</td>
             <td colspan="3">❌</td>
         </tr>
         <tr>
-            <td><b><a href="./raw.md">Raw</a></b></td>
+            <td><b><a href="./raw">Raw</a></b></td>
             <td>✅</td>
             <td colspan="3">❌</td>
         </tr>

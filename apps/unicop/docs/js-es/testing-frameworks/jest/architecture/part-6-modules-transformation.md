@@ -8,8 +8,8 @@ If you want to fully understand this article, make sure to be familiar with the 
 
 - [What isomorphic code is](../../../glossary/bundlers-and-the-isomorphic-code-confusion.md)
 - [JS-ecosystem module systems](../../../glossary/javascript-module-systems-explained.md)
-- [Node.js module system compatibility](../../)
-- [Transpiler and Code Transpilation](../../../glossary/)
+- [Node.js module system compatibility](../../../glossary/modules/nodejs-modules-support.md)
+- [Transpiler and Code Transpilation](../../../glossary/transpiler.md)
 
 On [Part 5.](./part-5-the-runtime-environment.md) on the step of building an isolated sandbox to run test files (at the `jest-runtime` module) I mentioned a module transformation sub-step where Jest convert modules from one form into another form.
 

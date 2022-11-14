@@ -1,6 +1,6 @@
 ---
 pagination_prev: js-es/glossary/index
-pagination_next: js-es/typescript/bugs-solved/index
+# pagination_next:
 last_update:
   date: 03/09/2022
   author: Ofri Peretz

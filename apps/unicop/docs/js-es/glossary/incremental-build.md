@@ -2,7 +2,7 @@
 
 Project incremental build refers to build tools that capable to look at a project as a set of components that compose it for the build purposes, and during this break down to log this map as information to use it for future builds, so when a `build` command would be requested again, the build tool will read the logged data from previous build, and figure out what has changed and re-build only those files/modules/components which defined as affected from changes.
 
-The incremental build comes as an enhancement to [naive build](./project-incremental-build.md), which is more expensive when building a project often, for example during development or in a deployment pipeline.
+The incremental build comes as an enhancement to [naive build](./incremental-build.md), which is more expensive when building a project often, for example during development or in a deployment pipeline.
 
 :::note
 
@@ -34,11 +34,11 @@ Today, build tools that support watch-mode, they might not state it explicitly b
 
 ### TypeScript
 
-- [TypeScript > Incremental Build](../typescript/optimizations/incremental-builds.md)
+- [TypeScript > Incremental Build](../typescript/optimizations/incremental-build.md)
 
 ### Glossary Terms
 
 - [Compiler](./compiler.md)
 - [Modules Bundler](./modules/modules-bundler.md)
-- [Project Naive Build](./project-naive-build.md)
+- [Project Naive Build](./naive-build.md)
 - [Transpiler](./transpiler.md)

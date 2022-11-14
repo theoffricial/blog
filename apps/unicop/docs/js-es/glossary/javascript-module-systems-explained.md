@@ -48,7 +48,7 @@ As you can see, the eco-system is messy, but the mess just drove it to develop a
 
 ## Compatibility
 
-- **[Compatibility Table 📐](./js-module-systems-compatibility.md)**
+- **[Compatibility Table 📐](./modules/modules-compatibility.md)**
 
 ## Credits 🎖️
 

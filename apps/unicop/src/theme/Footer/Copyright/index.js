@@ -12,7 +12,7 @@ export default function CopyrightWrapper(props) {
         author={unicop} 
         note={`
       I created this blog, and I'm consistently improving it for 
-      sharing ideas with others, To provide a medium for learning strong fundamentals up-to advanced topics, but above all, for fun 🦄.`} 
+      sharing ideas with others, To provide a platform for learning strong fundamentals up-to advanced topics, but above all, for fun 🦄.`} 
       />
       <Copyright {...props} />
     </div>
