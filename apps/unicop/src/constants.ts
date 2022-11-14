@@ -4,7 +4,7 @@ export const AUTHORS: Author[] = [
     {
         id: 'unicop',
         name: 'Ofri Peretz',
-        role: 'Software Developer',
+        role: 'Full Stack Developer',
         organization: 'Snappy',
         organizationURL: 'https://github.com/unicop.png',
         email: 'its.op.the.unicorn@gmail.com',

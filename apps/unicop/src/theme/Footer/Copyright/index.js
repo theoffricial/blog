@@ -10,7 +10,7 @@ export default function CopyrightWrapper(props) {
     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', textAlign: 'left'}}>
       <Author 
         author={unicop} 
-        shortSection={`
+        note={`
       I created this blog, and I'm consistently improving it for 
       sharing ideas with others, To provide a medium for learning strong fundamentals up-to advanced topics, but above all, for fun 🦄.`} 
       />

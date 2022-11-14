@@ -5,8 +5,10 @@ import Author from '../../components/Author'
 import clsx from 'clsx';
 
 const ofriPeretz = 'unicop';
-const honestFeedbackEmail = 'mailto:its.op.the.unicorn@gmail.com';
-const mailSubject = 'here%20is%20my%20honest%20feedback%20(unicop.art)!';
+// const honestFeedbackEmail = 'mailto:its.op.the.unicorn@gmail.com';
+// const mailSubject = 'here%20is%20my%20honest%20feedback%20(unicop.art)!';
+
+const note = `I seek what's true, and I can't do it alone! Please contact to share honest feedback.`
 
 export default function DocItemWrapper(props) {
 
@@ -31,7 +33,7 @@ export default function DocItemWrapper(props) {
               author={author} 
               key={author.email} 
               className={clsx("")} 
-              shortSection={"I'm looking for honest feedback. Please reach me out!"}
+              note={note}
               />
             </>
           )

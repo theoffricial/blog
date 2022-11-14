@@ -11,7 +11,7 @@ import styles from './Author.module.css';
 
 export interface Props {
   readonly author: IAuthor;
-  readonly shortSection?: string;
+  readonly note?: string;
   readonly className?: string;
 }
 
@@ -22,70 +22,73 @@ export interface Props {
 
 export default function Author({
     author,
-    shortSection,
+    note,
     className,
   }: Props): JSX.Element {
     const {name, role: role, organization, organizationURL, url, imageURL, email, social} = author;
     const link = url || (email && `mailto:${email}`) || undefined;
     
     return (
-      <div className={"avatar__container"}>
+      <div className={styles.avatar__container}>
 
 
-        <div className="avatar__details">
+        <div className={styles.avatar__details}>
           
           {imageURL && (
-            <MaybeLink href={link} className="avatar__photo-link" target="_blank" rel="noopener noreferrer">
+            <MaybeLink href={link} className={styles["avatar__photo-link"]} target="_blank" rel="noopener noreferrer">
               <img className="avatar__photo" src={imageURL} alt={name} />
             </MaybeLink>
           )}
     
           {name && (
             <div
-              className="avatar__intro"
+              className={styles.avatar__intro}
               itemProp="author"
               itemScope
               itemType="https://schema.org/Person">
-              <div className={clsx("avatar__name--display", "avatar__name")}>
-                <MaybeLink href={link} itemProp="url" style={{ marginRight: '0.25rem'}} target="_blank" rel="noopener noreferrer">
+
+              <div className={clsx(styles.avatar__name, "avatar__name--display", "avatar__name")}>
+                <MaybeLink href={link} itemProp="url" target="_blank" rel="noopener noreferrer">
                   <span itemProp="name">{name}</span>
                 </MaybeLink>
                 {(email || social) && 
                   <div className={styles.avatar__social}>
                     {email && (
-                      <Email email={email} style={{ width: '1.25rem' }}/>
+                      <Email email={email} className={styles['avatar__social--link']} />
                     )}
                     {social?.linkedIn && (
-                      <LinkedIn url={social?.linkedIn} style={{ width: '1.25rem' }} />
+                      <LinkedIn url={social?.linkedIn} className={styles['avatar__social--link']} />
                     )}
                     {social?.github && (
-                      <GitHub url={social?.github} style={{ width: '1.25rem' }} />
+                      <GitHub url={social?.github} className={styles['avatar__social--link']} />
                     )}
                     {social?.twitter && (
-                      <Tweeter url={social?.twitter} style={{ width: '1.25rem' }} />
+                      <Tweeter url={social?.twitter} className={styles['avatar__social--link']} />
                     )}
                   </div>
                 }
               </div>
               {role && (
-                <small className="avatar__subtitle" itemProp="description">
+                <div className={styles.avatar__job}>
+                <small className={clsx(styles.avatar__role, "avatar__subtitle")} itemProp="description">
                   {role}
+                </small>
                   {organization && (
-                  <small className="avatar__subtitle" itemProp="description">
+                    <small className={clsx(styles.avatar__org, "avatar__subtitle")} itemProp="description">
                     &nbsp;@&nbsp;<MaybeLink href={organizationURL} itemProp="organizationURL">
                       {organization}
                     </MaybeLink>
                   </small>
                   )}
-                </small>
+                  </div>
               )}
 
             </div>
           )}
 
         </div>
-        {shortSection && (<div className="avatar__intro" style={{ maxWidth: '500px'}}>
-                  <p>{shortSection}</p>
+        {note && (<div className={clsx(styles.avatar__note, "avatar__intro")} style={{ maxWidth: '500px'}}>
+                  <p>{note}</p>
         </div>)}
 
       </div>
