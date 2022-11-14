@@ -1,0 +1,10 @@
+.authors {
+    display: flex; 
+    flex-direction: row;
+}
+
+@media screen and (max-width: 300px) {
+    .authors {
+        justify-content: center;
+    }
+}

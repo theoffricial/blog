@@ -23,6 +23,8 @@
   --ifm-line-height-base: 2;
   --ifm-font-weight-normal: 700;
   --ifm-avatar-photo-size: 60px;
+
+  --ifm-footer-link-color: #f0c37f;
 }
 
 [data-theme='dark'] {
@@ -33,6 +35,9 @@
   --ifm-color-primary-light: #f4d2a0;
   --ifm-color-primary-lighter: #f6dab0;
   --ifm-color-primary-lightest: #fcf1e2;
+  --ifm-link-activate-color: var(--ifm-color-gray-200);
+  --ifm-footer-link-color: #f0c37f;
+
 }
 
 .docusaurus-highlight-code-line {

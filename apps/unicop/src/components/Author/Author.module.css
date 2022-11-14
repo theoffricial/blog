@@ -133,10 +133,10 @@
 }
 
 .avatar__social > a:hover, .avatar__social > div:hover {
-    color: var(--ifm-color-white);
+    color: var(--ifm-link-hover-color);
 }
 
 .avatar__social > a:active, .avatar__social > div:active {
-    color: var(--ifm-color-gray-200);
+    color: var(--ifm-link-activate-color);
 }
 

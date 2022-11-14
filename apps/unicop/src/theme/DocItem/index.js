@@ -3,12 +3,10 @@ import DocItem from '@theme-original/DocItem';
 import { AUTHORS } from '@site/src/constants';
 import Author from '../../components/Author'
 import clsx from 'clsx';
+import styles from './index.module.css';
 
 const ofriPeretz = 'unicop';
-// const honestFeedbackEmail = 'mailto:its.op.the.unicorn@gmail.com';
-// const mailSubject = 'here%20is%20my%20honest%20feedback%20(unicop.art)!';
-// window.ga = () => {};
-const note = `I seek what's true, and I can't do it alone! Please contact to share honest feedback.`
+const note = `Please reach out to share honest feedback.`
 
 export default function DocItemWrapper(props) {
 
@@ -23,17 +21,17 @@ export default function DocItemWrapper(props) {
     <>
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div className={styles.authors}>
       {
         final.map((author) => {
-          
+          const n = author.id === ofriPeretz ? note : null;
           return  (
             <>
             <Author 
               author={author} 
-              key={author.email} 
+              key={author.id} 
               className={clsx("")} 
-              note={note}
+              note={n}
               />
             </>
           )

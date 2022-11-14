@@ -2,12 +2,15 @@ import React from 'react';
 import Copyright from '@theme-original/Footer/Copyright';
 import Author from '../../../components/Author'
 import { AUTHORS } from '@site/src/constants';
-
+import styles from './Copyright.module.css';
 const unicop = AUTHORS.find(a => a.id === 'unicop')
 export default function CopyrightWrapper(props) {
-  return (
+  // console.log(document.querySelector(styles.container).getAttribute('dark-theme'));
+  // document.querySelector(styles.container).setAttribute('');
+  console.log(document.documentElement.getAttribute('data-theme'));
 
-    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', textAlign: 'left'}}>
+  return (
+    <div className={styles.container}>
       <Author 
         author={unicop} 
         note={`
