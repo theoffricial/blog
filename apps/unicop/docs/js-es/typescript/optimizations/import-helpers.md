@@ -184,6 +184,4 @@ npm install -D tslib
 
 ### Articles
 
-### TS Glossary
-
-### JS eco-system Glossary
+### JavaScript ecosystem Foundations 🏗️

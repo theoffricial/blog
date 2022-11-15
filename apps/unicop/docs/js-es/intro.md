@@ -12,8 +12,6 @@ Everything to master the JavaScript ecosystem, from foundations to advance topic
 
 Unlike other ecosystems, the JS ecosystem becomes more advanced and mature, but many tools today require deep foundation understanding to be able to build state-of-the-art JS applications, here you can find it all.
 
-<!-- <div onClick={() => console.log(typescriptSidebar)} >fsdsdksjfpsdajfpjdskpfjsd</div> -->
-
 ## Topics 🦉
 
 import DocCardList from '@theme/DocCardList';
@@ -51,16 +49,3 @@ collapsible: true,
 }
 ]
 } />
-
-<!-- type: 'link',
-docId: 'js-es/typescript/intro',
-href: '/blog/js-es/typescript',
-label: 'Introduction ✨' -->
-
-<!-- <DocCardList items={typescriptSidebar} /> -->
-
-<!-- mdx -->
-
-<!-- import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
-
-<DocCardList items={useCurrentSidebarCategory().items} />  -->

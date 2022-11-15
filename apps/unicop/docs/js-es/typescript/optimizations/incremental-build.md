@@ -86,10 +86,10 @@ Then on the next time TypeScript compiler is being invoked, it will use that inf
 
 - [Project References](./project-references-explained/intro.md)
 
-### Fundamentals Glossary
+### JavaScript ecosystem Foundations 🏗️
 
-- [Definition of Incremental Build](../../foundations/incremental-build.md)
-- [Definition of Naive Build](../../foundations/naive-build.md)
+- [Incremental Build](../../foundations/incremental-build.md)
+- [Naive Build](../../foundations/naive-build.md)
 
 [ts-perf-wiki-incremental-projects]: https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit
 [ts-3.4-release-note-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html
