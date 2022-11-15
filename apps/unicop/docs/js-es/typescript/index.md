@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-authors: ['Ofri Peretz']
+authors: [unicop]
 last_update:
   date: 07/10/2022
   author: Ofri Peretz

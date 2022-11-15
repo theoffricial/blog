@@ -1,3 +1,7 @@
+---
+pagination_prev: null
+---
+
 # Introduction ✨
 
 Happy to introduce you the 6-parts series of jest which explains you step after step how jest works,
@@ -13,6 +17,13 @@ Although I cover jest architecture much more in detail, I invite you to see the 
 > Jest’s packages make up an entire ecosystem of packages useful for building any kind of JavaScript tooling.
 > “The whole is greater than the sum of its parts” doesn’t apply to Jest!
 > **_[Christoph Nakazawa](https://twitter.com/cpojer)_**
+
+<br />
+
+import DocCardList from '@theme/DocCardList';
+import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items} />
 
 <!-- ### Navigation
 

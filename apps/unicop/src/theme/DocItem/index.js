@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import styles from './index.module.css';
 
 const ofriPeretz = 'unicop';
-const note = `Please reach out to share honest feedback.`
+const note = "If you want to share your honest feedback, reach out 🙏."
 
 export default function DocItemWrapper(props) {
 
@@ -44,7 +44,7 @@ export default function DocItemWrapper(props) {
     </div>
 
       {/* <br /> */}
-      <hr style={{ marginTop: 0 }}/>
+      { final.length > 0 && <hr style={{ marginTop: 0 }}/> }
       <DocItem {...props} />
     </>
   );

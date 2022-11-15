@@ -1,4 +1,8 @@
-# Appendix Ⅵ: Jest Test Frameworks Evolution
+---
+pagination_next: null
+---
+
+# Appendix Ⅵ: Jest Test Frameworks Evolution 🦕
 
 When Jest has released, it used `jasmine` under the hood to actually run tests and process their results (the `jest-runner` module was responsible for running tests, and still does.).
 

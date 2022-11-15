@@ -1,4 +1,4 @@
-# Unit Tests - Jest - Architecture - Hoisting Appendix Ⅰ
+# Appendix Ⅰ: Jest Hoisting 🆙
 
 hoisting definition,
 

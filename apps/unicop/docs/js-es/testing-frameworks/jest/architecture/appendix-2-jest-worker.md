@@ -1,4 +1,4 @@
-# Unit Tests - Jest - Architecture - jest-worker Appendix
+# Appendix Ⅱ: jest-worker 👷‍♂️
 
 The jest system requires some heavy I/O operations like files access, cache CRUD, and module transformation.
 

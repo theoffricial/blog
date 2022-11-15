@@ -160,16 +160,6 @@ const sidebars = {
                 { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers', label: 'Import Helpers 🧿' },
               ]
             },
-            // {
-            //   type: 'category',
-            //   label: 'Common Bugs Solved 🐞',
-            //   items: [
-            //     {
-            //       type: 'doc',
-            //       label: 'ts-jest: "Cannot use import statement outside module" 🤡'
-            //     }
-            //   ]
-            // }
           ] 
         },
         {
@@ -197,14 +187,9 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Jest Architecture Series 🏛',
-                  // link: { id: 'js-es/testing-frameworks/jest/architecture/architecture-diagram', type: 'doc' },
-                  link: { type: 'generated-index' , slug: 'js-es/testing-frameworks/jest/architecture' },
+                  // link: { type: 'generated-index' , slug: 'js-es/testing-frameworks/jest/architecture' },
+                  link: { type: 'doc' , id: 'js-es/testing-frameworks/jest/architecture/introduction' },
                   items: [
-                    // {
-                    //   type: 'doc',
-                    //   id: 'js-es/testing-frameworks/jest/architecture/sharing-thoughts', 
-                    //   label: 'Sharing Thoughts 🦉'
-                    // },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/introduction', 
@@ -258,17 +243,22 @@ const sidebars = {
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-3-cache-summary', 
-                      label: 'Appx. Ⅲ: Cache Summary 💵'
+                      label: 'Appx. Ⅲ: Cache Summary 🏴‍☠️ (Coming soon...)'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-4-reporters', 
-                      label: 'Appx. Ⅳ: Test Result Summary 🧪'
+                      label: 'Appx. Ⅳ: Reporters 🚓 (Coming soon..)'
                     },
                     {
                       type: 'doc',
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-5-watch-mode', 
                       label: 'Appx. Ⅴ: Watch Mode ⏱'
+                    },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-6-frameworks-evolution', 
+                      label: 'Appx. Ⅵ: Framework Evolution 🦕'
                     },
                   ]
                 }

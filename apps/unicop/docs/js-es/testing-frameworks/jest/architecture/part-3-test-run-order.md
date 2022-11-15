@@ -162,7 +162,7 @@ without cache the whole algorithm doesn't do much.
 The reason for this logic is to utilize the CPUs to work optimally as possible to complete running all tests fast as possible.
 
 ```bash
-failed > test run duration (slowest wins) > file size (the larger wins)
+failed > test run duration (slowest wins) > file size (largest wins)
 ```
 
 #### Heuristic 1: Failed Tests (cache required)
