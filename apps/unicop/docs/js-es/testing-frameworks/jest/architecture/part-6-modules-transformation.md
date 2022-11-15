@@ -6,10 +6,10 @@
 
 If you want to fully understand this article, make sure to be familiar with the following:
 
-- [What isomorphic code is](../../../glossary/bundlers-and-the-isomorphic-code-confusion.md)
-- [JS-ecosystem module systems](../../../glossary/javascript-module-systems-explained.md)
-- [Node.js module system compatibility](../../../glossary/modules/nodejs-modules-support.md)
-- [Transpiler and Code Transpilation](../../../glossary/transpiler.md)
+- [What isomorphic code is](../../../foundations/bundlers-and-the-isomorphic-code-confusion.md)
+- [JS-ecosystem module systems](../../../foundations/javascript-module-systems-explained.md)
+- [Node.js module system compatibility](../../../foundations/modules/nodejs-modules-support.md)
+- [Transpiler and Code Transpilation](../../../foundations/transpiler.md)
 
 On [Part 5.](./part-5-the-runtime-environment.md) on the step of building an isolated sandbox to run test files (at the `jest-runtime` module) I mentioned a module transformation sub-step where Jest convert modules from one form into another form.
 
@@ -32,8 +32,8 @@ Read more about jest hoisting on my architecture series [Appendix Ⅰ: Jest Hois
 
 ## Why Jest Module Transformation is Necessary
 
-Jest is a Node.js-based CLI, which compatible only with [CommonJS](../../../glossary/javascript-module-systems-explained.md) modules. It limits Jest to run any code that is using different module system, e.g. [ES modules](../../../glossary/javascript-module-systems-explained.md),
-or [isomorphic code](../../../glossary/bundlers-and-the-isomorphic-code-confusion.md) projects, like most modern web applications.
+Jest is a Node.js-based CLI, which compatible only with [CommonJS](../../../foundations/javascript-module-systems-explained.md) modules. It limits Jest to run any code that is using different module system, e.g. [ES modules](../../../foundations/javascript-module-systems-explained.md),
+or [isomorphic code](../../../foundations/bundlers-and-the-isomorphic-code-confusion.md) projects, like most modern web applications.
 
 The Jest team wanted Jest to be capable to work on different environments and be compatible to the modern JS eco-system where many projects are isomorphic or their dependencies are isomorphic, or to support testing projects that are written in languages that extends JavaScript capabilities, like TypeScript.
 

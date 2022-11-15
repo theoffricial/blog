@@ -1,5 +1,5 @@
 ---
-pagination_prev: js-es/testing-frameworks/jest/index
+pagination_prev: testing/unit/theory/intro
 pagination_next: null
 authors: [unicop]
 last_update:
@@ -7,10 +7,9 @@ last_update:
   author: Ofri Peretz
 ---
 
-# Jest - Mock Modules 🃏
+# Unit Tests - Theory - Low-Effort/High-Value Cases 🤩
 
-A detailed information and examples for the most used functionalities of jest mocks.
-
+Common cases for unit tests that takes low effort to implement and has high value, that will raise you and your team **[confidence](../pros.md#confidence)**.
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 

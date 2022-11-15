@@ -2,8 +2,8 @@
 
 Before you continue, please make sure you are familiar with the following terms:
 
-1. [What an environment is](../../../glossary/environment.md#what-an-environment-is)
-1. [What a test environment is](../../../glossary/environment.md#what-a-test-environment-is)
+1. [What an environment is](../../../foundations/environment.md#what-an-environment-is)
+1. [What a test environment is](../../../foundations/environment.md#what-a-test-environment-is)
 
 ---
 

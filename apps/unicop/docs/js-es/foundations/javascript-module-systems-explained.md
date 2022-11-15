@@ -1,7 +1,7 @@
 ---
 slug: javascript-module-systems-explained
 title: JavaScript Module Systems Explained 🫀
-pagination_prev: js-es/glossary/index
+pagination_prev: js-es/foundations/intro
 pagination_next: null
 authors: [unicop]
 tags: [JavaScript, Modules]

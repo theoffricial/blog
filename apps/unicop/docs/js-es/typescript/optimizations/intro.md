@@ -1,5 +1,5 @@
 ---
-pagination_prev: js-es/glossary/index
+pagination_prev: js-es/foundations/intro
 # pagination_next:
 last_update:
   date: 03/09/2022

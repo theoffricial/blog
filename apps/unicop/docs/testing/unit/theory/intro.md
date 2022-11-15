@@ -1,15 +1,15 @@
 ---
-pagination_prev: js-es/typescript/index
-pagination_next: js-es/typescript/optimizations/index
+pagination_prev: testing/unit/intro
+pagination_next: js-es/testing-frameworks/jest/intro
 authors: [unicop]
 last_update:
   date: 03/09/2022
   author: Ofri Peretz
 ---
 
-# TypeScript Fundamentals 🪢
+# Unit Tests Theory 🔭
 
-All fundamental terms that simplify TypeScript!
+All fundamentals that can help you understand the theory of unit tests.
 
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';

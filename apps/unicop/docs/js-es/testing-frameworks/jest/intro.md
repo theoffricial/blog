@@ -1,6 +1,6 @@
 ---
-pagination_prev: testing/unit/index
-pagination_next: testing/unit/theory/index
+pagination_prev: testing/unit/intro
+pagination_next: testing/unit/theory/intro
 authors: [unicop]
 last_update:
   date: 03/09/2022

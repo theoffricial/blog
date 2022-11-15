@@ -1,7 +1,7 @@
 ---
 # slug: import-helpers-with-tslib
 title: TypeScript - Optimizations - Import Helpers 🧿
-pagination_prev: js-es/typescript/optimizations/index
+pagination_prev: js-es/typescript/optimizations/intro
 pagination_next: null
 last_update:
   date: 03/09/2022
@@ -12,7 +12,7 @@ tags: [TypeScript, Optimization, Unknown, Advance]
 
 TypeScript takes source-code and emits it into output files that are executable in a JavaScript environment, so as the output will be mor efficient, it should be running faster.
 
-In this article, I will focus on the output files of the [tsc](../glossary/ts-compiler.md), show and explain to you how to help [tsc](../glossary/ts-compiler.md) to generate more efficient code, using an option call [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) and a library call [tslib](https://www.npmjs.com/package/tslib).
+In this article, I will focus on the output files of the [tsc](../foundations/ts-compiler.md), show and explain to you how to help [tsc](../foundations/ts-compiler.md) to generate more efficient code, using an option call [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) and a library call [tslib](https://www.npmjs.com/package/tslib).
 
 <details>
     <summary>TL;DR ⚡️</summary>
@@ -41,7 +41,7 @@ The weird default behavior is that `tsc` adds helper functions everywhere they n
 
 Let's look at thus example project, to understand the issue better.
 
-First let's examine how TypeScript [emit](../glossary/emit.md)s the following code:
+First let's examine how TypeScript [emit](../foundations/emit.md)s the following code:
 
 `export * from 'my-module'`, which often use in source-code.
 
@@ -76,7 +76,7 @@ https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/f
 ```
 
 So as you can see, TypeScript has generated `__exportStar`, `__createBinding`, and `__awaiter` helper functions.
-It does it in every file it [emit](../glossary/emit.md)s that using `async await`.
+It does it in every file it [emit](../foundations/emit.md)s that using `async await`.
 
 :::note
 TypeScript currently has [24 different helper functions](https://github.com/microsoft/tslib/blob/main/tslib.js#L16-L41)

@@ -1,5 +1,5 @@
 ---
-pagination_prev: js-es/typescript/optimizations/index
+pagination_prev: js-es/typescript/optimizations/intro
 pagination_next: null
 last_update:
   date: 03/09/2022
@@ -54,7 +54,7 @@ Project references can solve all of these problems and more.
 
 ## What is a Project Reference?
 
-`tsconfig.json` files have a new top-level property, [references](./index.md). It’s an array of objects that specifies projects to reference:
+`tsconfig.json` files have a new top-level property, [references](./intro.md). It’s an array of objects that specifies projects to reference:
 
 ```js
 {
@@ -75,7 +75,7 @@ When you reference a project, new things happen:
 - If the referenced project produces an [outFile](https://www.typescriptlang.org/tsconfig#outFile), the output file `.d.ts` file’s declarations will be visible in this project
 - Build mode (see below) will automatically build the referenced project if needed
 
-By separating into multiple projects, you can greatly improve the speed of `typechecking` and [compiling](../../glossary/compiler.md), reduce memory usage when using an editor, and improve enforcement of the logical groupings of your program.
+By separating into multiple projects, you can greatly improve the speed of `typechecking` and [compiling](../../foundations/compiler.md), reduce memory usage when using an editor, and improve enforcement of the logical groupings of your program.
 
 ## `composite`
 
@@ -83,7 +83,7 @@ Referenced projects must have the new [composite](https://www.typescriptlang.org
 This setting is needed to ensure TypeScript can quickly determine where to find the outputs of the referenced project. Enabling the [composite](https://www.typescriptlang.org/tsconfig#composite) flag changes a few things:
 
 - The rootDir setting, if not explicitly set, defaults to the directory containing the tsconfig file
-- All implementation files must be matched by an [include](https://www.typescriptlang.org/tsconfig#include) pattern or listed in the [files](https://www.typescriptlang.org/tsconfig#files) array. If this constraint is violated, [tsc](../glossary/ts-compiler.md) will inform you which files weren’t specified
+- All implementation files must be matched by an [include](https://www.typescriptlang.org/tsconfig#include) pattern or listed in the [files](https://www.typescriptlang.org/tsconfig#files) array. If this constraint is violated, [tsc](../foundations/ts-compiler.md) will inform you which files weren’t specified
 - [declaration](https://www.typescriptlang.org/tsconfig#declaration) must be turned on.
 
 ## `declarationMap`s
@@ -102,7 +102,7 @@ You can also enable prepending the output of a dependency using the `prepend` op
 
 Prepending a project will include the project’s output above the output of the current project. All output files (`.js`, `.d.ts`, `.js.map`, `.d.ts.map`) will be emitted correctly.
 
-[tsc](../glossary/ts-compiler.md) will only ever use existing files on disk to do this process, so it’s possible to create a project where a correct output file can’t be generated because some project’s output would be present more than once in the resulting file. For example:
+[tsc](../foundations/ts-compiler.md) will only ever use existing files on disk to do this process, so it’s possible to create a project where a correct output file can’t be generated because some project’s output would be present more than once in the resulting file. For example:
 
 ```
    A

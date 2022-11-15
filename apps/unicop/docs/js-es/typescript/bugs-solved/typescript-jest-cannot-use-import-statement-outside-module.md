@@ -14,7 +14,7 @@ tags: [TypeScript, Jest, Modules, Import]
 
 ## The Issue 🦚
 
-Natively, jest works only with `CommonJS`, because it is a **[Nodejs based CLI](../../glossary/modules/modules-compatibility.md)**, it means modules are in the form of `require`, and `exports`.
+Natively, jest works only with `CommonJS`, because it is a **[Nodejs based CLI](../../foundations/modules/modules-compatibility.md)**, it means modules are in the form of `require`, and `exports`.
 However, the jest team wanted to support many different environments to make jest practical in the JS eco-system they add the support of **[code-transformation](https://jestjs.io/docs/code-transformation)**, basically it means, transform code from one form to another, most of the time the transform is about converting modules from one system to another.
 
 The code-transformation output (or transpilation output) will be in a form jest can work with, which I already covered that is `CommonJS` module system, and the syntax of the JS language should be supported to the `Nodejs` version that runs jest.

@@ -1,5 +1,5 @@
 ---
-pagination_prev: js-es/typescript/optimizations/index
+pagination_prev: js-es/typescript/optimizations/intro
 pagination_next: null
 last_update:
   date: 03/11/2022
@@ -10,7 +10,7 @@ tags: [typescript, optimization, build, everything]
 
 # Incremental Build 🧱
 
-Incremental build allows [tsc](../glossary/ts-compiler.md) to leverage the result of previous build to build faster next time.
+Incremental build allows [tsc](../foundations/ts-compiler.md) to leverage the result of previous build to build faster next time.
 It does it by saving information regarding the dependencies within your ts-project, and according to changes understand what modules might affected from changes and re-build those modules only.
 
 <details>
@@ -28,8 +28,8 @@ It does it by saving information regarding the dependencies within your ts-proje
 
 For this article to fully connecting the dots, you should first master:
 
-- [Definition of Incremental Build](../../glossary/incremental-build.md)
-- [Definition of Naive Build](../../glossary/naive-build.md)
+- [Definition of Incremental Build](../../foundations/incremental-build.md)
+- [Definition of Naive Build](../../foundations/naive-build.md)
 
 <!-- truncate -->
 
@@ -50,7 +50,7 @@ The `incremental` option tells TypeScript to save information about the project 
 }
 ```
 
-By default with these settings, when we run tsc, TypeScript will look for a file called `.tsbuildinfo` in the output directory (`./lib`). If `./lib/.tsbuildinfo` doesn’t exist, it’ll be generated. But if it does, [tsc](../glossary/ts-compiler.md) will try to use that file to incrementally `type-check` and update our output files (emit).
+By default with these settings, when we run tsc, TypeScript will look for a file called `.tsbuildinfo` in the output directory (`./lib`). If `./lib/.tsbuildinfo` doesn’t exist, it’ll be generated. But if it does, [tsc](../foundations/ts-compiler.md) will try to use that file to incrementally `type-check` and update our output files (emit).
 
 These `.tsbuildinfo` files can be safely deleted and don’t have any impact on our code at runtime - they’re purely used to make compilations faster. We can also name them anything that we want, and place them anywhere we want using the `tsBuildInfoFile` option.
 
@@ -84,12 +84,12 @@ Then on the next time TypeScript compiler is being invoked, it will use that inf
 
 ### TypeScript
 
-- [Project References](./project-references-explained/index.md)
+- [Project References](./project-references-explained/intro.md)
 
 ### Fundamentals Glossary
 
-- [Definition of Incremental Build](../../glossary/incremental-build.md)
-- [Definition of Naive Build](../../glossary/naive-build.md)
+- [Definition of Incremental Build](../../foundations/incremental-build.md)
+- [Definition of Naive Build](../../foundations/naive-build.md)
 
 [ts-perf-wiki-incremental-projects]: https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit
 [ts-3.4-release-note-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html

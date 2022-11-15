@@ -17,11 +17,11 @@ In the JS eco-system tools often name transpilers differently which is quite con
 
 ## See also
 
-### Glossary Terms
+### JS ecosystem Foundations 🏗️
 
 - [Compiler](./compiler.md)
 - [Modules Bundler](./modules/modules-bundler.md)
 
 ### TypeScript
 
-- [The TypeScript Compiler](../typescript/glossary/ts-compiler.md) - An overview what `tsc` is.
+- [The TypeScript Compiler](../typescript/foundations/ts-compiler.md) - An overview what `tsc` is.

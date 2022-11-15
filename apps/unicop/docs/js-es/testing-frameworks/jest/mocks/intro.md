@@ -1,15 +1,15 @@
 ---
-pagination_prev: testing/unit/index
-pagination_next: js-es/testing-frameworks/jest/index
+pagination_prev: js-es/testing-frameworks/jest/intro
+pagination_next: null
 authors: [unicop]
 last_update:
   date: 03/09/2022
   author: Ofri Peretz
 ---
 
-# Unit Tests Theory 🔭
+# Jest - Mock Modules 🃏
 
-All fundamentals that can help you understand the theory of unit tests.
+A detailed information and examples for the most used functionalities of jest mocks.
 
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';

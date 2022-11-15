@@ -8,7 +8,7 @@ Today, most modern build tools, e.g. [transpilers](./transpiler.md), [compilers]
 
 ## See also
 
-### Glossary Terms
+### JS ecosystem Foundations 🏗️
 
 - [Compiler](./compiler.md)
 - [Modules Bundler](./modules/modules-bundler.md)

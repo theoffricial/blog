@@ -11,11 +11,11 @@ Another term that many developers are confusing with compiler is [transpiler](./
 
 ## See also
 
-### Glossary Terms
+### JS ecosystem Foundations 🏗️
 
 - [Transpiler](./transpiler.md)
 - [Modules Bundler](./modules/modules-bundler.md)
 
 ### TypeScript
 
-- [TypeScript Compiler](../typescript/glossary/ts-compiler.md)
+- [TypeScript Compiler](../typescript/foundations/ts-compiler.md)

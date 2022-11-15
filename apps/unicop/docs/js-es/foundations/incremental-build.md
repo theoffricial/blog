@@ -36,7 +36,7 @@ Today, build tools that support watch-mode, they might not state it explicitly b
 
 - [TypeScript > Incremental Build](../typescript/optimizations/incremental-build.md)
 
-### Glossary Terms
+### JS ecosystem Foundations 🏗️
 
 - [Compiler](./compiler.md)
 - [Modules Bundler](./modules/modules-bundler.md)

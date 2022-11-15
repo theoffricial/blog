@@ -25,105 +25,36 @@ const sidebars = {
         {
           type: 'category',
           label: 'Introduction ✨',
-          link: { id: 'js-es/index', type: 'doc' },
+          link: { id: 'js-es/intro', type: 'doc' },
           items: [],
-          // items: [
-          //   {
-          //     type: 'category', 
-          //     label: 'TypeScript', 
-          //     items: [
-                // {
-                //   type: 'doc',
-                //   id: 'js-es/typescript/index',
-                //   label: 'TypeScript Introduction ✨',
-                // },
-          //       {
-          //         type: 'category',
-          //         label: 'Fundamentals 🪢',
-          //         collapsed: true,
-          //         collapsible: true,
-          //         link: { 
-          //           // slug: 'js-es/glossary',
-          //           type: 'doc',
-          //           id: 'js-es/glossary/index', 
-          //           // title: 'TypeScript Fundamentals 📚',
-          //           // description: "All fundamental terms that simplify TypeScript!",
-          //           // keywords: ['guides'], 
-          //         },
-          //         // link: { type: 'doc', id: 'js-es/glossary/index' },
-          //         items: [
-          //           // 'js-es/glossary/index',
-          //           { type: 'doc', id: 'js-es/glossary/compiler-vs-transpiler', label: 'Compiler Vs. Transpiler 📜' },
-          //           { type: 'doc', id: 'js-es/glossary/js-module-systems-compatibility' },
-          //           { type: 'doc', id: 'js-es/glossary/javascript-module-systems-explained' },
-          //           { type: 'doc', id: 'js-es/glossary/bundlers-and-the-isomorphic-code-confusion', label: 'Isomorphic Code Confusion 🔮' },
-          //           { type: 'doc', id: 'js-es/glossary/incremental-vs-naive-build' },
-          //         ]
-          //       },
-          //       {
-          //         type: 'category',
-          //         label: 'Optimizations ⚡️',
-          //         link: { 
-          //           // slug: 'js-es/typescript/optimizations',
-          //           // title: 'TypeScript Optimizations ⚡️',
-          //           id: 'js-es/typescript/optimizations/index',
-          //           type: 'doc',
-          //           // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
-          //           // All the articles here unlock you crucial optimization that can be made for your project.`
-          //         },
-          //         items: [
-          //           // { type: 'doc', id: 'js-es/typescript/optimizations/index', label: 'Introduction ✨'},
-          //           { type: 'doc', id: 'js-es/typescript/optimizations/incremental-builds', label: 'TS Incremental builds 🧱' },
-          //           { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
-          //           { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers-with-tslib', label: 'Import Helpers 🧿' },
-          //         ]
-          //       },
-          //       {
-          //         type: 'category',
-          //         label: 'Common Bugs Solved 🐞',
-          //         items: [
-          //           {
-          //             type: 'doc',
-          //             label: 'ts-jest: "Cannot use import statement outside module" 🤡'
-          //           }
-          //         ]
-          //       }
-          //     ] 
-          //   },
-          // ]
+        
         },
         {
           type: 'category',
-          label: 'Glossary 🪢',
+          label: 'Foundations 🪢',
           collapsed: true,
           collapsible: true,
-          link: { 
-            // slug: 'js-es/glossary',
+          link: {
             type: 'doc',
-            id: 'js-es/glossary/index', 
-            // title: 'TypeScript Fundamentals 📚',
-            // description: "All fundamental terms that simplify TypeScript!",
-            // keywords: ['guides'], 
+            id: 'js-es/foundations/intro', 
           },
-          // link: { type: 'doc', id: 'js-es/glossary/index' },
           items: [
-            // 'js-es/glossary/index',
-            { type: 'doc', id: 'js-es/glossary/compiler', label: 'Compiler Definition 🏷' },
-            { type: 'doc', id: 'js-es/glossary/transpiler', label: 'Transpiler Definition 🏷' },
-            { type: 'doc', id: 'js-es/glossary/environment', label: 'Environment Definition 🏷' },
-            { type: 'doc', id: 'js-es/glossary/naive-build', label: 'Naive Build Definition 🏷' },
-            { type: 'doc', id: 'js-es/glossary/incremental-build', label: 'Incremental Build Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/compiler', label: 'Compiler Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/transpiler', label: 'Transpiler Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/environment', label: 'Environment Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/naive-build', label: 'Naive Build Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/incremental-build', label: 'Incremental Build Definition 🏷' },
             { 
               type: 'category', label: 'Modules 🧩', items: [
-                { type: 'doc', id: 'js-es/glossary/modules/summary', label: 'Module Systems Summary' },
-                { type: 'doc', id: 'js-es/glossary/modules/modules-compatibility', label: 'Environments Modules Compatibility 📊' },
-                { type: 'doc', id: 'js-es/glossary/modules/esm', label: 'ES Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/umd', label: 'UMD Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/amd', label: 'AMD Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/commonjs', label: 'CommonJS Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/raw', label: 'Raw <script> Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/modules-bundler', label: 'Modules Bundler Definition 🏷' },
-                { type: 'doc', id: 'js-es/glossary/modules/nodejs-modules-support', label: 'Node.js - Modules Support 🏷' }
+                { type: 'doc', id: 'js-es/foundations/modules/summary', label: 'Module Systems Summary' },
+                { type: 'doc', id: 'js-es/foundations/modules/modules-compatibility', label: 'Environments Modules Compatibility 📊' },
+                { type: 'doc', id: 'js-es/foundations/modules/esm', label: 'ES Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/umd', label: 'UMD Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/amd', label: 'AMD Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/commonjs', label: 'CommonJS Module System Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/raw', label: 'Raw <script> Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/modules-bundler', label: 'Modules Bundler Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/nodejs-modules-support', label: 'Node.js - Modules Support 🏷' }
               ],  
             }
           ]
@@ -132,31 +63,21 @@ const sidebars = {
           type: 'category', 
           label: 'TypeScript', 
           link: {
-            id: 'js-es/typescript/index',
+            id: 'js-es/typescript/intro',
             type: 'doc',
           },
           items: [
-            // {
-            //   type: 'doc',
-            //   id: 'js-es/typescript/index',
-            //   label: 'Introduction ✨',
-            // },
             {
               type: 'category',
               label: 'Optimizations ⚡️',
               link: { 
-                // slug: 'js-es/typescript/optimizations',
-                // title: 'TypeScript Optimizations ⚡️',
-                id: 'js-es/typescript/optimizations/index',
+                id: 'js-es/typescript/optimizations/intro',
                 type: 'doc',
-                // description: `As the TypeScript eco-system becomes more mature, and many TypeScript projects gets bigger, especially in the monorepo era, Optimizations for your TypeScript project becomes more relevant than ever.
-                // All the articles here unlock you crucial optimization that can be made for your project.`
               },
               items: [
-                // { type: 'doc', id: 'js-es/typescript/optimizations/index', label: 'Introduction ✨'},
                 { type: 'doc', id: 'js-es/typescript/optimizations/incremental-build', label: 'TS Incremental build 🧱' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/project-references', label: 'Project References (Composite Projects)' },
-                { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/index', label: 'Project References 🧬' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/intro', label: 'Project References 🧬' },
                 { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers', label: 'Import Helpers 🧿' },
               ]
             },
@@ -165,17 +86,16 @@ const sidebars = {
         {
           type: 'category',
           label: 'Testing Frameworks',
-          // link: { id: 'js-es/testing-frameworks/index', type: 'doc'},
           items: [
             {
               type: 'category',
               label: 'Jest 🤡',
-              link: { type: 'doc', id: 'js-es/testing-frameworks/jest/index' },
+              link: { type: 'doc', id: 'js-es/testing-frameworks/jest/intro' },
               items: [
                 {
                   type: 'category',
                   label: 'Mocks 🃏',
-                  link: {id: 'js-es/testing-frameworks/jest/mocks/index', type: 'doc' },
+                  link: {id: 'js-es/testing-frameworks/jest/mocks/intro', type: 'doc' },
                   items: [
                     {
                       id: 'js-es/testing-frameworks/jest/mocks/jest-do-mock',
@@ -187,12 +107,11 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Jest Architecture Series 🏛',
-                  // link: { type: 'generated-index' , slug: 'js-es/testing-frameworks/jest/architecture' },
-                  link: { type: 'doc' , id: 'js-es/testing-frameworks/jest/architecture/introduction' },
+                  link: { type: 'doc' , id: 'js-es/testing-frameworks/jest/architecture/intro' },
                   items: [
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/introduction', 
+                      id: 'js-es/testing-frameworks/jest/architecture/intro', 
                       label: 'Introduction ✨'
                     },
                     {
@@ -276,14 +195,14 @@ const sidebars = {
           type: 'category',
           label: 'Unit Tests',
           link: {
-            id: 'testing/unit/index',
+            id: 'testing/unit/intro',
             type: 'doc',
           },
           items: [
             {
               type: 'category',
               label: 'Theory 🔭',
-              link: { type: 'doc', id: 'testing/unit/theory/index' },
+              link: { type: 'doc', id: 'testing/unit/theory/intro' },
               items: [
                 {
                   id: 'testing/unit/theory/pros',
@@ -308,7 +227,7 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Low-Effort/High-Value Cases 🤩',
-                  link: { type: 'doc', id: 'testing/unit/theory/low-effort-high-value-cases/index' },
+                  link: { type: 'doc', id: 'testing/unit/theory/low-effort-high-value-cases/intro' },
                   items: [
                     {
                       id: 'testing/unit/theory/low-effort-high-value-cases/the-entry-module',

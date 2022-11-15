@@ -29,7 +29,7 @@ import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
 
 |      #       | Navigation List                                                             |
 | :----------: | :-------------------------------------------------------------------------- |
-|    Intro     | **[Introduction ✨](./introduction.md)** &nbsp; 👈&nbsp; You are Here     |
+|    Intro     | **[Introduction ✨](./intro.md)** &nbsp; 👈&nbsp; You are Here     |
 | Full Diagram | **[Full Architecture Diagram 🏛](./the-complete-architecture.md)**              |
 |    Part 1    | **[Configs 🧰](./part-1-configs.md)**                                            |
 |    Part 2    | **[File System & Dependency Resolution 🌳](./part-2-dependency-resolutions.md)** |

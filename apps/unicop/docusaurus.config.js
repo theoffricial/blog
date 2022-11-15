@@ -71,13 +71,13 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'js-es/index',
+            docId: 'js-es/intro',
             position: 'left',
             label: 'The JS Eco-System',
           },
           {
             type: 'doc',
-            docId: 'testing/unit/index',
+            docId: 'testing/unit/intro',
             position: 'left',
             label: 'Unit Tests',
           },
