@@ -5,9 +5,7 @@ import { AUTHORS } from '@site/src/constants';
 import styles from './Copyright.module.css';
 const unicop = AUTHORS.find(a => a.id === 'unicop')
 export default function CopyrightWrapper(props) {
-  // console.log(document.querySelector(styles.container).getAttribute('dark-theme'));
-  // document.querySelector(styles.container).setAttribute('');
-  console.log(document.documentElement.getAttribute('data-theme'));
+  
 
   return (
     <div className={styles.container}>

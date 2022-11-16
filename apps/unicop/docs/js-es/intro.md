@@ -26,8 +26,8 @@ items: [
 {
 type: 'link',
 docId: 'js-es/foundations/intro',
-href: '/blog/js-es/typescript',
-label: 'TypeScript Introduction ✨'
+href: '/blog/js-es/foundations/intro',
+label: 'Foundations 🏗️'
 },
 ],
 collapsed: true,
@@ -40,7 +40,7 @@ items: [
 {
 type: 'link',
 docId: 'js-es/typescript/intro',
-href: '/blog/js-es/typescript',
+href: '/blog/js-es/typescript/intro',
 label: 'TypeScript Introduction ✨'
 },
 ],

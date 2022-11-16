@@ -1,6 +1,6 @@
-# `type-checking`
+# TypeScript `type-checking`
 
-On TypeScript, the type-checking action happens statically in "compile-time", by the TypeScript compiler, which after type-checking, [emits](./emit.md) the output JavaScript code.
+TypeScript, the type-checking action happens statically in "compile-time", by the TypeScript compiler, which after type-checking, [emits](./emit.md) the output JavaScript code.
 
 The approach of type-checking on the "compile-time" is common, because type-checking is an extremely heavy algorithm.
 

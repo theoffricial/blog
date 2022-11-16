@@ -6,9 +6,14 @@ last_update:
   author: Ofri Peretz
 ---
 
-# What you can find here 🧐
+# TypeScript 🧐
 
-Advance topics in TypeScript like optimizations, Guides how to work with TypeScript better, and fundamentals terms and concepts that clarifies what I find confusing for many developers.
+TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+
+TypeScript is the standard for web applications both on frontend and backend.
+Although it has many advantages, it also adds complexity to the development process because `build` action is required.
+
+On my blog you can find the foundations to understand TypeScript better combined with advance topics to blow your teammates mind, and becoming a real pro.
 
 <p align="center">
     <img src="/img/typescript/ts-logo-256.svg" width="150" />
