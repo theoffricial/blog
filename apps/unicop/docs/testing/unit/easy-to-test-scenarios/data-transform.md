@@ -9,7 +9,7 @@ Data manipulation cases are very common, Often it required when working with dat
 
 Both cases are simple to write unit test for.
 
-<!-- This case is classic for unit tests, it saves you from regressions, increase your confidence in code changes (see explained unit tests **[pros 👍](../pros.md)**). -->
+<!-- This case is classic for unit tests, it saves you from regressions, increase your confidence in code changes (see explained unit tests **[pros 👍](../../foundations/pros.md)**). -->
 
 ## Testing Data Transform In practice
 

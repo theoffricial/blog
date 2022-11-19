@@ -1,5 +1,5 @@
 ---
-pagination_prev: testing/unit/theory/intro
+pagination_prev: testing/unit/intro
 pagination_next: null
 authors: [unicop]
 last_update:
@@ -10,7 +10,7 @@ last_update:
 # Easy to Test - Low Effort/High Value
 
 List of unit test scenarios, which you can implement effortlessly,
-And will dramatically increase **[confidence](../pros.md#confidence)** in your code.
+And will dramatically increase **[confidence](../../foundations/pros.md#confidence)** in your code.
 
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';

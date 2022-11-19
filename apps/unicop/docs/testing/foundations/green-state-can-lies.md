@@ -1,6 +1,6 @@
-# Verify Test Code ✅
+# Green-State Can Lies 🤥
 
-This short article, is about the importance of doubt and double verification.
+This short article is discussing the importance of doubt your own tests and double verify them.
 
 Unit tests are tricky, we write them to increase [confidence](./pros.md#confidence) the product quality and stability.
 But because we are because humans who tend to do unexpected errors. It sometimes leads to over-confidence, that can lead to mistakes and product bugs.
@@ -35,9 +35,6 @@ This technique verifies if your expectation has no relation to the production co
 🔴 state = what you are expecting
 🟢 state = means the test has an issue.
 
-<!-- Production code is what we want to test, so when having a doubt in the reliability of a test,
-Comment the production-code case the test-code aims to cover, re-run the test and find you answer. -->
-
 ### 2. Changing the Test Expected Value
 
 Change the expected value of your test, re-run the test.
@@ -53,3 +50,5 @@ As I mentioned earlier, as human-beings, we do mistakes.
 If you have other expectations from yourself, the history says that the odds are against you.
 
 Always doubt yourself, your team, your colleges, and so on (and look together for what is true).
+
+## See also

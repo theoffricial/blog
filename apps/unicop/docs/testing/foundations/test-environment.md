@@ -1,4 +1,4 @@
-# Code Environment Terms 🧫
+# Code Environment Terms 🏷️
 
 ## What an Environment is
 

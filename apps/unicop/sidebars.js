@@ -39,6 +39,7 @@ const sidebars = {
             id: 'js-es/foundations/intro', 
           },
           items: [
+            { type: 'doc', id: 'js-es/foundations/effort-value-and-productivity', label: 'Effort, Value, and Productivity 🏷' },
             { type: 'doc', id: 'js-es/foundations/compiler', label: 'Compiler 🏷' },
             { type: 'doc', id: 'js-es/foundations/transpiler', label: 'Transpiler 🏷' },
             { type: 'doc', id: 'js-es/foundations/interpreter', label: 'Interpreter 🏷' },
@@ -217,45 +218,45 @@ const sidebars = {
             {
               type: 'category',
               label: 'Theory 🧭',
-              link: { type: 'doc', id: 'testing/unit/theory/intro' },
+              link: { type: 'doc', id: 'testing/unit/intro' },
               items: [
                 {
-                  id: 'testing/unit/theory/pros',
+                  id: 'testing/foundations/pros',
                   type: 'doc',
                   label: 'Pros 👍'
                 },
                 {
-                  id: 'testing/unit/theory/cons',
+                  id: 'testing/foundations/cons',
                   type: 'doc',
                   label: 'Cons 👎'
                 },
                 {
-                  id: 'testing/unit/theory/production-code-to-test-code-ratio',
+                  id: 'testing/foundations/production-code-to-test-code-ratio',
                   type: 'doc',
                   label: 'Production/Test Code Ratio ☯'
                 },
                 {
-                  id: 'testing/unit/theory/verify-test-code',
+                  id: 'testing/foundations/green-state-can-lies',
                   type: 'doc',
-                  label: 'Verify Test Code ✅'
+                  label: 'Green-State Can Lies 🤥'
                 },
                 {
                   type: 'category',
                   label: 'Easy-to-Test Cases 🧪',
-                  link: { type: 'doc', id: 'testing/unit/theory/easy-to-test-scenarios/intro' },
+                  link: { type: 'doc', id: 'testing/unit/easy-to-test-scenarios/intro' },
                   items: [
                     {
-                      id: 'testing/unit/theory/easy-to-test-scenarios/the-entry-module',
+                      id: 'testing/unit/easy-to-test-scenarios/the-entry-module',
                       type: 'doc',
                       label: 'The Entry Module 🏷'
                     },
                     {
-                      id: 'testing/unit/theory/easy-to-test-scenarios/data-transform',
+                      id: 'testing/unit/easy-to-test-scenarios/data-transform',
                       type: 'doc',
                       label: 'Data Transform 🏷'
                     },
                     {
-                      id: 'testing/unit/theory/easy-to-test-scenarios/conditional-validation',
+                      id: 'testing/unit/easy-to-test-scenarios/conditional-validation',
                       type: 'doc',
                       label: 'Conditional Validation 🏷'
                     }
