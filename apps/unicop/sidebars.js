@@ -20,6 +20,30 @@ const sidebars = {
   typescriptSidebar: [
     {
       type: 'category',
+          label: 'Software Foundations 🏗',
+          collapsed: true,
+          collapsible: true,
+          link: {
+            type: 'doc',
+            id: 'foundations/intro', 
+          },
+          items: [
+            { type: 'doc', id: 'foundations/effort-value-and-productivity', label: 'Effort, Value, and Productivity 🏷' },
+            { type: 'doc', id: 'foundations/compiler', label: 'Compiler 🏷' },
+            { type: 'doc', id: 'foundations/transpiler', label: 'Transpiler 🏷' },
+            { type: 'doc', id: 'foundations/interpreter', label: 'Interpreter 🏷' },
+            { type: 'doc', id: 'foundations/run-time', label: 'Run-time 🏷' },
+            { type: 'doc', id: 'foundations/compile-time', label: 'Compile-time 🏷' },
+            { type: 'doc', id: 'foundations/jit-compilation', label: 'just-in-time compilation 🏷' },
+            { type: 'doc', id: 'foundations/type-checking', label: 'Type Checking 🏷' },
+            { type: 'doc', id: 'foundations/environment', label: 'Environment 🏷' },
+            { type: 'doc', id: 'foundations/build', label: 'Build 🏷' },
+            { type: 'doc', id: 'foundations/naive-build', label: 'Naive Build 🏷' },
+            { type: 'doc', id: 'foundations/incremental-build', label: 'Incremental Build 🏷' },
+          ]
+    },
+    {
+      type: 'category',
       label: 'JS eco-system',
       items: [
         {
@@ -39,18 +63,7 @@ const sidebars = {
             id: 'js-es/foundations/intro', 
           },
           items: [
-            { type: 'doc', id: 'js-es/foundations/effort-value-and-productivity', label: 'Effort, Value, and Productivity 🏷' },
-            { type: 'doc', id: 'js-es/foundations/compiler', label: 'Compiler 🏷' },
-            { type: 'doc', id: 'js-es/foundations/transpiler', label: 'Transpiler 🏷' },
-            { type: 'doc', id: 'js-es/foundations/interpreter', label: 'Interpreter 🏷' },
-            { type: 'doc', id: 'js-es/foundations/run-time', label: 'Run-time 🏷' },
-            { type: 'doc', id: 'js-es/foundations/compile-time', label: 'Compile-time 🏷' },
-            { type: 'doc', id: 'js-es/foundations/jit-compilation', label: 'just-in-time compilation 🏷' },
-            { type: 'doc', id: 'js-es/foundations/type-checking', label: 'Type Checking 🏷' },
             { type: 'doc', id: 'js-es/foundations/js-engine', label: 'JavaScript Engine 🏷' },
-            { type: 'doc', id: 'js-es/foundations/environment', label: 'Environment 🏷' },
-            { type: 'doc', id: 'js-es/foundations/naive-build', label: 'Naive Build 🏷' },
-            { type: 'doc', id: 'js-es/foundations/incremental-build', label: 'Incremental Build 🏷' },
             { 
               type: 'category', label: 'Modules 🧩', items: [
                 { type: 'doc', id: 'js-es/foundations/modules/summary', label: 'Module Systems Summary' },
@@ -251,9 +264,9 @@ const sidebars = {
                       label: 'The Entry Module 🏷'
                     },
                     {
-                      id: 'testing/unit/easy-to-test-scenarios/data-transform',
+                      id: 'testing/unit/easy-to-test-scenarios/data-manipulation',
                       type: 'doc',
-                      label: 'Data Transform 🏷'
+                      label: 'Data Manipulation 🏷'
                     },
                     {
                       id: 'testing/unit/easy-to-test-scenarios/conditional-validation',

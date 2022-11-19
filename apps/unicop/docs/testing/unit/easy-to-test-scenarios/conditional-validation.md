@@ -1,130 +1,127 @@
 # Conditional Validation 🏷️
 
-The conditional validation, is a common case where after the authorization layer and the schema validation layer, for some reason we still need to do more checks if the user is authorized or the user data is valid,
-When this case happens a common pattern will be to add a condition (usually an `if` statement), if it is valid nothing happens and if condition hit, an error is being thrown.
+Conditional validation has seen often, especially on a piece of code many unique, specific business cases required.
 
-## Where you should use it
+I'm talking about pure logic conditional blocks, nor cases such user identity authentication/authorization or a data entity needs existing verification.
 
-- After authorization layer and schema validation layer, but before communicating any data/event store.
-- After fetching data from data store and the response isn't as expected.
-
-## Example
-
-For the example I'm using `jest` but it should be relevant for any testing framework in any language.
-
-I took as an example a simple API endpoint handler in NodeJS that:
-
-1. execute authorization layer
-1. execute schema validation layer
-1. Check `arrayOfNumbers` input is not an empty array
-1. Get records
-1. Check if any records found
-1. returns records
+Let see an example:
 
 ```javascript
 // my-rest-api-entry.ts
 async function (req, res) {
 
-    await throwIfNotAuthorizedLayer();
-    await throwIfDataNotMatchSchemaValidationTypes();
+    await authorizationLayer();
+    await requestBodySchemaValidationLayer();
 
-    const { arrayOfNumbers } = req.body
+    const { salaries } = req.body
 
+    const average = getAverage(salaries);
 
-
-    if (arrayOfNumbers.length === 0) {
-        throw new BadRequestError('array must with at least one number')
+    if (average < 42) {
+        throw new BadRequestError('Salaries average must be higher than 42.')
     }
 
     const myImaginaryDataStoreConnection = await getConnection();
 
     // find greater than average
-    const records = await myImaginaryDataStoreConnection.get({ price: { matchOneOf: arrayOfNumbers } })
+    const records = await myImaginaryDataStoreConnection.get({ salary: { greaterThan: average } })
 
     if (records === undefined) {
-        throw new NotFoundError('Records not found')
+        throw new NotFoundError('Salaries not found.');
     }
 
     return records;
 }
 ```
 
-Now as I suggested I will separate the conditional validations logics and test them directly.
+In this very common endpoint process logic, you can see 2 pure logic conditional validations.
 
-For the example I'm doing it "quick and dirty" but in real life, you can actually create new files.
+I suggest that separating them into functions, helps avoiding to start mocking authorization layer, schema validation layer, and the data store connection, which has low up-to no [value](../../../js-es/foundations/effort-value-and-productivity.md#value).
 
 ```javascript
-// my-rest-api-entry.ts
-async function (req, res) {
-
-    await throwIfNotAuthorizedLayer();
-    await throwIfDataNotMatchSchemaValidationTypes();
-
-    const { arrayOfNumbers } = req.body
-
-    throwIfArrayIsEmpty(arrayOfNumbers)
-
-    const myImaginaryDataStoreConnection = await getConnection();
-
-    // find greater than average
-    const records = await myImaginaryDataStoreConnection.get({ id: { matchOneOf: arrayOfNumbers } })
-
-    throwIfNoRecordsFound(records)
-
-    return records;
-}
-
-function throwIfArrayIsEmpty(arrayOfNumbers: number[]) {
-    if (arrayOfNumbers.length === 0) {
-        throw new BadRequestError('array must with at least one number')
+// my-rest-api-entry.helpers.ts
+function throwWhenAverageIsLowerThan42(average: number) {
+    if (average < 42) {
+        throw new BadRequestError('Salaries average must be higher than 42.');
     }
 }
 
-function throwIfNoRecordsFound(records: unknown[] | undefined) {
-    if (records === undefined) {
-        throw new NotFoundError('Records not found')
+function throwWhenSalariesNotFound(records: unknown[] | undefined) {
+    if (Array.isArray(records) === false || records.length < 1) {
+        throw new NotFoundError('Records not found.')
     }
 }
-```
 
-Now it is easy to test `throwIfArrayIsEmpty`, and `throwIfNoRecordsFound` logics.
-
-```javascript
-// my-rest-api-entry.test.ts
+// my-rest-api-entry.helpers.test.ts
 import {
-  throwIfArrayIsEmpty,
-  throwIfNoRecordsFound,
+  throwWhenAverageIsLowerThan42,
+  throwWhenSalariesNotFound,
 } from '../my-rest-api-entry';
 
 describe('my-rest-api-entry tests', () => {
-  describe(throwIfArrayIsEmpty.name, () => {
-    it('should throw when array is empty', () => {
-      expect(() => throwIfArrayIsEmpty([])).toThrow(
-        new BadRequestError('array must with at least one number')
+  describe(throwWhenAverageIsLowerThan42.name, () => {
+    it('should throw when average is lower than 42', () => {
+      expect(() => throwWhenAverageIsLowerThan42(30)).toThrow(
+        new BadRequestError('Salaries average must be higher than 42.')
       );
     });
-    it('should do nothing when array has values', () => {
-      // pay attention to the 'not' getter
-      expect(() => throwIfArrayIsEmpty([1, 2])).not.toThrow(
-        new BadRequestError('array must with at least one number')
-      );
+    it('should do nothing when average is 42 exactly', () => {
+      // PAY ATTENTION that I'm using "not"
+      expect(() => throwWhenAverageIsLowerThan42(50)).not.toThrow();
+    });
+    it('should do nothing when average is higher than 42', () => {
+      // PAY ATTENTION that I'm using "not"
+      expect(() => throwWhenAverageIsLowerThan42(50)).not.toThrow();
     });
   });
 
-  describe(throwIfNoRecordsFound.name, () => {
-    it('should throw when no records found', () => {
-      expect(() => throwIfNoRecordsFound([])).toThrow(
-        new NotFoundError('Records not found')
+  describe(throwWhenSalariesNotFound.name, () => {
+    it('should throw when no records found and data store returned undefined', () => {
+      expect(() => throwWhenSalariesNotFound(undefined)).toThrow(
+        new NotFoundError('Records not found.')
       );
     });
-    it('should do nothing when records found', () => {
-      // pay attention to the 'not' getter
-      expect(() => throwIfNoRecordsFound([{ myProp: 'myValue' }])).not.toThrow(
-        new NotFoundError('Records not found')
+
+    it('should throw when no records found and data store returned an empty array', () => {
+      expect(() => throwWhenSalariesNotFound([])).toThrow(
+        new NotFoundError('Records not found.')
       );
+    });
+
+    it('should do nothing when records found', () => {
+      // PAY ATTENTION that I'm using "not"
+      expect(() => throwWhenSalariesNotFound([{ salary: 57 }])).not.toThrow();
     });
   });
 });
+
+// my-rest-api-entry.ts
+async function (req, res) {
+
+    await authorizationLayer();
+    await requestBodySchemaValidationLayer();
+
+    const { salaries } = req.body
+
+    const average = getAverage(salaries);
+
+    throwWhenAverageIsLowerThan42(average);
+
+    const myImaginaryDataStoreConnection = await getConnection();
+
+    // find greater than average
+    const records = await myImaginaryDataStoreConnection.get({ salary: { greaterThan: average } })
+
+    throwWhenSalariesNotFound(records);
+
+    return records;
+}
 ```
 
-No mocks, very straightforward, low effort and high value.
+:::note
+
+If you wish to become better at finding test cases to check, or just to review this subject one more time, check out my article about [What you Should Test Against](../../foundations/test-against.md).
+
+:::
+
+## See also

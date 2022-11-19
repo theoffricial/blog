@@ -10,13 +10,13 @@ If a language specification requires its typing rules strongly (i.e., more or le
 
 Static type checking is the process of verifying the type safety of a program based on analysis of a program's text (source code).
 
-For instance, the [TypeScript compiler](../typescript/foundations/ts-compiler.md) includes static type-checking.
+For instance, the [TypeScript compiler](../js-es/typescript/foundations/ts-compiler.md) includes static type-checking.
 
 ## Dynamic type-checking
 
 Dynamic type checking is the process of verifying the type safety of a program at runtime.
 
-For instance, the [JavaScript engine](./js-engine.md) has dynamic type-checking, as a fact, the `TypeError` exists.
+For instance, the [JavaScript engine](../js-es/foundations/js-engine.md) has dynamic type-checking, as a fact, the `TypeError` exists.
 
 ## Type-checking cost
 
@@ -24,14 +24,17 @@ type-checking consider as an expensive action, that's why static type-checking i
 
 ## See also
 
-### Foundations 🏗️
+### Software Development Foundations 🏗️
 
-- [JavaScript Engine 🏷️](./js-engine.md)
+- [JavaScript Engine 🏷️](../js-es/foundations/js-engine.md)
+
+### JavaScript ecosystem Foundations 🏗️
+
 - [Incremental Build 🏷️](./incremental-build.md)
 
-### TypeScript 🏗️
+### TypeScript Foundations 🏗️
 
-- [TypeScript > Compiler](../typescript/foundations/ts-compiler.md)
+- [TypeScript Compiler](../js-es/typescript/foundations/ts-compiler.md)
 
 <!-- Types and type-checking is the ability of a programming languages to give quick feedback of bugs about nonsense variables assignments so we can fix them quickly, and its purpose is to help us, the developers to develop quicker.
 <!--

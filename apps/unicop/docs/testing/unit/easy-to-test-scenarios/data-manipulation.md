@@ -1,6 +1,6 @@
 # Data Manipulation 🏷️
 
-In code, when a data set needs to be manipulated from one form to another, it can be called data manipulation.
+Whenever a data set needs to be manipulated from one form to another, it can be called data manipulation.
 
 Data manipulation cases are very common, Often it required when working with data stores, in which the following cases often occur:
 
@@ -8,8 +8,6 @@ Data manipulation cases are very common, Often it required when working with dat
 1. When receiving an input in a specific form, and manipulation is needed to query the data store.
 
 Both cases are simple to write unit test for.
-
-<!-- This case is classic for unit tests, it saves you from regressions, increase your confidence in code changes (see explained unit tests **[pros 👍](../../foundations/pros.md)**). -->
 
 ## Testing Data Transform In practice
 
