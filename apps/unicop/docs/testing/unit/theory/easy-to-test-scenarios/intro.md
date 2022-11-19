@@ -7,9 +7,10 @@ last_update:
   author: Ofri Peretz
 ---
 
-# Unit Tests - Theory - Low-Effort/High-Value Cases 🤩
+# Easy to Test - Low Effort/High Value
 
-Common cases for unit tests that takes low effort to implement and has high value, that will raise you and your team **[confidence](../pros.md#confidence)**.
+List of unit test scenarios, which you can implement effortlessly,
+And will dramatically increase **[confidence](../pros.md#confidence)** in your code.
 
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';

@@ -1,4 +1,4 @@
-# Unit Tests - Theory - Low Effort/High Value Cases - The Entry Module 🧭
+# The Entry Module 🏷️
 
 The entry module case, is when you have a module that highly imported, and breaking changes in it has a huge effect, on your system or your clients/users etc. this is what I called "The entry module" case.
 

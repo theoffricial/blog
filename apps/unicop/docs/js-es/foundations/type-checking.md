@@ -1,9 +1,43 @@
-# Type-Checking
+# Type-Checking 🏷
 
-Types and type-checking is the ability of a programming languages to give quick feedback of bugs about nonsense variables assignments so we can fix them quickly, and its purpose is to help us, the developers to develop quicker.
+The process of verifying and enforcing the constraints of types, called type-checking.
 
+The type-checking occurs at compile-time, also called static type-checking, or at run-time, also called dynamic type-checking.
+
+If a language specification requires its typing rules strongly (i.e., more or less allowing only those automatic type conversions that do not lose information), one can refer to the process as strongly typed, if not, as weakly typed. The terms are not usually used in a strict sense.
+
+## Static type-checking
+
+Static type checking is the process of verifying the type safety of a program based on analysis of a program's text (source code).
+
+For instance, the [TypeScript compiler](../typescript/foundations/ts-compiler.md) includes static type-checking.
+
+## Dynamic type-checking
+
+Dynamic type checking is the process of verifying the type safety of a program at runtime.
+
+For instance, the [JavaScript engine](./js-engine.md) has dynamic type-checking, as a fact, the `TypeError` exists.
+
+## Type-checking cost
+
+type-checking consider as an expensive action, that's why static type-checking is more popular today, to reduce checks from run-time, and dynamically type checking only what can't be check statically.
+
+## See also
+
+### Foundations 🏗️
+
+- [JavaScript Engine 🏷️](./js-engine.md)
+- [Incremental Build 🏷️](./incremental-build.md)
+
+### TypeScript 🏗️
+
+- [TypeScript > Compiler](../typescript/foundations/ts-compiler.md)
+
+<!-- Types and type-checking is the ability of a programming languages to give quick feedback of bugs about nonsense variables assignments so we can fix them quickly, and its purpose is to help us, the developers to develop quicker.
+<!--
 There are 2 types of languages type-checking
 options:
+
 
 - Dynamically typed languages
 - Statically-typed languages
@@ -29,9 +63,9 @@ Although they can sometimes be compiled, they need to cut many corners for reaso
 
 So they often try to coerce types to prevent exceptions, even when it may be undesirable. In python, it isn't uncommon to discover that a simple division by whole integers means that my user output is suddenly full of '2.0' because I didn't explicitly cast back into `int`.
 
-That is why it is common for dynamically-typed languages to be interpreted, and not compiled.
+That is why it is common for dynamically-typed languages to be interpreted, and not compiled. --> -->
 
-## Statically-typed Languages
+<!-- ## Statically-typed Languages
 
 _Example languages_: TypeScript, C#, Java
 
@@ -39,6 +73,6 @@ When languages is being designed for a [compiler](./compiler.md), the compiler h
 
 It make sense, that the less you need to be responsible at runtime, the faster code will execute.
 
-That's why it is very common for statically-typed languages to be compiled.
+That's why it is very common for statically-typed languages to be compiled. -->
 
 <!-- https://stackoverflow.com/a/41624354/11554280 -->

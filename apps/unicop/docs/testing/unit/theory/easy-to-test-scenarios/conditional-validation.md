@@ -1,4 +1,4 @@
-# Unit Tests - Theory - Low Effort/High Value Cases - Conditional Validation 🧭
+# Conditional Validation 🏷️
 
 The conditional validation, is a common case where after the authorization layer and the schema validation layer, for some reason we still need to do more checks if the user is authorized or the user data is valid,
 When this case happens a common pattern will be to add a condition (usually an `if` statement), if it is valid nothing happens and if condition hit, an error is being thrown.

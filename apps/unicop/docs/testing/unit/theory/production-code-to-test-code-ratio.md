@@ -1,4 +1,4 @@
-# Unit Tests - Theory - Production/Test Code Ratio ☯
+# Production/Test Code Ratio 🧭 ☯
 
 ## Basic terms
 
@@ -33,6 +33,6 @@ So your total code will be
 100 + 100-400 = (200 + 0-300) lines of code
 :::
 
-## Credits 🎖️
+<!-- ## Credits 🎖️
 
-Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 4: Costs of Testing - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design.
+Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 4: Costs of Testing - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design. -->

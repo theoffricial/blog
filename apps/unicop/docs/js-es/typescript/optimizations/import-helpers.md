@@ -1,6 +1,4 @@
 ---
-# slug: import-helpers-with-tslib
-title: TypeScript - Optimizations - Import Helpers 🧿
 pagination_prev: js-es/typescript/optimizations/intro
 pagination_next: null
 last_update:
@@ -9,6 +7,8 @@ last_update:
 authors: [unicop]
 tags: [TypeScript, Optimization, Unknown, Advance]
 ---
+
+# Import Helpers 🧿
 
 TypeScript takes source-code and emits it into output files that are executable in a JavaScript environment, so as the output will be mor efficient, it should be running faster.
 

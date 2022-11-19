@@ -1,12 +1,11 @@
 # `emit`
 
-Emit is the action of the [TypeScript compiler](./ts-compiler.md) to create output files of all kinds (`.js`, `.d.ts`, `.js.map`, `.d.ts.map`)
+In TypeScript, the action of the TypeScript compiler to output files like JavaScript source code, source-maps or declarations. Called emit.
 
-[tsc](./ts-compiler.md) emits source-code into output after [type-checking](./type-checking.md).
+The TypeScript compiler emits source code after [type-checking](./type-checking.md)
 
-There are several configuration options that affect the behavior of emitting,
+## Compiler Interoperate
 
-A popular option is [noEmit](https://www.typescriptlang.org/tsconfig/#noEmit), that when configure TypeScript won't emit any output,
-This lets TypeScript to be interoperability with other tools, for example to make room for other tools like Babel, or swc to handle converting the source-code.
+The TypeScript compiler, enables customizing the emit action to allow interoperate with other build tools like `Babel`, or `swc` to handle converting the TypeScript file to a file which can run inside a JavaScript environment (`.js`, `.d.ts`, `.js.map`, `.d.ts.map`).
 
-Without emitting [tsc](./ts-compiler.md) can be used as a tool for providing editor integration, and a source-code type-checker only, for instance when working with bundler such as webpack.
+TypeScript is also a tool for providing editor integration, and as a source code [type-checker](./type-checking.md).

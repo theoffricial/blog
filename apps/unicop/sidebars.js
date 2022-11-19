@@ -31,7 +31,7 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Foundations 🪢',
+          label: 'Foundations 🏗',
           collapsed: true,
           collapsible: true,
           link: {
@@ -39,21 +39,27 @@ const sidebars = {
             id: 'js-es/foundations/intro', 
           },
           items: [
-            { type: 'doc', id: 'js-es/foundations/compiler', label: 'Compiler Definition 🏷' },
-            { type: 'doc', id: 'js-es/foundations/transpiler', label: 'Transpiler Definition 🏷' },
-            { type: 'doc', id: 'js-es/foundations/environment', label: 'Environment Definition 🏷' },
-            { type: 'doc', id: 'js-es/foundations/naive-build', label: 'Naive Build Definition 🏷' },
-            { type: 'doc', id: 'js-es/foundations/incremental-build', label: 'Incremental Build Definition 🏷' },
+            { type: 'doc', id: 'js-es/foundations/compiler', label: 'Compiler 🏷' },
+            { type: 'doc', id: 'js-es/foundations/transpiler', label: 'Transpiler 🏷' },
+            { type: 'doc', id: 'js-es/foundations/interpreter', label: 'Interpreter 🏷' },
+            { type: 'doc', id: 'js-es/foundations/run-time', label: 'Run-time 🏷' },
+            { type: 'doc', id: 'js-es/foundations/compile-time', label: 'Compile-time 🏷' },
+            { type: 'doc', id: 'js-es/foundations/jit-compilation', label: 'just-in-time compilation 🏷' },
+            { type: 'doc', id: 'js-es/foundations/type-checking', label: 'Type Checking 🏷' },
+            { type: 'doc', id: 'js-es/foundations/js-engine', label: 'JavaScript Engine 🏷' },
+            { type: 'doc', id: 'js-es/foundations/environment', label: 'Environment 🏷' },
+            { type: 'doc', id: 'js-es/foundations/naive-build', label: 'Naive Build 🏷' },
+            { type: 'doc', id: 'js-es/foundations/incremental-build', label: 'Incremental Build 🏷' },
             { 
               type: 'category', label: 'Modules 🧩', items: [
                 { type: 'doc', id: 'js-es/foundations/modules/summary', label: 'Module Systems Summary' },
                 { type: 'doc', id: 'js-es/foundations/modules/modules-compatibility', label: 'Environments Modules Compatibility 📊' },
-                { type: 'doc', id: 'js-es/foundations/modules/esm', label: 'ES Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/foundations/modules/umd', label: 'UMD Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/foundations/modules/amd', label: 'AMD Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/foundations/modules/commonjs', label: 'CommonJS Module System Definition 🏷' },
-                { type: 'doc', id: 'js-es/foundations/modules/raw', label: 'Raw <script> Definition 🏷' },
-                { type: 'doc', id: 'js-es/foundations/modules/modules-bundler', label: 'Modules Bundler Definition 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/esm', label: 'ES Module System 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/umd', label: 'UMD Module System 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/amd', label: 'AMD Module System 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/commonjs', label: 'CommonJS Module System 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/raw', label: 'Raw <script> 🏷' },
+                { type: 'doc', id: 'js-es/foundations/modules/modules-bundler', label: 'Modules Bundler 🏷' },
                 { type: 'doc', id: 'js-es/foundations/modules/nodejs-modules-support', label: 'Node.js - Modules Support 🏷' }
               ],  
             }
@@ -61,7 +67,7 @@ const sidebars = {
         },
         {
           type: 'category', 
-          label: 'TypeScript', 
+          label: 'TypeScript 🔵', 
           link: {
             id: 'js-es/typescript/intro',
             type: 'doc',
@@ -69,16 +75,25 @@ const sidebars = {
           items: [
             {
               type: 'category',
-              label: 'Optimizations ⚡️',
+              label: 'Foundations 🔵🏗️',
+              items: [
+                { type: 'doc', id: 'js-es/typescript/foundations/emit', label: 'Emit 🔵🏷' },
+                { type: 'doc', id: 'js-es/typescript/foundations/type-checking', label: 'Type Checking 🔵🏷' },
+                { type: 'doc', id: 'js-es/typescript/foundations/ts-compiler', label: 'TypeScript Compiler 🔵🏷' },
+              ]
+            },
+            {
+              type: 'category',
+              label: 'Optimizations 🔵⚡️',
               link: { 
                 id: 'js-es/typescript/optimizations/intro',
                 type: 'doc',
               },
               items: [
                 { type: 'doc', id: 'js-es/typescript/optimizations/incremental-build', label: 'TS Incremental build 🧱' },
-                { type: 'doc', id: 'js-es/typescript/optimizations/project-references', label: 'Project References (Composite Projects)' },
-                { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/intro', label: 'Project References 🧬' },
-                { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers', label: 'Import Helpers 🧿' },
+                { type: 'doc', id: 'js-es/typescript/optimizations/project-references', label: 'Project References (Composite Projects) 🌀' },
+                // { type: 'doc', id: 'js-es/typescript/optimizations/project-references-explained/intro', label: 'Project References 🧬' },
+                // { type: 'doc', id: 'js-es/typescript/optimizations/import-helpers', label: 'Import Helpers 🧿' },
               ]
             },
           ] 
@@ -201,7 +216,7 @@ const sidebars = {
           items: [
             {
               type: 'category',
-              label: 'Theory 🔭',
+              label: 'Theory 🧭',
               link: { type: 'doc', id: 'testing/unit/theory/intro' },
               items: [
                 {
@@ -226,23 +241,23 @@ const sidebars = {
                 },
                 {
                   type: 'category',
-                  label: 'Low-Effort/High-Value Cases 🤩',
-                  link: { type: 'doc', id: 'testing/unit/theory/low-effort-high-value-cases/intro' },
+                  label: 'Easy-to-Test Cases 🧪',
+                  link: { type: 'doc', id: 'testing/unit/theory/easy-to-test-scenarios/intro' },
                   items: [
                     {
-                      id: 'testing/unit/theory/low-effort-high-value-cases/the-entry-module',
+                      id: 'testing/unit/theory/easy-to-test-scenarios/the-entry-module',
                       type: 'doc',
-                      label: 'The Entry Module 🧭'
+                      label: 'The Entry Module 🏷'
                     },
                     {
-                      id: 'testing/unit/theory/low-effort-high-value-cases/data-transform',
+                      id: 'testing/unit/theory/easy-to-test-scenarios/data-transform',
                       type: 'doc',
-                      label: 'Data Transform 🧭'
+                      label: 'Data Transform 🏷'
                     },
                     {
-                      id: 'testing/unit/theory/low-effort-high-value-cases/conditional-validation',
+                      id: 'testing/unit/theory/easy-to-test-scenarios/conditional-validation',
                       type: 'doc',
-                      label: 'Conditional Validation 🧭'
+                      label: 'Conditional Validation 🏷'
                     }
                   ]
                 }

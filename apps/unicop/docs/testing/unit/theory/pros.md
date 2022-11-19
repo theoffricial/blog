@@ -1,4 +1,4 @@
-# Unit Tests - Theory - Pros 👍
+# Pros 👍
 
 ## The Nature of Applications to Get Bigger
 
@@ -36,8 +36,8 @@ This one is my opinion, but I think it make sense, because tests give confidence
 
 Over time production code that is uncovered by automated test code, is tends to become “legacy code”, And “legacy code” is hard to maintain and delays scalability.
 
-## Credits 🎖️
+<!-- ## Credits 🎖️
 
-- Yuto - **[How to determine test values for unit testing](https://www.technicalfeeder.com/2022/04/how-to-determine-test-values-for-unit/)** - Good article explain also the pros of unit tests.
+- Yuto - **[How to determine test values for unit testing](https://www.technicalfeeder.com/2022/04/how-to-determine-test-values-for-unit/)** - Good article explain also the pros of unit tests. -->
 
-- Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 1: TDD and Confidence - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design.
+<!-- - Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 1: TDD and Confidence - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design. -->

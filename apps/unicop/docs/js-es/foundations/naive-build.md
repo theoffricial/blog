@@ -1,4 +1,4 @@
-# Project Naive Build
+# Naive Build 🏷
 
 Naive Build is when a project build command is "just" building the project without saving information that can assist building the project faster on the next time running the build command.
 
@@ -8,11 +8,12 @@ Today, most modern build tools, e.g. [transpilers](./transpiler.md), [compilers]
 
 ## See also
 
-### JS ecosystem Foundations 🏗️
+### Foundations 🏗️
 
-- [Compiler](./compiler.md)
-- [Modules Bundler](./modules/modules-bundler.md)
-- [Project Incremental Build](./incremental-build.md)
+- [Build 🏷️](./build.md)
+- [Compiler 🏷️](./compiler.md)
+- [Modules Bundler 🏷️](./modules/modules-bundler.md)
+- [Incremental Build 🏷️](./incremental-build.md)
 - [Transpiler](./transpiler.md)
 
 ### TypeScript

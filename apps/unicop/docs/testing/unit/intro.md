@@ -7,14 +7,6 @@ last_update:
 
 # What you can find here 🧐
 
-<!-- import Author from '@theme/BlogPostItem/Header/Author';
-
-<Author author={{email: 'its.op.the.unicorn@gmail.com',title: 'Software Developer @ Snappy',name: 'Ofri Peretz',url: 'https://unicop.art',imageURL: 'https://github.com/unicop.png'}} className="hero\_\_subtitle"></Author>
-
---- -->
-
-<!-- ![x](/img/typescript/ts-logo-128.svg) -->
-
 Personally I feel, that the unit tests and testing in general is discussed a lot but not well organized,
 Here I tried to give answers to all the theory questions, tips, and also how jest in which I use on a daily basis really work.
 

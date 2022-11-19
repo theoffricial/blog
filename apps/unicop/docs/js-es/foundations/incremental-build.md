@@ -1,4 +1,4 @@
-# Project Incremental Build 🧩
+# Incremental Build 🏷
 
 Project incremental build refers to build tools that capable to look at a project as a set of components that compose it for the build purposes, and during this break down to log this map as information to use it for future builds, so when a `build` command would be requested again, the build tool will read the logged data from previous build, and figure out what has changed and re-build only those files/modules/components which defined as affected from changes.
 

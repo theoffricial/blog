@@ -7,9 +7,9 @@ last_update:
   author: Ofri Peretz
 ---
 
-# Unit Tests Theory 🔭
+# Unit Tests Theory 🧭
 
-All fundamentals that can help you understand the theory of unit tests.
+Solid background to understand what unit test is, and its value.
 
 import DocCardList from '@theme/DocCardList';
 import { useCurrentSidebarCategory } from '@docusaurus/theme-common';

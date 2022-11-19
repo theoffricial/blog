@@ -5,13 +5,16 @@ last_update:
   date: 03/11/2022
   author: Ofri Peretz
 authors: [unicop]
-tags: [typescript, optimization, build, everything]
+tags: [typescript, optimization, build, sophisticated_builds]
 ---
 
 # Incremental Build 🧱
 
-Incremental build allows [tsc](../foundations/ts-compiler.md) to leverage the result of previous build to build faster next time.
-It does it by saving information regarding the dependencies within your ts-project, and according to changes understand what modules might affected from changes and re-build those modules only.
+In TypeScript (released in TypeScript 3.4), you can set the [TypeScript compiler](../foundations/ts-compiler.md) to work as [incremental build](../../foundations/incremental-build.md) tool.
+
+The incremental build, in comparison to the default configuration, enables TypeScript to analyze and save static information of the project during build run, to build faster next time, information like dependencies between modules.
+
+<!-- truncate -->
 
 <details>
   <summary>TL;DR ⚡️</summary>
@@ -24,20 +27,11 @@ It does it by saving information regarding the dependencies within your ts-proje
 <br/>
 </details>
 
-### Prerequisite Terms 🔓:
+To allow that, TypeScript supports the new [incremental](https://www.typescriptlang.org/tsconfig#incremental) option, which telling TypeScript to save information about the project graph from the last compilation to files stored on disk, which enables by creating a series of [.tsbuildinfo](https://www.typescriptlang.org/tsconfig#tsBuildInfoFile) files in the same folder as your compilation output.
 
-For this article to fully connecting the dots, you should first master:
+Those information files are not used by your JavaScript at runtime and can be safely deleted, they’re purely used to make compilations faster.
 
-- [Definition of Incremental Build](../../foundations/incremental-build.md)
-- [Definition of Naive Build](../../foundations/naive-build.md)
-
-<!-- truncate -->
-
-### Technical Prerequisite 🔓
-
-- TypeScript 3.4 or above.
-
-The `incremental` option tells TypeScript to save information about the project graph from the last compilation to files stored on disk. This creates a series of `.tsbuildinfo` files in the same folder as your compilation output. They are not used by your JavaScript at runtime and can be safely deleted. You can read more about the flag in the [3.4 release notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#faster-subsequent-builds-with-the---incremental-flag).
+See an example
 
 ```json
 // tsconfig.json
@@ -50,9 +44,13 @@ The `incremental` option tells TypeScript to save information about the project 
 }
 ```
 
-By default with these settings, when we run tsc, TypeScript will look for a file called `.tsbuildinfo` in the output directory (`./lib`). If `./lib/.tsbuildinfo` doesn’t exist, it’ll be generated. But if it does, [tsc](../foundations/ts-compiler.md) will try to use that file to incrementally `type-check` and update our output files (emit).
+By default with these settings, when running the [TypeScript compiler](../foundations/ts-compiler.md), it looks for the `.tsbuildinfo` information files, which expect them to located at the output directory (`./lib`).
 
-These `.tsbuildinfo` files can be safely deleted and don’t have any impact on our code at runtime - they’re purely used to make compilations faster. We can also name them anything that we want, and place them anywhere we want using the `tsBuildInfoFile` option.
+When `./lib/.tsbuildinfo` doesn’t exist, it’ll be generated. But if it does, [TypeScript compiler](../foundations/ts-compiler.md) tries to use it for incrementally [type-checking](../foundations/type-checking.md) and [emit](../foundations/emit.md) our output files.
+
+---
+
+The `.tsbuildinfo` file location is customable with the `tsBuildInfoFile` option.
 
 ```json
 // front-end.tsconfig.json
@@ -66,14 +64,6 @@ These `.tsbuildinfo` files can be safely deleted and don’t have any impact on 
 }
 ```
 
-<!-- ## The Solution 🛠 - Your implementation guide
-
-Set TypeScript to work with incremental build tells TypeScript to change its default behavior and save information about last compilation.
-
-Then on the next time TypeScript compiler is being invoked, it will use that information to detect the least costly way to `type-check` and `emit` <sub><sup>[2]</sup></sub> changes to your project.
-
-<sub><sup>[2] - TypeScript in comparison to other transpilers (e.g. <a href="https://babeljs.io/">Babel</a>) which only emit project, also type-check the project.</sup></sub> -->
-
 ## Quote 🦜
 
 > The `--incremental` flag allows TypeScript to save state from the last compilation to a `.tsbuildinfo` file. This file is used to figure out the smallest set of files that might to be re-checked/re-emitted since it last ran.
@@ -82,14 +72,23 @@ Then on the next time TypeScript compiler is being invoked, it will use that inf
 
 ## See also
 
-### TypeScript
+### Foundations 🏗️
+
+- [Build Tool 🏷️](../../foundations/build.md#build-tools)
+- [Incremental Build 🏷️](../../foundations/incremental-build.md)
+- [Naive Build 🏷️](../../foundations/naive-build.md)
+- [Type checking 🏷️](../../foundations/type-checking.md)
+- [Naive Build 🏷️](../../foundations/naive-build.md)
+
+### TypeScript Foundations 🔵🏗️
+
+- [Type checking 🔵🏷️](../foundations/type-checking.md)
+- [emit 🔵🏷️](../foundations/emit.md)
+- [TypeScript compiler, or tsc 🔵🏷️](../foundations/ts-compiler.md)
+
+### TypeScript Foundations 🔵
 
 - [Project References](./project-references-explained/intro.md)
-
-### JavaScript ecosystem Foundations 🏗️
-
-- [Incremental Build](../../foundations/incremental-build.md)
-- [Naive Build](../../foundations/naive-build.md)
 
 [ts-perf-wiki-incremental-projects]: https://github.com/microsoft/TypeScript/wiki/Performance#incremental-project-emit
 [ts-3.4-release-note-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html
