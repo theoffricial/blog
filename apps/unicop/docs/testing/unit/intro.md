@@ -5,9 +5,10 @@ last_update:
   author: Ofri Peretz
 ---
 
-# What you can find here 🧐
+# What Is In Here 🚀
 
-Personally I feel, that the unit tests and testing in general is discussed a lot but not well organized,
+Personally I feel for a long time, that people discuss a lot about testing in general, and unit tests specifically, but almost never well organized, understood or done.
+
 Here I tried to give answers to all the theory questions, tips, and also how jest in which I use on a daily basis really work.
 
 Testing is a huge topic, and frameworks like `jest` aren't just "another library" it is a whole new world.

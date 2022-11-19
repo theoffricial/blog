@@ -1,10 +1,23 @@
-Unit Tests
+Things remained before release 🚀
 
-- Classification to cases
-- The concept of "FTU"
-- What are the key values of unit Tests
+- Overview all intros
+- Overview Jest Architecture
+- Add "See also" to all articles
+
+
+- Pipelines
+ - lint
+ - unit tests
+ - monitoring
+ - Monitoring OKRs
+ - Monitoring Business cases
+ - Migrate from CRA to Vite
+
+- Protocols
+    - GraphQL
+    - WebSockets
+
 - What you should leave for other types of tests - component/integration/api/e2e tests
-- The tests trade-off
 - How to work while write tests
     -  How to work with jest and vscode specifically
 - Unit Testing and CI

@@ -1,4 +1,4 @@
-# Environments 🧫
+# How-To-Use Jest Environments 🧫
 
 Before you continue, please make sure you are familiar with the following terms:
 

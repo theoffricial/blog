@@ -249,9 +249,9 @@ const sidebars = {
                   label: 'Production/Test Code Ratio ☯'
                 },
                 {
-                  id: 'testing/foundations/green-state-can-lies',
+                  id: 'testing/foundations/green-state-can-lie',
                   type: 'doc',
-                  label: 'Green-State Can Lies 🤥'
+                  label: 'Green-State Can Lie 🤥'
                 },
                 {
                   type: 'category',

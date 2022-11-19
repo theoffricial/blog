@@ -1,4 +1,4 @@
-# Green-State Can Lies 🤥
+# Green-State Can Lie 🤥
 
 This short article is discussing the importance of doubt your own tests and double verify them.
 
