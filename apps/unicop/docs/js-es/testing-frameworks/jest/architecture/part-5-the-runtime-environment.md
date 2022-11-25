@@ -11,34 +11,39 @@ last_update:
 
 ## Introduction ✨
 
-This part is discussing how the jest-runner package works, which is responsible for running tests.
+This part is discussing how the `jest-runner` package works.
 
-The jest-runner module implementation includes solutions for:
+<!-- , which is responsible for running tests. -->
+
+The `jest-runner` module implementation includes solutions for:
 concurrency, test compatibility, avoiding side effects, analyzing and building a TestResult from a test file, and sending TestResult-s when ready back to the runner’s scheduler.
 
-Because I’m considering jest-runner as the orchestrator for the test run, All modules it uses compound the runtime environment, And that is the reason for this part name “The Runtime Environment”.
+The `jest-runner` main job is to schedule test files execution, and execute them.
+To execute test file smoothly, the `jest-runner` module initializes 3 modules (`jest-environment`, `jest-runtime`, and a testing framework module) to build the runtime environment for Jest tests.
+That's the reason I called this part “The Runtime Environment”.
 
-:::note
+<!-- :::note
 
-Recap: [Part 4. Test Run](./part-4-test-run.md) is focusing how the `TestScheduler` scheduling `jest-runner`-s, for the events `jest-runner`-s are emitting to collect `TestResult`-s, and aggregates results that reflects the entire test run result.
+Recap: [Part 4. Test Run](./part-4-test-run.md) focuses on scheduling `jest-runner`-s, and how test results being delivered from runners back to the `TestScheduler` asynchronously.
 
-:::
-
+::: -->
+<!--
 :::note
 
 I find this part of Jest interesting because it reveals how Jest executing a test file that I write and translates it into a test result, which is the connection between technical implementation and good user experience.
 
-:::
+::: -->
 
-Here a step by step how the `jest-runner` module works:
+Here is a step by step guide how `jest-runner` works:
 
-1. by picking a run method
-1. Setup the test environment,
-1. Setup the runtime sandbox creator object
-1. Create and run the test framework to analyze a test file result
-1. emitting events with test results.
+1. Picks a run method
+1. Setup a test environment,
+1. Setup a test runtime sandbox
+1. Setup a test framework
+1. Runs the test framework with both environment, runtime sandbox and test path
+1. Emits the test framework execution test result.
 
-Below there are more detail explanations how step works
+Below each step there is a summary how each step works in detail.
 
 ---
 

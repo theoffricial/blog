@@ -11,7 +11,6 @@ last_update:
 
 ## Introduction ✨
 
-The money time!
 After figuring out configuration, file list & dependency graph, finding tests, and determining their run order, Jest can schedule tests to run.
 
 For this Jest has a module call the `TestScheduler`, that currently isn't a standalone package, but part of `@jest/core`.
@@ -31,23 +30,24 @@ import JestArchitectureSVG from './svg/part-4-test-run.svg';
 
 <JestArchitectureSVG />
 
-## 1 - Choosing Run Method - "In-Band" Or In-Parallel
+## `TestScheduler` Run Method - "In-Band" Or In-Parallel
 
-The `TestScheduler` does is to determine the entire test run execution method, and it supports 2 options only:
+First, The `TestScheduler` determine the execution method it runs, and it supports 2 options:
 
 1. Running "in-band" - run all tests on a single process, on the same process jest is running, one after one in a synchronous sequence.
 2. Running parallelize - Schedule a great amount of work processes and then schedule tests to run over them, and get back their results asynchronously.
 
-In general, if you want to run jest "in-band" mode you have to explicitly specific it with the `--runInBand` option,
-but also on every test run, the `TestScheduler` is following heuristic which tries to figure out how long the entire test run will take.
-If `TestScheduler` finds it relatively small, it will decide to run the tests "in-band", because establishing workers is expensive action and it will probably cause the test run to take longer.
+By default Jest chooses the "parallelize" execution, So if you want to run tests "in-band", you have to explicitly set it, which you can do by using the `--runInBand` option.
 
-So for small projects jest usually run everything "in-band" which increases user experience.
-Also worth mention that for the `shouldRunInBand` heuristic to be consider, cache required.
+Although it's default, for each test run the `TestScheduler` runs an heuristic, which I call the `shouldRunInBand` heuristic, which tries to predict how long the entire test run will take,
+When `TestScheduler` finds a project relatively small, it will decide to run the tests "in-band", because establishing [jest-worker](./appendix-2-jest-worker.md)-s is an expensive action and it will probably be faster to just run them, in stead of spawning multiple processes and then run all tests in parallel.
 
-Whatever the `TestScheduler` decides, it will send it to the `jest-runner` to execute together with all the other information the `jest-runner` expects.
+That's why small projects usually run "in-band", because of the `shouldRunInBand` heuristic. Jest added the heuristic increase user experience for small projects.
+Also worth mention that for Jest to use the `shouldRunInBand` heuristic, It has to have cache available (for the duration metadata), meaning not on first run.
 
-#### The `shouldRunInBand` Heuristic Example
+Whatever the `TestScheduler` decides, it will send it to the `jest-runner` module, in which describes at the next part [The Runtime Environment 💽](./part-5-the-runtime-environment.md).
+
+### The `shouldRunInBand` Heuristic Example
 
 If a project has 10 tests, and running them takes up to 5 seconds.
 For such case, it doesn't make sense to spawn 10 new processes that their start-up time probably be longer than the time it takes to actually run those tests.
@@ -56,7 +56,7 @@ That's why `TestScheduler` consider what might be the best running method for th
 
 This consideration of the `TestScheduler` call in jest code the `shouldRunInBand` heuristic, and it created mostly to improve user experience while project are relatively small (because large projects will always pick the parallel option if "in-band" not explicitly specified).
 
-### Choosing Run Method - Code Highlights 🔦
+### `TestScheduler` Run Method: See Jest Implementation Highlights 🔦
 
 ```ts
 // jest-core/src/TestScheduler.ts
@@ -123,30 +123,39 @@ export function shouldRunInBand(
 }
 ```
 
-## TestScheduler & Runners
+## How `TestScheduler` Communicates with Runners
 
-While `TestScheduler` is the run orchestrator, and responsible for things like, initial runners, schedule runners and build for them the communication channel they support, runners are orchestrating how a certain task is being executed.
+The `TestScheduler` is the test run orchestrator, and responsible for initialing test runners, scheduling test runners, and building communication channels between runners and [reporters](./appendix-4-reporters.md) dispatcher.
 
-When running jest without using any custom runner, runner is the component that actually run a set of tests and return the test results.
-But as you should already know, jest is modular. So in fact the `TestScheduler` interacts with runners following an agreed interface as input, and expect to receive `TestResult`s.
+:::note
 
-The `TestScheduler` supports 2 methods of interaction between a runner and itself:
+In Jest, Runners are the component that actually executes tests.
+Runners are explained on the next part, [The Runtime Environment 💽](./part-5-the-runtime-environment.md).
+By default, Jest runner is an instance of the `jest-runner` module.
+
+:::
+
+The `TestScheduler` supports 2 communication methods with runners it initialize:
 
 1. Callback Runners - that receive callback functions as arguments, and call them when results are ready.
 2. Emitter Runners - For this type of runners, the `TestScheduler` establish listeners for known events, and waiting for runners to emit results.
 
 Both methods enable the `TestScheduler` receiving results asynchronously.
 
-The modular implementation of the communication between a `TestScheduler` and the runners it is managing, enables to create custom runners that following those contracts and run them smoothly with jest.
+:::note
+
+The way communication is being implemented between `TestScheduler` module and the "test" runners, Jest enables us to develop custom "test" runners for different types of jobs and execute those tasks smoothly using Jest and its advanced parallelize system.
 
 The default runner that comes out-of-the-box is the `jest-runner` package, that its job is to run tests as we expect jest to do.
 But the community have already developed custom runners to leverage jest and its optimize mechanisms as a legitimate runner for various tasks.
 
-For instance, you can take a look at the custom runner [jest-runner-eslint](https://github.com/jest-community/jest-runner-eslint) that leverages jest as runner to run `eslint` over the "test files" (e.g. your entire codebase) you configure it.
+Community custom runners exists, and are ready for you to use. For example, [jest-runner-eslint](https://github.com/jest-community/jest-runner-eslint) that leverages Jest to execute `eslint` over your "test files", which can be configure to be your entire code base. <br />
+That's SUPER cool.
+:::
 
-### Runner Contracts - Code Highlights 🔦
+### How `TestScheduler` Communicates with Runners: See Jest Implementation Highlights 🔦
 
-#### Callback Runner Contracts:
+#### Callback "Test" Runner Contracts:
 
 ```ts
 // packages/jest-runner/src/types.ts
@@ -187,7 +196,7 @@ export abstract class CallbackTestRunner
 }
 ```
 
-#### Emitter Runner Contracts:
+#### Emitter "Test" Runner Contracts:
 
 ```ts
 // packages/jest-test-result/src/types.ts
@@ -301,19 +310,24 @@ class TestScheduler {
 
 :::
 
-## Starting The Runner Tests Execution
+## How `TestScheduler` Schedules Test Runners Execution
 
-The main job of the `TestScheduler` is to setup runners and execute them with proper configuration, including what tests to run, with what context information, and should it run on the same process or in parallel in multiple processes.
+The `TestScheduler` most obvious job, is scheduling test runners to run tests and return test results.
+Based on the run method, and number of projects Jest manages in a single test run, it determines how many runners to schedule.
+For Every project it schedules a single test runners.
+
+<!-- The main job of the `TestScheduler` is to setup runners and execute them with proper configuration, including what tests to run, with what context information, and should it run on the same process or in parallel in multiple processes. -->
 
 ## How `TestScheduler` Handles Incoming `TestResult`s
 
-The `TestScheduler` is handling incoming `TestResult`s from runners, and responsible for
+The `TestScheduler` handles runners' incoming `TestResult`s, and whenever it receives them it:
 
-1. Aggregate the asynchronous incoming `TestResult`s.
-2. Dispatch every incoming `TestResult` to reporters.
-3. Wait for all tests to complete and return the aggregated object.
+1. Aggregates the asynchronous incoming `TestResult`s.
+2. Dispatches every incoming `TestResult` to [reporters](./appendix-4-reporters.md).
+3. Wait for all tests to complete
+4. Returns an aggregated test results object.
 
-### Handling Incoming `TestResult`s - Code Highlights 🔦
+### How `TestScheduler` Handles Incoming `TestResult`s - Code Highlights 🔦
 
 :::note
 You can see on the **[`TestScheduler` Contracts Implementation](#testscheduler-contracts-implementation)**
@@ -432,11 +446,13 @@ class TestScheduler {
 }
 ```
 
-## Final Output - `AggregatedTestResult`
+## What `TestScheduler` Returns
 
-The aggregated result is an object that summaries all test results and being return back to the `runJest(..)` method on the `@jest/core` package, and then passed to the `@jest/test-sequencer` that cache the results to optimize future test runs.
+As mentioned above, while waiting for all runners to complete the `TestScheduler` aggregates all incoming test results to an object that implements the `AggregatedTestResult` interface. The aggregated object summaries all test results and returns this object to its caller.
+In Jest, the `runJest(..)` function which is part of the `@jest/core` package calls the `TestScheduler` to schedule tests, and after it receives the aggregated object, the `runJest(..)` logic sends it back to the `@jest/test-sequencer` instance that stores it in cache.
+The test results, which includes execution duration will be used to optimize future test runs.
 
-### Final Output - Code Highlight 🔦
+### What `TestScheduler` Returns - Code Highlight 🔦
 
 ```ts
 // packages/jest-test-result/src/types.ts

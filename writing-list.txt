@@ -1,9 +1,9 @@
 Things remained before release 🚀
 
 - Overview all intros - DONE
-- Overview Jest Architecture - In progress, exhausting currently at part 4
-- Fix next pagination and titles
-- Add "See also" to all articles
+- Overview Jest Architecture - In progress, exhausting currently at part 4,5,6
+- Fix next pagination and titles - DONE
+- Add "See also" to all articles - DONE
 
 
 - Pipelines
