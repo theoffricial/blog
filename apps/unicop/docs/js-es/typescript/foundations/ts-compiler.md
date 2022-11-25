@@ -1,18 +1,18 @@
 # The TypeScript Compiler, or `tsc` 🔵🏷️
 
-In TypeScript, the [compiler](../../foundations/compiler.md) is the component that makes all the difference between TypeScript and JavaScript.
+In TypeScript, the [compiler](../../../foundations/compiler.md) is the component that makes all the difference between TypeScript and JavaScript.
 
-The compiler enables TypeScript to be a strongly-typed language, by supporting both [type checking](./type-checking.md), and be a [build tool](../../foundations/build.md#build-tools) by [emit](./emit.md) TypeScript source code to JavaScript which cans anywhere JavaScript runs: In a browser, and JavaScript runtimes like Node.js or Deno and in your apps (see [full compatibility](../../foundations/modules/modules-compatibility.md)).
+The compiler enables TypeScript to be a strongly-typed language, by supporting both [type checking](./type-checking.md), and be a [build tool](../../../foundations/build.md#build-tools) by [emit](./emit.md) TypeScript source code to JavaScript which cans anywhere JavaScript runs: In a browser, and JavaScript runtimes like Node.js or Deno and in your apps (see [full compatibility](../../foundations/modules/modules-compatibility.md)).
 
-An interesting fact, in which according to definitions the TypeScript compiler is actually a [transpiler](../../foundations/transpiler.md), and not a [compiler](../../foundations/compiler.md) as it called.
+An interesting fact, in which according to definitions the TypeScript compiler is actually a [transpiler](../../../foundations/transpiler.md), and not a [compiler](../../../foundations/compiler.md) as it called.
 
 ## See also
 
 ### Foundations 🏗️
 
-- [Compiler 🏷️](../../foundations/compiler.md)
-- [Transpiler 🏷️](../../foundations/transpiler.md)
-- [Type Checking 🏷️](../../foundations/type-checking.md)
+- [Compiler 🏷️](../../../foundations/compiler.md)
+- [Transpiler 🏷️](../../../foundations/transpiler.md)
+- [Type Checking 🏷️](../../../foundations/type-checking.md)
 
 ### TypeScript Foundations 🔵 🏗️
 

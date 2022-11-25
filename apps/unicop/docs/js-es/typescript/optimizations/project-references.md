@@ -75,7 +75,7 @@ When you reference a project, new things happen:
 - If the referenced project produces an [outFile](https://www.typescriptlang.org/tsconfig#outFile), the output file `.d.ts` file’s declarations will be visible in this project
 - Build mode (see below) will automatically build the referenced project if needed
 
-By separating into multiple projects, you can greatly improve the speed of `typechecking` and [compiling](../../foundations/compiler.md), reduce memory usage when using an editor, and improve enforcement of the logical groupings of your program.
+By separating into multiple projects, you can greatly improve the speed of `typechecking` and [compiling](../../../foundations/compiler.md), reduce memory usage when using an editor, and improve enforcement of the logical groupings of your program.
 
 ## `composite`
 

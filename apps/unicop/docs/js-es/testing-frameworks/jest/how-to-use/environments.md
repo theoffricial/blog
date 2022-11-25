@@ -130,7 +130,7 @@ test('use custom example that has global "x" property', () => {
 
 ### JS ecosystem > Foundations 🏗️
 
-- [JavaScript Engine 🏷️](../js-es/foundations/js-engine.md)
+- [JavaScript Engine 🏷️](../../../foundations/js-engine.md)
 
 ### Testing > Foundations 🏗️
 

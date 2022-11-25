@@ -20,7 +20,7 @@ Jest's out of the box transformer, which uses Babel to enable using syntax not s
 
 jest does it by using the `/\.[jt]sx?$/` pattern implicitly by default.
 
-Read more about **[jest transform](./transform.md)**
+Read more about **[jest transform](./how-to-use/transform.md)**
 
 The `babel-jest` also included `babel-plugin-jest-hoist`.
 

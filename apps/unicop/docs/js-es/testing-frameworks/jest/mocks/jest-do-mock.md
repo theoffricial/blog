@@ -42,7 +42,7 @@ it('test myModule 2', async () => {
 ## Use jest.doMock(..) with [ESM][unicop-esm]
 
 `
-This section is how to use an ESM module when you aren't using the **[transform](../transform.md)** option.
+This section is how to use an ESM module when you aren't using the **[transform](../how-to-use/transform.md)** option.
 
 To use `jest.doMock()` with [ESM][unicop-esm] requires the following steps:
 

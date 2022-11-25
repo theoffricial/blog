@@ -10,7 +10,7 @@ tags: [typescript, optimization, build, sophisticated_builds]
 
 # Incremental Build 🧱
 
-In TypeScript (released in TypeScript 3.4), you can set the [TypeScript compiler](../foundations/ts-compiler.md) to work as [incremental build](../../foundations/incremental-build.md) tool.
+In TypeScript (released in TypeScript 3.4), you can set the [TypeScript compiler](../foundations/ts-compiler.md) to work as [incremental build](../../../foundations/incremental-build.md) tool.
 
 The incremental build, in comparison to the default configuration, enables TypeScript to analyze and save static information of the project during build run, to build faster next time, information like dependencies between modules.
 
@@ -74,11 +74,11 @@ The `.tsbuildinfo` file location is customable with the `tsBuildInfoFile` option
 
 ### Foundations 🏗️
 
-- [Build Tool 🏷️](../../foundations/build.md#build-tools)
-- [Incremental Build 🏷️](../../foundations/incremental-build.md)
-- [Naive Build 🏷️](../../foundations/naive-build.md)
-- [Type checking 🏷️](../../foundations/type-checking.md)
-- [Naive Build 🏷️](../../foundations/naive-build.md)
+- [Build Tool 🏷️](../../../foundations/build.md#build-tools)
+- [Incremental Build 🏷️](../../../foundations/incremental-build.md)
+- [Naive Build 🏷️](../../../foundations/naive-build.md)
+- [Type checking 🏷️](../../../foundations/type-checking.md)
+- [Naive Build 🏷️](../../../foundations/naive-build.md)
 
 ### TypeScript Foundations 🔵🏗️
 
