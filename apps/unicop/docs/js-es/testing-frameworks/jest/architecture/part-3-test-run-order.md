@@ -2,23 +2,7 @@
 
 ## Introduction ✨
 
-Tests run order determination is an important part for the optimization of the overall run time.
-jest is following a set of 3 main heuristics to determine which test run first, an interesting thing is that jest not takes only time into account but also user experience, you will see exactly how on the following sections :)
-
-But for now it is important for you to know that the motto of jest's heuristics is to run the SLOWEST tests first and the FASTEST last (examples included!).
-
-:::note
-Except how jest is ordering tests, I also combined with it the step of how jest is finding test files.
-:::
-
-### A Recap from Parts 1 + 2
-
-jest reaching the test run order determination step after it:
-
-1. Part 1: Figured out **[configs](./part-1-configs.md)**.
-2. Part 2: Built the up-to-date **[HasteContext](./part-2-dependency-resolutions.md)** that enable jest to find files and use their metadata (metadata like dependencies resolution).
-
-The main input when reaching the test order step:
+At this part of the Jest system, Jest has both **[configs](./part-1-configs.md)**, and **[HasteContext](./part-2-dependency-graph.md)**.
 
 ```ts
 const TestContext = {
@@ -29,29 +13,59 @@ const TestContext = {
 }
 ```
 
+Now it is time to find test files, and determine their run order, which you are about to see that is crucial for the overall run time.
+
+<!-- jest is following a set of 3 main heuristics to determine which test run first, an interesting thing is that jest not takes only time into account but also user experience, you will see exactly how on the following sections :) -->
+
+<!-- But for now it is important for you to know that the motto of jest's heuristics is to run the SLOWEST tests first and the FASTEST last (examples included!). -->
+
+<!-- :::note
+
+Except how jest is ordering tests, I also combined with it the step of how jest is finding test files.
+
+::: -->
+
+<!-- ### A Recap from Parts 1 + 2
+
+jest reaching the test run order determination step after it:
+
+1. Part 1: Figured out **[configs](./part-1-configs.md)**.
+2. Part 2: Built the up-to-date **[HasteContext](./part-2-dependency-graph.md)** that enable jest to find files and use their metadata (metadata like dependencies resolution). -->
+
+<!-- The main input when reaching the test order step: -->
+
 ## Part 3. Test Run Order Diagram ✍️
 
 import JestArchitectureSVG from './svg/part-3-run-order.svg';
 
 <JestArchitectureSVG />
 
-## 1 - Finding Tests - `SearchSource` Component
+## 1 - `SearchSource` Finding Test Files
 
-The `SearchSource` is currently part of the `@jest/core` package and it is in charge to find what are the test files that jest should run, and it is straightforward,
-At this step of the run, jest has the access to all files from `HasteContext` and what are the patterns for test files be using one of `testMatch` or `testRegex` options.
-Then it simply "regex" over the array and return you an array of tests, simple as that.
+Before determine test run order, Jest has to locate what test files it should order.
+To locate test file, Jest uses a module call `SearchSource`, which is currently not a standalone package, but part of the `@jest/core` package.
 
-The `HasteContext` contains the map of files, and at the `ProjectConfig` one of the options `testMatch` or `testRegex` are defined - these options determine what is the pattern for a test file.
+Has mentioned in the introduction, at this part of the Jest run, it always has the file lists it operates on.
+
+Then based on it and the configuration option of one of `testMatch` or `testRegex` it loop over the file list and find matches to the regex/glob pattern, simple as that.
+
+<!-- At this step of the run, jest has the access to all files from `HasteContext` and what are the patterns for test files be using one of `testMatch` or `testRegex` options.
+Then it simply "regex" over the array and return you an array of tests, simple as that. -->
+
+<!-- The `HasteContext` contains the map of files, and at the `ProjectConfig` one of the options `testMatch` or `testRegex` are defined - these options determine what is the pattern for a test file. -->
 
 :::info
-You can read more about both options here:
+
+Here is Jest documentation for both pattern options:
 
 - **[testMatch](https://jestjs.io/docs/configuration#testmatch-arraystring)** option - glob patterns
 - **[testRegex](https://jestjs.io/docs/configuration#testregex-string--arraystring)** option - regex patterns
 
 :::
 
-### Finding Tests - Code Highlights 🔦
+### Step 1: See Real Jest Implementation Highlights 🔦
+
+"Test" types:
 
 ```ts
 // jest-test-result/src/types.ts
@@ -74,6 +88,8 @@ export type TestContext = {
 };
 ```
 
+`SearchSource`
+
 ```ts
 export default class SearchSource {
   // ...
@@ -91,9 +107,9 @@ export default class SearchSource {
 }
 ```
 
-### `SearchSource` Output
+### `SearchSource`'s Output
 
-The `SearchSource` instance output (by calling `getTestPaths` function) back to `runJest` function, is an object call `SearchResult`, that has a `test` property with all tests optimally sorted.
+After "regex-ing" the entire file list, and finding tests, `SearchSource` eventually returns an object called `SearchResult` which includes all `Test`-s, and some less interesting data.
 
 ```ts
 // https://github.com/facebook/jest/blob/main/packages/jest-core/src/SearchSource.ts#L21-L27
@@ -120,7 +136,7 @@ export default class SearchSource {
 }
 ```
 
-### Example: How jest Find Tests
+### Illustrating How `SearchSource` finds Tests
 
 <!-- convert into a GIF -->
 
@@ -150,19 +166,24 @@ my-module-2.test.js
 
 ## 2 - Determining Test Run Order
 
-After receiving the test array (`Array<Test>`) it is being pass to the `@jest/test-sequencer` package/component, that regardless to the number of CPUs on your machine, sorts test array following a set of 3 heuristics.
+With the `Array<Test>` that `SearchSource` found, Jest starts the test run order.
+For that Jest has a dedicated package call `@jest/test-sequencer`, that regardless to the number of CPUs on your machine, sorts test array following a set of 3 heuristics.
 
 :::note
+
 2 out of 3 heuristics depend on cache from previous test runs to make more predictable assumptions,
-without cache the whole algorithm doesn't do much.
+Without cache the whole algorithm doesn't do much.
+
 :::
 
 ### The Heuristics Algorithm 🤯
 
 The reason for this logic is to utilize the CPUs to work optimally as possible to complete running all tests fast as possible.
 
+_The algorithm:_
+
 ```bash
-failed > test run duration (slowest wins) > file size (largest wins)
+failed test > test run duration (slowest wins) > file size (largest wins)
 ```
 
 #### Heuristic 1: Failed Tests (cache required)
@@ -212,7 +233,7 @@ Intuitively test file A probably takes longer to run, the jest team found this v
 
 The file size heuristic fails when a test file is very short, for example let's take "test file B" from the example, when it is depends on a very expensive module with hundred thousands lines of code, for those scenarios "test file A" might run quicker and the heuristic missed its goal.
 
-### The Heuristics Algorithm - Code Highlights 🔦
+### Step 3: See Real Jest Implementation Highlights 🔦
 
 ```ts
 // ...

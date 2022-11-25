@@ -155,8 +155,8 @@ const sidebars = {
                     },
                     {
                       type: 'doc',
-                      id: 'js-es/testing-frameworks/jest/architecture/part-2-dependency-resolutions', 
-                      label: 'P2: File System & Dependency Resolution 🌳'
+                      id: 'js-es/testing-frameworks/jest/architecture/part-2-dependency-graph', 
+                      label: 'P2: File System & Dependency Graph 🌳'
                     },
                     {
                       type: 'doc',
@@ -208,6 +208,12 @@ const sidebars = {
                       id: 'js-es/testing-frameworks/jest/architecture/appendix-6-frameworks-evolution', 
                       label: 'Appx. Ⅵ: Framework Evolution 🦕'
                     },
+                    {
+                      type: 'doc',
+                      id: 'js-es/testing-frameworks/jest/architecture/appendix-7-what-is-haste', 
+                      label: 'Appx. Ⅶ: What is "Haste"? 👾'
+                    },
+                    
                   ]
                 }
               ]

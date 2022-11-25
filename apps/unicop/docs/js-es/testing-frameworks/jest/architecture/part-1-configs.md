@@ -1,37 +1,54 @@
+---
+pagination_next: js-es/testing-frameworks/jest/architecture/part-2-dependency-graph
+authors: [unicop]
+---
+
 # Part 1. Configs
 
 ## Introduction ✨
 
-When running the jest CLI command:
+Welcome to the first part in the series, which discusses how Jest figures out its execution configuration.
+
+Jest supports several configuration types, like CLI arguments, configuration files, and inline codeblock configuration.
+
+:::note
+The inline codeblock configuration isn't cover here, but you can see a real example at my [Jest, How-to-Use Environments](../how-to-use/environments.md#using-inline-codeblock) article.
+:::
+
+Let's examine what happens once we run Jest through the CLI:
 
 ```bash
 jest <my-test-pattern> [argv]
 
 ```
 
-The first thing jest does is to figure out the answer for "How exactly should I run?", To answer that jest collects all custom configurations defined for the specific run.
+Once execution starts, Jest tries as a first thing to figure out "How exactly should I run?".
 
-Because managing configurations is a specific task, the jest team separated this task into a package call `jest-config`.
+To answer that question, Jest starts looking for its different configuration types.
 
-jest allows to custom a test run in 2 ways
+Jest looks for configuration using the `jest-config` dedicated module for it.
 
-1. the CLI `argv`
-2. dedicated configuration file e.g. `jest.config.js` _OR_ using the `"jest"` key on the `package.json`.
+And what it does is simple,
+
+1. It parses the CLI arguments (`argv`) passed together with Jest CLI.
+2. It Looks for dedicated configuration files like the `jest.config. js`, or for the `"jest"` key in the `package.json`.
 
 :::note
-jest supports the argv [--config=\<path\> [-c]](https://jestjs.io/docs/cli#--configpath) option
-that enables jest to look for a dedicated configuration file from a custom location instead of look for it in the `rootDir`.
+jest supports passing a custom configuration file path through CLI using [--config=<path\> [-c]](https://jestjs.io/docs/cli#--configpath) option. <br/>
+It tells Jest to look for configuration file in the custom path, instead at the project root directory.
 :::
 
-`jest-config` depends on these 2 methods, and based on them it builds the configuration objects for the entire test run.
+`jest-config` is built from 2 main modules, reading, and parsing all configuration types, and normalizing all together into a final configuration objects for [run-time](../../../../foundations/run-time.md).
 
-## Part 1: Diagram ✍️
+## Part 1: Configs Diagram ✍️
 
 import JestArchitectureSVG from './svg/part-1-configs.svg';
 
 <JestArchitectureSVG />
 
-## Step 1: Collecting the CLI options
+## Reading, and Parsing Configurations
+
+### Step 1: Collecting the CLI options
 
 jest [extract](https://github.com/facebook/jest/blob/e21c5aba950f6019bbfde2f8233ac96d1fcaef42/packages/jest-cli/src/cli/index.ts#L51) all CLI argument into an object using the [yargs](https://github.com/yargs/yargs) package.
 
@@ -78,7 +95,7 @@ export async function buildArgv(
   );
 ```
 
-## Step 2: Reading Configuration File
+### Step 2: Reading Configuration File
 
 jest supports 2 methods to look for a configuration file
 
@@ -130,13 +147,11 @@ export const JEST_CONFIG_EXT_ORDER = Object.freeze([
 See [Jest Configuration Options](https://jestjs.io/docs/configuration)
 :::
 
-## Step 3: Normalize All Configurations For Test Run
+## Step 3: Normalizing Configurations Data For Tests Run-time
 
-At this point jest already extract the CLI argv, and the raw-options from the configuration file.
+Jest enters the normalize step when it already has all configuration types parsed, and it needs to merge everything together and using default values to fill blank mandatory options.
 
-jest still has to make order from all options out there, this is why the `jest-config` has a special function call `normalize`, and it is done what it promised, it normalizes all the options received from the different configs but also has a default value for every option that jest need.
-
-The [normalize](https://github.com/facebook/jest/blob/main/packages/jest-config/src/normalize.ts#L485) function is huge, but the signature clarifies it pretty well.
+The `normalized` function is long, but straightforward, so I shared with you its signature and a reference if you're curious.
 
 ```js
 // https://github.com/facebook/jest/blob/main/packages/jest-config/src/normalize.ts#L485
@@ -154,7 +169,7 @@ export default async function normalize(
 ```
 
 :::info
-See jest under-the-hood [defaults](https://github.com/facebook/jest/blob/main/packages/jest-config/src/Defaults.ts)
+See Jest's mandatory options [defaults](https://github.com/facebook/jest/blob/main/packages/jest-config/src/Defaults.ts), when custom configuration doesn't define values.
 :::
 
 After receiving the `AllOptions` from the normalize function, there is a small step of classifying the options and decide for each option whether it is belong to the `ProjectConfig` or the `GlobalConfig`.
@@ -163,44 +178,55 @@ After receiving the `AllOptions` from the normalize function, there is a small s
 This options classification call [groupOptions](https://github.com/facebook/jest/blob/main/packages/jest-config/src/index.ts#L110).
 :::
 
-## Step 4: Configs Final Output
+## Step 4: `jest-config` Final Run-time Options Output
 
 `jest-config` outputs 2 runtime objects that the whole jest system uses:
 
 1. ProjectConfig
 2. GlobalConfig
 
+Their name clarifies both purposes, but let's jump into their details real-quick.
+
 ### ProjectConfig
 
-This config includes all customize options of a specific project, because jest knows how to run multiple projects in a single test run, with the [--projects CLI option](https://jestjs.io/docs/cli#--projects-path1--pathn) / [projects configuration option](https://jestjs.io/docs/configuration#projects-arraystring--projectconfig).
+Project's specific custom options.
 
-It also means that jest can operate with multiple `ProjectConfig`, so possibly there are `1...N` `ProjectConfig` be generated.
+In most projects, there is only a single project, but it is a good opportunity to tell you that Jest supports running multiple projects in a single test run! That's why Jest separate between global configs and project-specific ones.
+
+Because Jest supports multiple projects, It's implementation designed to operate with multiple `ProjectConfig` objects, and it assumes that potentially there are `1...N` `ProjectConfig` objects.
+
+:::note
+Running multiple projects in a single test run is an advanced option.
+And it can be done using the [--projects CLI option](https://jestjs.io/docs/cli#--projects-path1--pathn) / [projects configuration option](https://jestjs.io/docs/configuration#projects-arraystring--projectconfig)
+
+:::
 
 :::info
-See [ProjectConfig interface](https://github.com/facebook/jest/blob/main/packages/jest-types/src/Config.ts#L421)
+If you're curious what the `ProjectConfig` includes, [Here is a reference for it](https://github.com/facebook/jest/blob/main/packages/jest-types/src/Config.ts#L421).
 :::
 
 ### GlobalConfig
 
-This config created only once, and includes all options that are relevant for everything that is more generic than a specific project.
+There is a single `GlobalConfig` for every test run, no matter how many `ProjectConfig`s exists.
+The `GlobalConfig` includes the global options (like how many workers you allow the Jest process to spawn and run in parallel).
 
 :::info
-See [GlobalConfig interface](https://github.com/facebook/jest/blob/main/packages/jest-types/src/Config.ts#357)
+If you're curious what the `GlobalConfig` includes, [Here is a reference for it](https://github.com/facebook/jest/blob/main/packages/jest-types/src/Config.ts#357)
 :::
 
-## Options Hierarchy - The Strongest Wins!
+## The Options Hierarchy - The Strongest, Overwrites!
 
-> CLI arguments (1) > Configuration File Options (2) > Jest Default Options (3)
+> (1) inline codeblock configuration > (2) CLI arguments > (3) Configuration File Options > (4) Jest Default Options
 
-### Example - How The Hierarchy Works In Practice
+Let's see how it works in practice.
 
-when running `jest` with the following command:
+when running Jest with the following command:
 
 ```bash
 jest --maxWorkers=11
 ```
 
-While your configuration defined like this:
+And the configuration file defined as the following:
 
 ```js
 // jest.config.js
@@ -210,11 +236,19 @@ module.exports = {
 };
 ```
 
+Here is what the `normalized` function will return:
 The final result of the `maxWorkers` option is 11, because:
 
-- CLI argument `--maxWorkers` is 11
-- Configuration file option `maxWorkers` is 4
-- Jest default is `maxWorkers=50%`
+1. inline codeblock variable = undefined
+2. The CLI argument `--maxWorkers` is `11`
+3. The configuration file option `maxWorkers` is `4`
+4. Jest's default is `maxWorkers=50%`
 
-The `maxWorkers` option is part of the `GlobalConfig` because it is not related to a specific project but to the actual test run constraints.
+The final `maxWorker` value is `11`.
+
+:::note
+
+The `maxWorkers` option is located at the `GlobalConfig`, because it is not specific for a particular project, but for the entire test run.
 So `GlobalConfig.maxWorkers` will be 11.
+
+:::

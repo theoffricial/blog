@@ -2,6 +2,7 @@ Things remained before release 🚀
 
 - Overview all intros
 - Overview Jest Architecture
+- Fix next pagination and titles
 - Add "See also" to all articles
 
 

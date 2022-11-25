@@ -1,21 +1,23 @@
-# Part 2. File System & Dependencies Resolution
+# Part 2. File System & Build Dependencies Graph
 
 ## Introduction ✨
 
-This part discuss 2 key questions jest should ask to complete a test run,
-after figuring out **[configs](./part-1-configs.md)**.
+Recap: at part 1, Jest has parsed its [run-time](../../../../foundations/run-time.md) configuration values for its test run.
 
-1. "What is the code base am I operate on?"
-2. "What are the dependencies between files?"
+After Jest has its configuration, the next things Jest figures out are:
 
-To answer those question, jest uses the `jest-haste-map` package,
-which does static analysis to figure out data like, the list of all files of your project, the dependencies of every file, sizes of files, etc.
+<!-- This part discuss 2 key questions jest should ask to complete a test run,
+after figuring out **[configs](./part-1-configs.md)**. -->
 
-The haste map creation and synchronization is critical to jest startup performance.
+1. _"What is the code base am I operate on?"_
+2. _"What are the dependencies between files in the code base I operate on?"_
 
-Let's breakdown how the magic works
+To solve these questions, Jest is using a dedicated package call `jest-haste-map`,
+which includes actions like file system crawling, and metadata static analysis.
 
-## Part 2: Diagram ✍️
+This step is crucial for Jest startup performance, so it includes some optimizations that makes it more complex.
+
+## Part 2: FS & Build Deps. Graph Diagram ✍️
 
 import JestArchitectureSVG from './svg/part-2-dependency-resolution.svg';
 
@@ -23,17 +25,20 @@ import JestArchitectureSVG from './svg/part-2-dependency-resolution.svg';
 
 ## Understanding HasteMap
 
-`HasteMap` is an object that represents an entire file system.
-To fill `HasteMap` with data, the outputs of actions such as crawling file system or extracting files metadata being saved in `HasteMap`.
+`HasteMap` is Jest's representation for all project files, and tracking each module's metadata, including its dependencies.
 
-### How HasteMap look like:
+The `jest-haste-map` package role is to build you an `HasteMap` of your project.
 
-Sharing the real types from the jest repository
+Let's take a look how it looks like!
+
+### How HasteMap is Look Like:
+
+These are real types from the Jest repository, links attached, Also I added extra comments to make sure everything is clear.
 
 ```ts
 type HasteMap = {
   clocks: WatchmanClocks; // related to file crawling, irrelevant for this article
-  files: FileData; // see below
+  files: FileData; // §see below
   map: { [id: string]: ModuleMapItem }; // modules in multiple platform support
   // key {[id: string]} - mock file path
   // value {string} - relative path of the actual file
@@ -64,35 +69,49 @@ export type FileMetaData = [
 ];
 ```
 
-## 1+2 - Build HasteMap
+## How `jest-haste-map` Builds an HasteMap Object
+
+The Jest repository itself divides the build process into 4 major steps
+
+1. If `HasteMap` exists in cache; then read it and exist; Otherwise, Create a new empty one;
+2.
 
 ### 1 - Read Or Create New Map
 
-The first thing `jest-haste-map` does is trying to look for an existing `HasteMap` from cache, if it does not exist it initialize an empty one.
+First,
+The first thing `jest-haste-map` does is trying to look for an existing `HasteMap` from cache, if it doesn't exist, a new empty `HasteMap` will be initialized.
 
-### 2 - Discover The Codebase To Operate On (Crawl)
+### 2 - Discover Filesystem To Operate On (Crawl Filesystem)
 
-After "reading" the initial `HasteMap` `jest-haste-map` is going to crawl the entire file system of your project, find and returns back the list of all files within the project.
+Right after `HasteMap` initialization, `jest-haste-map` crawls the filesystem, according to pattern in the configuration, then returns a list of files, which represents the entire project.
 
-For the crawling job, jest supports 2 crawlers to do that
+Jest supports 2 crawlers:
 
 1. [fb-watchman](https://github.com/facebook/watchman) - crawler developed by Facebook, it is the default option when available and has more advance capabilities and optimizations
 2. The native node-crawler which is the fallback when `fb-watchman` isn't available.
 
-The main difference between the crawlers is while `fb-watchman` can crawl deltas when cache already available, the node-crawler has to crawl the entire file system every time, this ability let jest to leverage cache and make test run much shorter when `fb-watchman` available.
+The main advantage of the `fb-watchman` crawler, is its capability to crawl "deltas" means to crawl after first scan only what has changed since last time the projected crawl the filesystem.
+On the other hand, when working with the node-crawler for each rebuild, the node-crawler force to crawl the entire filesystem every time any change has detected.
+
+This advantage makes the `fb-watchman` crawler build much faster over time/several build.
 
 :::note
 `jest-haste-map` cache `HasteMap` each build.
 :::
 
-The crawling op builds metadata objects for every file. This builds the `files` part of the `HasteMap`.
+<!-- The crawling operation builds metadata objects for every file. This builds the `files` part of the `HasteMap`. -->
 
 :::info
-[fb-watchman crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/watchman.ts#L92)
-[node-crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/node.ts#L196)
+Here are references for Jest implementation for both crawlers:
+
+1. [fb-watchman crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/watchman.ts#L92)
+2. [node-crawler implementation](https://github.com/facebook/jest/blob/main/packages/jest-haste-map/src/crawlers/node.ts#L196)
+
 :::
 
-### Build HasteMap Code Highlights 🔦
+## Step 1 + 2: See Real Jest Implementation Highlights 🔦
+
+Including references:
 
 ```ts
 class HasteMap extends EventEmitter implements IHasteMap {
@@ -170,32 +189,40 @@ class HasteMap extends EventEmitter implements IHasteMap {
 
 ## 3 - Parse & Extract Metadata from Files
 
-Next, `jest-haste-map` wants to figure out the metadata for all the files found, such as dependencies.
+After having the project file list, `jest-haste-map` starts to process each file by reading its content and extract metadata from it, including dependencies.
 
-To get metadata `jest-haste-map` has to read each file content and collect it.
+### Metadata Extraction Process
 
-### Metadata Extraction and jest-worker
+The metadata extraction process is essential for Jest startup, it is responsible to build the dependency graph, by reading the content of the entire file list. that's why it is must to be process fast as possible. But by default it has a blocker - Node.js.
 
-Maybe one of the most known limitations of nodejs is that it is a single threaded,
-and that's why I/O operations are thread blocking actions, and because `HasteMap` creation and synchronization is essential for jest to startup, but also critical to startup performance, For the heavy I/O actions metadata extraction requires, it uses the `jest-worker` package that in charge of parallelize work.
+Node.js is single threaded technology by default, when I/O operations blocks the thread, even when using `async` (I/O are between a machine and it self, in comparison to API calls).
 
-Because when starting metadata extraction task we expect the following scenarios:
+That's why `jest-haste-map` using the [jest-worker](./appendix-2-jest-worker.md) module to parallelize the I/O operations.
 
-- worst case: parse all files, on first run for example.
+When starting the metadata extraction process there are several scenarios we can expect:
+
+- worst case: parse all files, required on first run for example.
 - best case: no file-system changes from last run, then retrieving all data from cache.
 - average case: small number of file system changes, like when working on a new feature.
 
+Jest knows to extract metadata only for changed files when working with the `fb-watchman` module. When working with `node-crawler` implementation every test run will be the worst case. That's why you should avoid using it.
+
 :::note
-You can read more about jest-worker on [Appendix. Ⅱ: jest-worker 👷](./appendix-2-jest-worker.md) article.
+`jest-worker` is a core module in the Jest system, that's why I created an appendix to the series that discuss specifically how `jest-worker` works.
+[Appendix. Ⅱ: jest-worker 👷](./appendix-2-jest-worker.md) article.
 :::
 
-### How dependencies found
+### How Jest Detect Dependencies
 
-After reading a file content, by default the extractor looks for `require` as nodejs works natively with [CommonJS](../../../foundations/javascript-module-systems-explained.md#-commonjs) and if nodejs configured to work with [ESM](../../../foundations/javascript-module-systems-explained.md#-ecmascript-modules-or-esm) it will look for `import` statements.
+During the metadata extraction process, when reading file's content Jest looks for `require` calls when it's Node.js directed to the default [CommonJS](../../../foundations/modules/commonjs.md), or if Jest's Node.js configured to work with [ESM](../../../foundations/modules/esm.md) it will look for `import` statements.
 
-The full metadata jest collects for each file can be found above on the `FileMetadata` interface.
+:::note
 
-### Parse & Extract Metadata from Files Code Highlights 🔦
+To see all metadata Jest is looking for each file, See the `FileMetadata` interface [above](#L62).
+
+:::
+
+### Step 3: See Real Jest Implementation Highlights 🔦
 
 ```ts
 // jest-haste-map/src/index.ts
@@ -260,12 +287,13 @@ export const extractor: DependencyExtractor = {
 };
 ```
 
-## 4 - Store HasteMap in Cache
+## 4 - Storing HasteMap in Cache
 
 Wether `jest-haste-map` crawl and extract the entire file system or just a small number of changed files, the final result is a new `HasteMap` object,
-And to optimize future runs, Whenever files have changed `jest-haste-map` calculate the new `HasteMap` and store it in cache.
+And to optimize future test runs, When there are file changes
+`jest-haste-map` [builds](#2---discover-filesystem-to-operate-on-crawl-filesystem) the new `HasteMap`, and stores it in cache.
 
-Here is how `jest-haste-map` stores `hasteMap` in cache:
+### Step 4: See Real Jest Implementation Highlights 🔦
 
 ```ts
 // jest-haste-map/src/index.ts
@@ -305,13 +333,13 @@ class HasteMap extends EventEmitter implements IHasteMap {
 
 ## 5 - Build Output - `HasteContext`
 
-After read, crawl, extract metadata and store in cache again, `jest-haste-map` is ready to return its output.
+After [read](#1---read-or-create-new-map), [crawl](#2---discover-filesystem-to-operate-on-crawl-filesystem), [extract metadata](#3---parse--extract-metadata-from-files), and [store `HasteMap` in cache](#4---storing-hastemap-in-cache), `jest-haste-map` is ready to return an output so the Jest startup can move to the next stages.
 
-Instead of returning the new `hasteMap` it has just built, the `build()` function wraps the new map in a new instance of wrapper class call `HasteFS`, This class exports convenient utility functions to reach files and metadata.
+`jest-haste-map` doesn't return an `HasteMap` as-is, instead, it wraps it in an utility class instance call `HasteFS`, this class expose utility functions to reach files and metadata, and isolating the `HasteMap` object from modifications across the Jest system.
 
-After building the `HasteFS` instance, it returns in with a module map that match between a file and mock, platform and duplication and returns all together in an object call `HasteContext`.
+Then the `HasteFS` instance returns inside another object call `HasteContext`, that also includes a module map that match between a file and its mock, and a map for each module per platform (if necessary).
 
-### Build HasteContext Output Code Highlights 🔦
+### Step 5: See Real Jest Implementation Highlights 🔦
 
 ```ts
 // jest-core/src/lib/createContext.ts
@@ -398,20 +426,6 @@ class HasteMap extends EventEmitter implements IHasteMap {
 }
 ```
 
-## What is Haste? - Historical Brief 🦕
+## What is "Haste"?
 
-HasteMap is a JavaScript implementation of Facebook's haste module system developed at around 2010 and used internally at Facebook (Meta) in the times before any other module system exist, before the era of CommonJS/ESM/AMD/UMD/etc.
-
-The `jest-haste-map` implementation inspired by https://github.com/facebook/node-haste and was built with for high-performance in large code repositories with
-hundreds of thousands of files which Facebook had at the time haste developed.
-This implementation is scalable and provides predictable performance.
-
-The idea of how Haste works is that Facebook used to manage all their codebase at a single huge project, and all the different modules were under a folder called `html/js`.
-
-### Haste Evolution
-
-So what they did was to add an header to each file, like this [one](https://github.com/facebook/fbjs/blob/main/packages/fbjs/src/dom/BrowserSupportCore.js#L7) that provides the unique name associates with that module, and was inside the file, the module name is global, it means that you could not provide the same name for 2 modules, although it might happened and also that no relative path was needed like the present module systems (as long as you don't use an alias), these relative paths can be sometimes really long and exhausting.
-
-So in Hate instead of using `../my/relative/path/to/my-module.js`, you just had to call `my-module`.
-
-Later on, instead of using declarative headers inside files, the implementation had changed to take the file-path/ name as the unique identifier. That way Facebook avoided to read the content of files for the modules list, but only for the step of building the tree of dependencies resolution, so it improved performance.
+See an appendix of the series: [Appendix Ⅶ: What is "Haste"? 👾](./appendix-7-what-is-haste.md)

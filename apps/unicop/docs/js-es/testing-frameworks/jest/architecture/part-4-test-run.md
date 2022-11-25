@@ -2,17 +2,19 @@
 
 ## Introduction ✨
 
-Now is the money time, after figuring out configs, file system, what tests to run and their order,
-jest is ready to start the actual test run.
+The money time!
+After figuring out configuration, file list & dependency graph, finding tests, and determining their run order, Jest can schedule tests to run.
 
-The main component that manages the entire test run call `TestScheduler` that is part of the `@jest/core` package.
+For this Jest has a module call the `TestScheduler`, that currently isn't a standalone package, but part of `@jest/core`.
 
-Let's break down the steps one by one to find out how jest manages the test run.
+The `TestScheduler` main job is to schedule "runners", and manage them as long as they run.
+
+<!-- Let's break down the steps one by one to find out how jest manages the test run.
 
 :::note
 This article concentrate on how the test run being manages and how the main components communicate with each other.
 The next article **[Part 5. The Runtime Environment](./part-5-the-runtime-environment.md)** focused on the detail how jest is actually taking a test file and running it.
-:::
+::: -->
 
 ## Part 4. Test Run Diagram ✍️
 
@@ -22,10 +24,10 @@ import JestArchitectureSVG from './svg/part-4-test-run.svg';
 
 ## 1 - Choosing Run Method - "In-Band" Or In-Parallel
 
-After the `TestScheduler` is being created, and start to schedule tests, the first action it does is to determine the execution method, where it has 2 options.
+The `TestScheduler` does is to determine the entire test run execution method, and it supports 2 options only:
 
-1. Run "in-band" - run all tests on a single process, on the same process jest is running, one after one in a synchronous sequence.
-2. Run in-parallel - Schedule a great amount of work processes and then schedule tests to run over them, and get back their results asynchronously.
+1. Running "in-band" - run all tests on a single process, on the same process jest is running, one after one in a synchronous sequence.
+2. Running parallelize - Schedule a great amount of work processes and then schedule tests to run over them, and get back their results asynchronously.
 
 In general, if you want to run jest "in-band" mode you have to explicitly specific it with the `--runInBand` option,
 but also on every test run, the `TestScheduler` is following heuristic which tries to figure out how long the entire test run will take.
