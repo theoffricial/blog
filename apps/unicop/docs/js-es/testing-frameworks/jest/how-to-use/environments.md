@@ -1,9 +1,18 @@
+---
+pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # How-To-Use Jest Environments 🧫
 
 Before you continue, please make sure you are familiar with the following terms:
 
-1. [What an environment is](../../../foundations/environment.md#what-an-environment-is)
-1. [What a test environment is](../../../foundations/environment.md#what-a-test-environment-is)
+1. [What an environment is](../../../../foundations/environment.md)
+1. [What a test environment is](../../../../testing/foundations/test-environment.md)
 
 ---
 
@@ -112,3 +121,17 @@ test('use custom example that has global "x" property', () => {
   expect(global.x).toBe(42);
 });
 ```
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Environment 🏷️](../../../../foundations/environment.md)
+
+### JS ecosystem > Foundations 🏗️
+
+- [JavaScript Engine 🏷️](../js-es/foundations/js-engine.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Environment 🏷️](../../../../testing/foundations/test-environment.md)

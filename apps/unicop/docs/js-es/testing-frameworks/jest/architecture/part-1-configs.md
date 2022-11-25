@@ -1,9 +1,13 @@
 ---
-pagination_next: js-es/testing-frameworks/jest/architecture/part-2-dependency-graph
+# pagination_prev: null
+# pagination_next: null
 authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
 ---
 
-# Part 1. Configs
+# Part 1. Configs 🧰
 
 ## Introduction ✨
 
@@ -252,3 +256,9 @@ The `maxWorkers` option is located at the `GlobalConfig`, because it is not spec
 So `GlobalConfig.maxWorkers` will be 11.
 
 :::
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appendix Ⅴ. Watch Mode ⏱](./appendix-5-watch-mode.md)

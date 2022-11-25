@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Cons 👎
 
 ## Larger codebase
@@ -27,3 +36,9 @@ During the time when the number of implemented tests grows in the system, and al
 ## Credits 🎖️
 
 - Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 1: TDD and Confidence - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design.
+
+## See also
+
+### Testing > Foundations 🏗️
+
+- [Pros 👍](./pros.md)

@@ -1,6 +1,9 @@
 ---
+pagination_prev: null
+# pagination_next: null
+authors: [unicop]
 last_update:
-  date: 07/10/2022
+  date: 03/09/2022
   author: Ofri Peretz
 ---
 
@@ -347,3 +350,12 @@ export default class TestRunner extends EmittingTestRunner {
 ## Watch Mode & Module Transformation
 
 The transformation part is just worth mention, the modules that affected by the file changes will have to go through transformation again.
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Part 1. Configs 🧰](./part-1-configs.md)
+- [Architecture 🏛 > Part 2. FS & Dependency Graph 🕸️](./part-2-dependency-graph.md)
+- [Architecture 🏛 > Part 4. Test Run 🃏](./part-4-test-run.md)
+- [Architecture 🏛 > Part 5. The Runtime Environment 💽](./part-5-the-runtime-environment.md)

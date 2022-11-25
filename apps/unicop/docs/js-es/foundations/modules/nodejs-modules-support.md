@@ -1,4 +1,14 @@
-# Node.js Modules Support
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+tags: [JavaScript, Modules]
+---
+
+# Node.js Modules Support 🎗
 
 Node.js has two module systems: `CommonJS` modules and `ECMAScript modules (ESM)`.
 
@@ -44,4 +54,7 @@ Node.js official docs references:
 
 :::
 
-## See also
+### JS ecosystem > Foundations 🏗️ > Modules
+
+- [Compatibility Table 📐](./modules-compatibility.md)
+- [JavaScript Module Systems Summary 🫀](./summary.md)

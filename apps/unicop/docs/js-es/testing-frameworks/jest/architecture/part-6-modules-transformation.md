@@ -6,10 +6,11 @@
 
 If you want to fully understand this article, make sure to be familiar with the following:
 
-- [What isomorphic code is](../../../foundations/bundlers-and-the-isomorphic-code-confusion.md)
-- [JS-ecosystem module systems](../../../foundations/javascript-module-systems-explained.md)
+<!-- - [What isomorphic code is] -->
+
+- [JavaScript Module Systems Summary 🫀](../../../foundations/modules/summary.md)
 - [Node.js module system compatibility](../../../foundations/modules/nodejs-modules-support.md)
-- [Transpiler and Code Transpilation](../../../foundations/transpiler.md)
+- [Transpiler and Code Transpilation](../../../../foundations/transpiler.md)
 
 On [Part 5.](./part-5-the-runtime-environment.md) on the step of building an isolated sandbox to run test files (at the `jest-runtime` module) I mentioned a module transformation sub-step where Jest convert modules from one form into another form.
 
@@ -32,8 +33,8 @@ Read more about jest hoisting on my architecture series [Appendix Ⅰ: Jest Hois
 
 ## Why Jest Module Transformation is Necessary
 
-Jest is a Node.js-based CLI, which compatible only with [CommonJS](../../../foundations/javascript-module-systems-explained.md) modules. It limits Jest to run any code that is using different module system, e.g. [ES modules](../../../foundations/javascript-module-systems-explained.md),
-or [isomorphic code](../../../foundations/bundlers-and-the-isomorphic-code-confusion.md) projects, like most modern web applications.
+Jest is a Node.js-based CLI, which compatible only with [CommonJS](../../../foundations/modules/commonjs.md) modules. It limits Jest to run any code that is using different module system, e.g. [ES modules](../../../foundations/modules/esm.md),
+or [isomorphic code](../../../foundations/modules/isomorphic-code-scene.md) projects, like most modern web applications.
 
 The Jest team wanted Jest to be capable to work on different environments and be compatible to the modern JS eco-system where many projects are isomorphic or their dependencies are isomorphic, or to support testing projects that are written in languages that extends JavaScript capabilities, like TypeScript.
 
@@ -78,3 +79,21 @@ Here are some highlights references for you:
 
 That's it!
 You've just completed reading my Jest architecture series, I hope you enjoyed, and inspired.
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Transpiler 🏷️](../../../../foundations/transpiler.md)
+- [Run-time 🏷️](../../../../foundations/run-time.md)
+- [Environment 🏷️](../../../../foundations/environment.md)
+
+### JS ecosystem > Foundations 🏗️
+
+- [JavaScript Module Systems Summary 🫀](../../../foundations/modules/summary.md)
+- [JS-ecosystem Modules Compatibility 📐](../../../foundations/modules/modules-compatibility.md)
+  f
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appx. Ⅰ: Jest Hoisting 🆙](./appendix-1-hoisting.md)

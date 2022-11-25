@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Part 2. File System & Build Dependencies Graph
 
 ## Introduction ✨
@@ -429,3 +438,13 @@ class HasteMap extends EventEmitter implements IHasteMap {
 ## What is "Haste"?
 
 See an appendix of the series: [Appendix Ⅶ: What is "Haste"? 👾](./appendix-7-what-is-haste.md)
+
+## See also
+
+### JS ecosystem > Foundations 🏗️ > Modules
+
+- [JavaScript Module Systems Summary 🫀](../../../foundations/modules/summary.md)
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appendix Ⅶ: What is "Haste"? 👾](./appendix-7-what-is-haste.md)

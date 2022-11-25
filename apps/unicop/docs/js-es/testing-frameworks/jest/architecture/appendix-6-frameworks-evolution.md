@@ -1,5 +1,10 @@
 ---
-pagination_next: null
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
 ---
 
 # Appendix Ⅵ: Jest Test Frameworks Evolution 🦕
@@ -38,3 +43,9 @@ References for both test frameworks:
 [jest-jasmine2](https://github.com/facebook/jest/tree/main/packages/jest-jasmine2)
 
 :::
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Part 5. The Runtime Environment 💽](./part-5-the-runtime-environment.md)

@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Part 3. Test Run Order (Optimizations) ⏳
 
 ## Introduction ✨
@@ -294,3 +303,9 @@ So when running jest for the 1st to 5th run, the test order might look inconsist
 But as jest has more data, the statistics won't lie over many runs and the order will become more and more consistent.
 
 <!-- add gif -->
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appx. Ⅱ: jest-worker 👷‍♂️](./appendix-2-jest-worker.md)

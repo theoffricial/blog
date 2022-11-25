@@ -1,5 +1,10 @@
 ---
+# pagination_prev: null
+# pagination_next: null
 authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
 tags: [JavaScript, Modules]
 ---
 
@@ -38,6 +43,13 @@ The inflation in the number of module systems, led to the invention of a fifth t
 
 ## See also
 
-### Definitions of Modules-related terms
+### JS ecosystem > Foundations 🏗️ > Modules
 
-- **[Compatibility Table 📐](./modules-compatibility.md)**
+- [Compatibility Table 📐](./modules-compatibility.md)
+- [CommonJS 🏷️](./commonjs.md)
+- [AMD 🏷️](./amd.md)
+- [UMD 🏷️](./umd.md)
+- [ESM 🏷️](./esm.md)
+- [Raw Script 🏷️](./raw.md)
+- [Modules Bundler 🏷️](./modules-bundler.md)
+- [Node.js Modules Support 🎗](./nodejs-modules-support.md)

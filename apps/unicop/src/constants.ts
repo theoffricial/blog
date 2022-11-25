@@ -6,7 +6,7 @@ export const AUTHORS: Author[] = [
         name: 'Ofri Peretz',
         role: 'Full Stack Developer',
         organization: 'Snappy',
-        organizationURL: 'https://github.com/unicop.png',
+        organizationURL: 'https://www.linkedin.com/company/snappy-app',
         email: 'its.op.the.unicorn@gmail.com',
         url: 'https://www.linkedin.com/in/unicop',
         imageURL: 'https://github.com/unicop.png',

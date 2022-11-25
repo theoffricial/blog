@@ -1,6 +1,6 @@
 ---
-pagination_prev: js-es/testing-frameworks/jest/intro
-pagination_next: null
+pagination_prev: null
+# pagination_next: null
 authors: [unicop]
 last_update:
   date: 03/09/2022

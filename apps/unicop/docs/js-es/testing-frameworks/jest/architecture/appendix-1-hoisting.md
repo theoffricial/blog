@@ -1,3 +1,12 @@
+---
+pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # Appendix Ⅰ: Jest Hoisting 🆙
 
 hoisting definition,
@@ -35,3 +44,9 @@ Here is hoisting [implementation](https://github.com/kulshekhar/ts-jest/blob/mai
 [babel-jest-link]: https://github.com/facebook/jest/tree/main/packages/babel-jest
 [babel-plugin-jest-hoist-link]: https://github.com/facebook/jest/tree/main/packages/babel-plugin-jest-hoist
 [hoist-jest.spec.ts-link]: https://github.com/kulshekhar/ts-jest/blob/main/src/transformers/hoist-jest.spec.ts
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Transpiler 🏷️](../../../../foundations/transpiler.md)

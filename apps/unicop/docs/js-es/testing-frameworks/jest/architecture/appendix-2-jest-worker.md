@@ -1,3 +1,12 @@
+---
+pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # Appendix Ⅱ: jest-worker 👷‍♂️
 
 The jest system requires some heavy I/O operations like files access, cache CRUD, and module transformation.
@@ -22,7 +31,7 @@ The [jest-worker][jw] module works by providing an absolute path of the module t
 While jest is using the `jest-haste-map` package that find all files in the project, access them and collect their metadata including dependencies,
 `jest-haste-map` call jest-worker to execute the I/O and metadata extraction actions in parallel.
 
-You can read the full explanation of that process at the [5. FS & Dependency Resolution](./part-2-dependency-resolutions.md) chapter.
+You can read the full explanation of that process at the [5. FS & Dependency Resolution](./part-2-dependency-graph.md) chapter.
 
 ### 2. Run Tests
 
@@ -49,3 +58,11 @@ Here sharing a short list of some of the popular packages that are using `jest-w
 - [metro](https://www.npmjs.com/package/metro)
 
 Also jest used on over [6,700,000+ public repositories](https://github.com/facebook/jest/network/dependents).
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Part 2. FS & Dependency Graph 🕸️](./part-2-dependency-graph.md)
+- [Architecture 🏛 > Part 4. Test Run 🃏](./part-4-test-run.md)
+- [Architecture 🏛 > Part 5. The Runtime Environment 💽](./part-5-the-runtime-environment.md)

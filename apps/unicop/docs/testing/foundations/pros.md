@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Pros 👍
 
 ## The Nature of Applications to Get Bigger
@@ -41,3 +50,10 @@ Over time production code that is uncovered by automated test code, is tends to 
 - Yuto - **[How to determine test values for unit testing](https://www.technicalfeeder.com/2022/04/how-to-determine-test-values-for-unit/)** - Good article explain also the pros of unit tests. -->
 
 <!-- - Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 1: TDD and Confidence - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design. -->
+
+## See also
+
+### Testing > Foundations 🏗️
+
+- [Cons 👎](./cons.md)
+- [Confidence 🏷️](./confidence.md)

@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Incremental Build 🏷
 
 Project incremental build refers to build tools that capable to look at a project as a set of components that compose it for the build purposes, and during this break down to log this map as information to use it for future builds, so when a `build` command would be requested again, the build tool will read the logged data from previous build, and figure out what has changed and re-build only those files/modules/components which defined as affected from changes.
@@ -32,13 +41,13 @@ Today, build tools that support watch-mode, they might not state it explicitly b
 
 ## See also
 
-### TypeScript
-
-- [TypeScript > Incremental Build](../typescript/optimizations/incremental-build.md)
-
-### JS ecosystem Foundations 🏗️
+### JS ecosystem > Foundations 🏗️
 
 - [Compiler](./compiler.md)
-- [Modules Bundler](./modules/modules-bundler.md)
+- [Modules Bundler](../js-es/foundations/modules/modules-bundler.md)
 - [Project Naive Build](./naive-build.md)
 - [Transpiler](./transpiler.md)
+
+### JS ecosystem > TypeScript 🔵
+
+- [Incremental Build](../js-es/typescript/optimizations/incremental-build.md)

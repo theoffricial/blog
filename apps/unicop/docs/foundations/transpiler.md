@@ -1,5 +1,10 @@
 ---
+# pagination_prev: null
+# pagination_next: null
 authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
 ---
 
 # Transpiler 🏷
@@ -17,11 +22,20 @@ In the JS eco-system tools often name transpilers differently which is quite con
 
 ## See also
 
-### JS ecosystem Foundations 🏗️
+### Software Foundations 🏗️
 
 - [Compiler](./compiler.md)
-- [Modules Bundler](./modules/modules-bundler.md)
+- [Interpreter](./interpreter.md)
 
-### TypeScript
+### Js ecosystem > Foundations 🏗️
 
-- [The TypeScript Compiler](../typescript/foundations/ts-compiler.md) - An overview what `tsc` is.
+- [Modules Bundler](../js-es/foundations/modules/modules-bundler.md)
+- [JavaScript Engine 🏷](../js-es/foundations/js-engine.md)
+
+### JS ecosystem > TypeScript 🔵
+
+- [TypeScript Compiler](../js-es/typescript/foundations/ts-compiler.md)
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Part 6. Module Transformation 🦠](../js-es/testing-frameworks/jest/architecture/part-6-modules-transformation.md)

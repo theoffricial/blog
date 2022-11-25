@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Production/Test Code Ratio 🧭 ☯
 
 ## Basic terms
@@ -36,3 +45,13 @@ So your total code will be
 <!-- ## Credits 🎖️
 
 Martin Fowler, Kent Beck, David Heinemeier - **[Is TDD Dead?](https://martinfowler.com/articles/is-tdd-dead/)** - 4: Costs of Testing - A series of conversations on the topic of Test-Driven Development (TDD) and its impact upon software design. -->
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Production Code 🔥](../../foundations/production-code.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Code 🧪](./test-code.md)

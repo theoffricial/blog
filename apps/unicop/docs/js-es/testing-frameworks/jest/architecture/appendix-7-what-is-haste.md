@@ -1,8 +1,17 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # Appendix Ⅶ: What is "Haste"? 👾
 
 ## Introduction ✨
 
-In Jest, "Haste" is being used through [Part 2. FS & Build Dependency Graph 🕸](./part-2-dependency-resolutions.md)
+In Jest, "Haste" is being used through [Part 2. FS & Build Dependency Graph 🕸](./part-2-dependency-graph.md)
 
 But you might wondered where the name "Haste" comes from.
 
@@ -25,3 +34,9 @@ So what they did was to add an header to each file, like this [one](https://gith
 So in Hate instead of using `../my/relative/path/to/my-module.js`, you just had to call `my-module`.
 
 Later on, instead of using declarative headers inside files, the implementation had changed to take the file-path/ name as the unique identifier. That way Facebook avoided to read the content of files for the modules list, but only for the step of building the tree of dependencies resolution, so it improved performance.
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Part 2. FS & Dependency Graph 🕸️](./part-2-dependency-graph.md)

@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Environment 🏷
 
 ## What an Environment is
@@ -34,3 +43,13 @@ When running tests using a testing framework, e.g. jest, the testing framework's
 It means that the test runner should be able to customize the runtime environment of the test code to successfully run.
 
 For example, when testing react code with jest, jest's default environment is Nodejs, so jest has to customize the runtime environment when running a test file that has react code in it.
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture > Part 5. The Runtime Environment 💽](../js-es/testing-frameworks/jest/architecture/part-5-the-runtime-environment.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Environment](../testing/foundations/test-environment.md)

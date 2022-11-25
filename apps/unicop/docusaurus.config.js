@@ -63,7 +63,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'unicop',
+        title: 'unic(o|p)art',
         logo: {
           alt: 'be unico be a part',
           src: 'img/unicop.art.svg'
@@ -77,9 +77,21 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'testing/unit/intro',
+            docId: 'testing/intro',
             position: 'left',
-            label: 'Unit Tests',
+            label: 'Testing',
+          },
+          // {
+          //   type: 'doc',
+          //   docId: 'js-es/testing-frameworks/jest/intro',
+          //   position: 'left',
+          //   label: 'Jest 🤡',
+          // },
+          {
+            type: 'doc',
+            docId: 'js-es/testing-frameworks/jest/architecture/intro',
+            position: 'left',
+            label: 'Jest Architecture 🏛',
           },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {

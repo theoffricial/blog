@@ -28,6 +28,7 @@ const sidebars = {
             id: 'foundations/intro', 
           },
           items: [
+            { type: 'doc', id: 'foundations/intro', label: 'Introduction ✨' },
             { type: 'doc', id: 'foundations/effort-value-and-productivity', label: 'Effort, Value, and Productivity 🏷' },
             { type: 'doc', id: 'foundations/compiler', label: 'Compiler 🏷' },
             { type: 'doc', id: 'foundations/transpiler', label: 'Transpiler 🏷' },
@@ -45,13 +46,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'JS eco-system',
+      link: { id: 'js-es/intro', type: 'doc' },
       items: [
         {
-          type: 'category',
+          type: 'doc',
           label: 'Introduction ✨',
-          link: { id: 'js-es/intro', type: 'doc' },
-          items: [],
-        
+          id: 'js-es/intro',
         },
         {
           type: 'category',
@@ -63,7 +63,16 @@ const sidebars = {
             id: 'js-es/foundations/intro', 
           },
           items: [
-            { type: 'doc', id: 'js-es/foundations/js-engine', label: 'JavaScript Engine 🏷' },
+            {
+              type: 'doc', 
+              id: 'js-es/foundations/intro', 
+              label: 'Introduction ✨' 
+            },
+            { 
+              type: 'doc', 
+              id: 'js-es/foundations/js-engine', 
+              label: 'JavaScript Engine 🏷' 
+            },
             { 
               type: 'category', label: 'Modules 🧩', items: [
                 { type: 'doc', id: 'js-es/foundations/modules/summary', label: 'Module Systems Summary' },
@@ -115,7 +124,13 @@ const sidebars = {
         {
           type: 'category',
           label: 'Testing Frameworks',
+          link: { type: 'doc', id: 'js-es/testing-frameworks/intro' },
           items: [
+            {
+              type: 'doc',
+              id: 'js-es/testing-frameworks/intro',
+              label: 'Introduction ✨'
+            },
             {
               type: 'category',
               label: 'Jest 🤡',
@@ -224,8 +239,71 @@ const sidebars = {
     },
     {
       'type': 'category',
+      link: { type: 'doc', id: 'testing/intro' },
       label: 'Testing',
       items: [
+        {
+          id: 'testing/intro',
+          type: 'doc',
+          label: 'Introduction ✨'
+        },
+        {
+          type: 'category',
+          label: 'Foundations 🧪🏗',
+          link: {type: 'doc', id: 'testing/foundations/intro'},
+          items: [
+            {
+              type: 'doc', 
+              id: 'testing/foundations/intro',
+              label: 'Introduction ✨',
+            },
+            {
+              id: 'testing/foundations/pros',
+              type: 'doc',
+              label: 'Pros 👍'
+            },
+            {
+              id: 'testing/foundations/cons',
+              type: 'doc',
+              label: 'Cons 👎'
+            },
+            {
+              id: 'testing/foundations/production-code-to-test-code-ratio',
+              type: 'doc',
+              label: 'Production/Test Code Ratio ☯'
+            },
+            {
+              id: 'testing/foundations/green-state-can-lie',
+              type: 'doc',
+              label: 'Green-State Can Lie 🤥'
+            },
+            {
+              id: 'testing/foundations/test-environment',
+              type: 'doc',
+              label: 'Test Environment 🏷'
+            },
+            {
+              id: 'testing/foundations/test-against',
+              type: 'doc',
+              label: 'Test Against (Coming soon...) 🪄'
+            },
+            {
+              id: 'testing/foundations/test-code',
+              type: 'doc',
+              label: 'Test Code (Coming soon...) 🏷'
+            },
+            {
+              id: 'testing/foundations/test-framework',
+              type: 'doc',
+              label: 'Test Framework (Coming soon...) 🏷'
+            },
+            {
+              id: 'testing/foundations/confidence',
+              type: 'doc',
+              label: 'Confidence (Coming soon...) 🏷'
+            },
+          ]
+        },
         {
           type: 'category',
           label: 'Unit Tests',
@@ -235,51 +313,29 @@ const sidebars = {
           },
           items: [
             {
+              type: 'doc',
+              id: 'testing/unit/intro',
+              label: 'Introduction ✨'
+            },
+            {
               type: 'category',
-              label: 'Theory 🧭',
-              link: { type: 'doc', id: 'testing/unit/intro' },
+              label: 'Easy-to-Test Cases 🧪',
+              link: { type: 'doc', id: 'testing/unit/easy-to-test-scenarios/intro' },
               items: [
                 {
-                  id: 'testing/foundations/pros',
+                  id: 'testing/unit/easy-to-test-scenarios/the-entry-module',
                   type: 'doc',
-                  label: 'Pros 👍'
+                  label: 'The Entry Module 🏷'
                 },
                 {
-                  id: 'testing/foundations/cons',
+                  id: 'testing/unit/easy-to-test-scenarios/data-manipulation',
                   type: 'doc',
-                  label: 'Cons 👎'
+                  label: 'Data Manipulation 🏷'
                 },
                 {
-                  id: 'testing/foundations/production-code-to-test-code-ratio',
+                  id: 'testing/unit/easy-to-test-scenarios/conditional-validation',
                   type: 'doc',
-                  label: 'Production/Test Code Ratio ☯'
-                },
-                {
-                  id: 'testing/foundations/green-state-can-lie',
-                  type: 'doc',
-                  label: 'Green-State Can Lie 🤥'
-                },
-                {
-                  type: 'category',
-                  label: 'Easy-to-Test Cases 🧪',
-                  link: { type: 'doc', id: 'testing/unit/easy-to-test-scenarios/intro' },
-                  items: [
-                    {
-                      id: 'testing/unit/easy-to-test-scenarios/the-entry-module',
-                      type: 'doc',
-                      label: 'The Entry Module 🏷'
-                    },
-                    {
-                      id: 'testing/unit/easy-to-test-scenarios/data-manipulation',
-                      type: 'doc',
-                      label: 'Data Manipulation 🏷'
-                    },
-                    {
-                      id: 'testing/unit/easy-to-test-scenarios/conditional-validation',
-                      type: 'doc',
-                      label: 'Conditional Validation 🏷'
-                    }
-                  ]
+                  label: 'Conditional Validation 🏷'
                 }
               ]
             }

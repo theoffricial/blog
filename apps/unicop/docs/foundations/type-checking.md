@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Type-Checking 🏷
 
 The process of verifying and enforcing the constraints of types, called type-checking.
@@ -24,15 +33,16 @@ type-checking consider as an expensive action, that's why static type-checking i
 
 ## See also
 
-### Software Development Foundations 🏗️
+### Software Foundations 🏗️
+
+- [Compiler 🏷️](./compiler.md)
+- [Incremental Build 🏷️](./incremental-build.md)
+
+### JS ecosystem > Foundations 🏗️
 
 - [JavaScript Engine 🏷️](../js-es/foundations/js-engine.md)
 
-### JavaScript ecosystem Foundations 🏗️
-
-- [Incremental Build 🏷️](./incremental-build.md)
-
-### TypeScript Foundations 🏗️
+### JS ecosystem > TypeScript 🔵
 
 - [TypeScript Compiler](../js-es/typescript/foundations/ts-compiler.md)
 

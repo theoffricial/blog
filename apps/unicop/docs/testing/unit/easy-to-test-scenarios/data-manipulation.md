@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Data Manipulation 🏷️
 
 Whenever a data set needs to be manipulated from one form to another, it can be called data manipulation.
@@ -102,8 +111,14 @@ async function (req, res) {
 
 ## See also
 
-### Foundations 🏗️
+### Software Foundations 🏗️
 
-### Unit Test
+- [Effort, Value And Productivity 🏷️](../../../foundations/effort-value-and-productivity.md)
 
-### Testing Frameworks
+### Testing > Foundations 🏗️
+
+- [Test Code 🏷️](../../foundations/test-code.md)
+
+### Testing > Unit Tests
+
+- [Introduction ✨](../intro.md)

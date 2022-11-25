@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Part 5. The Runtime Environment 💽
 
 ## Introduction ✨
@@ -147,3 +156,16 @@ For the implementations of everything I covered, here some relevant refs:
 - [Step 5. Propagation of TestResult-s](https://github.com/facebook/jest/blob/main/packages/jest-runner/src/index.ts#L76-L90)
 
 :::
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Run-time 🏷️](../../../../foundations/run-time.md)
+- [Environment 🏷️](../../../../foundations/environment.md)
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appx. Ⅰ: Jest Hoisting 🆙](./appendix-1-hoisting.md)
+- [Architecture 🏛 > Appx. Ⅱ: jest-worker 👷‍♂️](./appendix-2-jest-worker.md)
+- [Architecture 🏛 > Appx. Ⅵ: Framework Evolution 🦕](./appendix-6-frameworks-evolution.md)

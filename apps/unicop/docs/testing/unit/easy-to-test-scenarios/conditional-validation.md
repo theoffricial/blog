@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Conditional Validation 🏷️
 
 Conditional validation has seen often, especially on a piece of code many unique, specific business cases required.
@@ -36,7 +45,7 @@ async function (req, res) {
 
 In this very common endpoint process logic, you can see 2 pure logic conditional validations.
 
-I suggest that separating them into functions, helps avoiding to start mocking authorization layer, schema validation layer, and the data store connection, which has low up-to no [value](../../../js-es/foundations/effort-value-and-productivity.md#value).
+I suggest that separating them into functions, helps avoiding to start mocking authorization layer, schema validation layer, and the data store connection, which has low up-to no [value](../../../foundations/effort-value-and-productivity.md#value).
 
 ```javascript
 // my-rest-api-entry.helpers.ts
@@ -125,3 +134,15 @@ If you wish to become better at finding test cases to check, or just to review t
 :::
 
 ## See also
+
+### Software Foundations 🏗️
+
+- [Effort, Value And Productivity 🏷️](../../../foundations/effort-value-and-productivity.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Code 🏷️](../../foundations/test-code.md)
+
+### Testing > Unit Tests
+
+- [Introduction ✨](../intro.md)

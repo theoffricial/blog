@@ -75,9 +75,9 @@ export default function Author({
                 </small>
                   {organization && (
                     <small className={clsx(styles.avatar__org, "avatar__subtitle")} itemProp="description">
-                    &nbsp;@&nbsp;<MaybeLink href={organizationURL} itemProp="organizationURL">
+                    &nbsp;@&nbsp;<b><MaybeLink href={organizationURL} itemProp="organizationURL" target="_blank" rel="noopener noreferrer">
                       {organization}
-                    </MaybeLink>
+                    </MaybeLink></b>
                   </small>
                   )}
                   </div>

@@ -1,3 +1,12 @@
+---
+pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 03/09/2022
+  author: Ofri Peretz
+---
+
 # Appendix Ⅲ: Cache Summary 🏴‍☠️ (Coming soon..)
 
 <!-- jest use cache to improve test run time,

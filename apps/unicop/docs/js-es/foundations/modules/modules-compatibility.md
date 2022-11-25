@@ -1,5 +1,10 @@
 ---
+# pagination_prev: null
+# pagination_next: null
 authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
 ---
 
 # The Complete JS-ecosystem Modules Compatibility 📐
@@ -89,16 +94,11 @@ Here is a list of compatibility tables exists out-there
 
 ## See also
 
-#### Definitions of modules-related terms
+### Software Foundations 🏗️
 
-- **[Node.js Modules Support](./nodejs-modules-support.md)**
-- **[ECMAScript Modules (ESM) Explained](./esm.md)**
-- **[CommonJS Modules Explained](./commonjs.md)**
-- **[AMD Modules Explained](./amd.md)**
-- **[UMD Modules Explained](./umd.md)**
-- **[Raw Scripts Explained](./raw.md)**
-- **[Modules Bundler](./modules-bundler.md)**
+- **[Environment](../../../foundations/environment.md)**
 
-#### More definitions of related terms
+### JS ecosystem > Foundations 🏗️ > Modules
 
-- **[Environment](../environment.md)**
+- [JavaScript Module Systems Summary 🫀](./summary.md)
+- [Node.js Modules Support 🎗](./nodejs-modules-support.md)

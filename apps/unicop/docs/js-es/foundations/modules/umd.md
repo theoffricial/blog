@@ -1,4 +1,14 @@
-# UMD
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+tags: [JavaScript, Modules]
+---
+
+# UMD 🏷️
 
 Universal Module Definition, or "UMD" is basically a JavaScript file that tries to guess at runtime which module system it’s being used in, and then it acts as that kind of module.
 
@@ -56,3 +66,11 @@ Here is the actual [implementation](https://github.com/umdjs/umd/blob/master/tem
   exports.action = function () {};
 });
 ```
+
+## See also
+
+### JS ecosystem > Foundations 🏗️ > Modules
+
+- [Compatibility Table 📐](./modules-compatibility.md)
+- [JavaScript Module Systems Summary 🫀](./summary.md)
+- [Node.js Modules Support 🎗](./nodejs-modules-support.md)

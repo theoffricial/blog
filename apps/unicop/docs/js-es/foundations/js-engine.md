@@ -1,3 +1,13 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+tags: [JavaScript]
+---
+
 # JavaScript Engine 🏷
 
 A JavaScript engine is a software component that executes JavaScript code. The first JavaScript engines were mere interpreters, but all relevant modern engines use just-in-time compilation for improved performance.
@@ -7,3 +17,9 @@ JavaScript engines are typically developed by web browser vendors, and every maj
 The use of JavaScript engines is not limited to browsers. For example, the `V8` engine is a core component of the `Node.js` and `Deno` runtime systems.
 
 Since ECMAScript is the standardized specification of JavaScript, ECMAScript engine is another name for these engines.
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Interpreter 🏷️](../../foundations/interpreter.md)

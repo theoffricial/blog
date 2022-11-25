@@ -7,7 +7,7 @@ last_update:
   author: Ofri Peretz
 ---
 
-# Unit Tests Theory 🧭
+# Testing Foundations 🧪 🏗️
 
 Solid background to understand what unit test is, and its value.
 

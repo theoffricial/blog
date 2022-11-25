@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # The Entry Module 🏷️
 
 When exposing an entry module, for a package, a set of internal modules (like React component), etc., All these cases I classify as "The Entry Module" case.
@@ -30,3 +39,17 @@ describe('my-entry-module the entry module test', () => {
   });
 });
 ```
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Effort, Value And Productivity 🏷️](../../../foundations/effort-value-and-productivity.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Code 🏷️](../../foundations/test-code.md)
+
+### Testing > Unit Tests
+
+- [Introduction ✨](../intro.md)

@@ -1,4 +1,14 @@
-# ESM
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+tags: [JavaScript, Modules]
+---
+
+# ESM 🏷️
 
 :::note
 🔙 to **[Modules Summary](./summary.md)**.
@@ -35,7 +45,8 @@ PAY ATTENTION, TypeScript `import` and `export` statements, look the same, does 
 
 ## See also
 
-### Modules
+### JS ecosystem > Foundations 🏗️ > Modules
 
-- [Modules Compatibility](./modules-compatibility.md)
-- [Node.js Modules Support](./nodejs-modules-support.md)
+- [Compatibility Table 📐](./modules-compatibility.md)
+- [JavaScript Module Systems Summary 🫀](./summary.md)
+- [Node.js Modules Support 🎗](./nodejs-modules-support.md)

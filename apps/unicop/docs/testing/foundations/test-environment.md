@@ -1,10 +1,17 @@
-# Code Environment Terms 🏷️
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
+# Test Environment 🏷️
 
 ## What an Environment is
 
-An environment is where your code is pushed live to the intended users.
-Think of it as a final phase of production.
-This is the environment where the end user can see, experience, and interact with your code.
+See [Environment 🏷️](../../foundations/environment.md) article.
 
 ## Production Code Depends On Its Target Environment
 
@@ -34,3 +41,17 @@ When running tests using a testing framework, e.g. jest, the testing framework's
 It means that the test runner should be able to customize the runtime environment of the test code to successfully run.
 
 For example, when testing react code with jest, jest's default environment is Nodejs, so jest has to customize the runtime environment when running a test file that has react code in it.
+
+# Confidence 🏷️ (Coming soon...)
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Production Code 🔥](../../foundations/production-code.md)
+
+### Testing > Foundations 🏗️
+
+- [Test Code 🏷️](./test-code.md)
+- [Test Environment 🏷️](./test-environment.md)
+- [Production/Test Code Ratio 🧭 ☯](./production-code-to-test-code-ratio.md)

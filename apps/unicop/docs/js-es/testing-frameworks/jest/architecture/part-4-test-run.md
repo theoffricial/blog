@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Part 4. Test Run 🃏
 
 ## Introduction ✨
@@ -723,3 +732,9 @@ const createAggregatedResults = (numTotalTestSuites: number) => {
   return result;
 };
 ```
+
+## See also
+
+### JS ecosystem > Testing Frameworks > Jest 🤡
+
+- [Architecture 🏛 > Appx. Ⅱ: jest-worker 👷‍♂️](./appendix-2-jest-worker.md)

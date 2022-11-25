@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_update:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Green-State Can Lie 🤥
 
 This short article is discussing the importance of doubt your own tests and double verify them.
@@ -52,3 +61,8 @@ If you have other expectations from yourself, the history says that the odds are
 Always doubt yourself, your team, your colleges, and so on (and look together for what is true).
 
 ## See also
+
+### Testing > Foundations 🏗️
+
+- [Pros 👍](./pros.md)
+- [Cons 👎](./cons.md)

@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # Build 🏷️
 
 In software development, a build is the process of converting source code files into standalone software artifact(s) that can be run on a computer.
@@ -14,11 +23,11 @@ Tools that use **[naive build](./naive-build.md)** compiles source code that doe
 
 ## See also
 
-### Foundations 🏗️
+### Software Foundations 🏗️
 
 - [Naive Build](./naive-build.md)
 - [Incremental Build](./incremental-build.md)
 
-### TypeScript 🔵
+### JavaScript ecosystem > TypeScript 🔵
 
-- [TS Incremental Build](../typescript/optimizations/incremental-build.md)
+- [Incremental Build](../js-es/typescript/optimizations/incremental-build.md)

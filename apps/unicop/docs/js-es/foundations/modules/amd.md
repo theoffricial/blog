@@ -1,3 +1,12 @@
+---
+# pagination_prev: null
+# pagination_next: null
+authors: [unicop]
+last_updated:
+  date: 11/25/2022
+  author: Ofri Peretz
+---
+
 # AMD Modules 🏷️
 
 :::note
@@ -124,3 +133,15 @@ define(['require', 'dependency1', 'dependency2'], function (require) {
 ```
 
 This allows the loader to load `dependency1` and `dependency2` asynchronously, execute those dependencies, then execute this function.
+
+## See also
+
+### Software Foundations 🏗️
+
+- [Compiler](../../../foundations/compiler.md)
+- [Run-time](../../../foundations/run-time.md)
+
+### JS ecosystem > TypeScript 🔵
+
+- [JavaScript Module Systems Summary 🫀](./summary.md)
+- [Modules Bundler](modules-bundler.md)
