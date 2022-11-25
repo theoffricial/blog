@@ -11,7 +11,7 @@ last_update:
 
 ## Introduction ✨
 
-At this part of the Jest system, Jest has both **[configs](./part-1-configs.md)**, and **[HasteContext](./part-2-dependency-graph.md)**.
+At this part of the Jest system, Jest already has both **[configs](./part-1-configs.md)**, and **[HasteContext](./part-2-dependency-graph.md)**.
 
 ```ts
 const TestContext = {
