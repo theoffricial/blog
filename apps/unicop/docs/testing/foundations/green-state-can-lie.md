@@ -23,8 +23,7 @@ First, let me show you that `1 + 1 = 2`.
 ```ts
 test('1 + 1 = 2', () => expect(1 + 1).toBe(2)); // 🟢 true
 test('1 + 1 = 2', () => expect(1 + 2).toBe(3)); // 🟢 lies
-test('1 + 1 = 2', () => {expect(1 + 1).toBe(3)); // 🔴 being honest
-
+test('1 + 1 = 2', () => expect(1 + 1).toBe(3)); // 🔴 being honest
 ```
 
 Do you see the problem? 🔴 state always honest, but 🟢 state can lie!
