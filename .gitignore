@@ -42,5 +42,7 @@ Thumbs.db
 .docusaurus/
 .cache-loader/
 
-# 
+# example repos
 **/example-repos
+**/examples
+**/demos
