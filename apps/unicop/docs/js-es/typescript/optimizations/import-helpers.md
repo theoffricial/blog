@@ -48,13 +48,13 @@ First let's examine how TypeScript [emit](../foundations/emit.md)s the following
 Let's take for instance this source file:
 
 ```ts reference title="src/math/index.ts"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/math/index.ts
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/src/math/index.ts
 ```
 
 And here is the output code:
 
 ```js reference title="dist/no-import-helpers-out-tsc/math/index.js"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/math/index.js#L1-L18
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/math/index.js#L1-L18
 
 ```
 
@@ -65,13 +65,13 @@ Another example for `async await` feature.
 source-code:
 
 ```ts reference title="src/index.ts"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/index.ts#L6-L20
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/src/index.ts#L6-L20
 ```
 
 output:
 
 ```js reference title="dist/no-import-helpers-out-tsc/math/index.js"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/index.js#L1-L80
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/dist/false-import-helpers-out-tsc/index.js#L1-L80
 
 ```
 
@@ -93,26 +93,26 @@ The TypeScript team realized this overhead and released a an option to change it
 Let's see the output of the same files from the previous example, but now TypeScript will use [tslib](https://www.npmjs.com/package/tslib), and enable the [importHelpers](https://www.typescriptlang.org/tsconfig#importHelpers) option.
 
 ```json reference title="tsconfig.json when 'importHelpers' is set to 'true'"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/tsconfig.true-import-helpers.json#L1-L17
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/tsconfig.true-import-helpers.json#L1-L17
 
 ```
 
 ```ts reference title="src/math/index.ts - source"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/math/index.ts
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/src/math/index.ts
 ```
 
 ```js reference title="dist/math/index.js - transpiled using tslib (previously was 17 lines see above 👆)"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/math/index.js#L1-L5
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/math/index.js#L1-L5
 ```
 
 ```ts reference title="src/index.ts - source"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/src/index.ts#L4-L30
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/src/index.ts#L4-L30
 ```
 
 And that's the transpiled module when using tslib, which turned to 16 lines Vs. [+50 lines](#the-issue-)
 
 ```js reference title="dist/index.js"
-https://github.com/unicop-art/typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/index.js#L7-L30
+https://github.com/unicop/blog-typescript-import-helpers-example/blob/main/dist/true-import-helpers-out-tsc/index.js#L7-L30
 ```
 
 ## What you should do 💎

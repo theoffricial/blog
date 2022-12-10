@@ -154,7 +154,7 @@ Using this option is good for performance but also it means that you have to run
 <br/>
 
 ```json reference title="<rootDir>/tsconfig.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/tsconfig.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/tsconfig.json
 ```
 
 ### 2. `tsconfig.base.json`
@@ -166,7 +166,7 @@ This file is the project's base `TypeScript` configuration which all projects (e
 This file should be able to run smoothly for tools like `jest`, `webpack`, `ts-node`, etc.
 
 ```json reference title="<rootDir>/tsconfig.base.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/tsconfig.base.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/tsconfig.base.json
 ```
 
 ### 3. `tsconfig.project.json`
@@ -180,7 +180,7 @@ Also, because I'm going to configure tests as different projects, `tests files` 
 So the `tsconfig.project.json` is well configured for our project references of `production-code` to use!
 
 ```json reference title="<rootDir>/tsconfig.project.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/tsconfig.project.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/tsconfig.project.json
 ```
 
 ### 4. `tsconfig.test-project.json`
@@ -194,7 +194,7 @@ The same as in the `tsconfig.project.json`, we want to extend `tsconfig.base.jso
 So the `tsconfig.test-project.json` is well configured for our `test-code` projects to use!
 
 ```json reference title="<rootDir>/tsconfig.test-project.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/tsconfig.test-project.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/tsconfig.test-project.json
 ```
 
 ### 5. Referenced Project's `tsconfig.json`
@@ -215,7 +215,7 @@ But we already configured everything for it, so it will be simple as
 See how it looks like
 
 ```json reference title="<rootDir>/src/formatting/tsconfig.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/src/formatting/tsconfig.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/src/formatting/tsconfig.json
 ```
 
 ### 6. Referenced Test Project's `tsconfig.test.json`
@@ -238,18 +238,18 @@ Worth mentioning that I configured `noEmit: true` in `tsconfig.test-project.json
 To turn the `formatting` folder's `tests` to a `TypeScript` project, `tsconfig.test.json` should be configured on the top-level (of the `formatting` folder), and should `extends` the [tsconfig.test-project.json](#6-setup-test-code-project-example).
 
 ```json reference title="<rootDir>/src/formatting/tsconfig.test.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/src/formatting/tsconfig.test.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/src/formatting/tsconfig.test.json
 ```
 
 <!--
 #### Example end-project `tsconfig.json` - `creatures`, `formatting`, and `wonderland` directories
 
 ```json reference title="<rootDir>/src/formatting/tsconfig.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/src/formatting/tsconfig.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/src/formatting/tsconfig.json
 ```
 
 ```json reference title="<rootDir>/src/wonderland/tsconfig.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/src/wonderland/tsconfig.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/src/wonderland/tsconfig.json
 ``` -->
 
 Dependency between project means that whenever TypeScript re-builds a file on the `formatting` he verifies that `creatures` project build is up-to-date, if not, TypeScript re-builds the `creatures` project before re-builds the `formatting`.
@@ -280,7 +280,7 @@ If you work with [monorepo][nx-monorepo-explanation-link], the `tsconfig.base.js
 The [path mapping][ts-path-mapping-link] is important to let the different projects for other tools to find and resolve other packages.
 
 ```json reference title="<rootDir>/tsconfig.base.json"
-https://github.com/unicop-art/typescript-projects-references-example/blob/main/tsconfig.base.json
+https://github.com/unicop/blog-typescript-projects-references-example/blob/main/tsconfig.base.json
 ```
 
 To allow projects to reference each other, you need to add both the project reference for `tsc` in the project `tsconfig.json` and also add a `path mapping` in `tsconfig.base.json`.
@@ -357,7 +357,7 @@ Some tools that work in these method are: `ESBuild`/`SWC`/`Babel`, etc. any tool
 [ts-path-mapping-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#path-mapping
 [ts-project-references-link]: https://www.typescriptlang.org/docs/handbook/project-references.html
 [ts-config-project-options-link]: https://www.typescriptlang.org/tsconfig#Projects_6255
-[example-repo-link]: https://github.com/unicop-art/typescript-projects-references-example/blob/main
+[example-repo-link]: https://github.com/unicop/blog-typescript-projects-references-example/blob/main
 [ts-3.4-release-note-link]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html
 [nx-monorepo-explanation-link]: https://monorepo.tools/
 [ts-language-service-link]: https://github.com/microsoft/typescript/wiki/using-the-language-service-api
